@@ -7,7 +7,6 @@ const FloatingActionButton = ({ email }) => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
-  // Close menu on page click (except when clicking the menu itself)
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!e.target.closest('.fab-container')) {
@@ -47,7 +46,6 @@ const FloatingActionButton = ({ email }) => {
   };
 
   const downloadResume = () => {
-    // Create a link to download the resume (placeholder URL)
     const link = document.createElement('a');
     link.href = '/nathan_dryer_resume.pdf';
     link.download = 'Nathan_Dryer_Resume.pdf';
@@ -60,23 +58,46 @@ const FloatingActionButton = ({ email }) => {
 
   // Button configuration
   const buttons = [
-    { label: "Top", icon: "M5 15l7-7 7 7", onClick: scrollToTop },
-    { label: "Timeline", icon: "M4 5h16M4 12h16M4 19h7", onClick: scrollToTimeline },
-    { label: "Skills", icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z", onClick: scrollToSkills },
-    { label: "Bottom", icon: "M19 9l-7 7-7-7", onClick: scrollToBottom },
+    { label: "Top", icon: "arrow-up", onClick: scrollToTop },
+    { label: "Timeline", icon: "timeline", onClick: scrollToTimeline },
+    { label: "Skills", icon: "lightbulb", onClick: scrollToSkills },
+    { label: "Contact", icon: "chevron-down", onClick: scrollToBottom },
     { 
       label: "Email", 
-      icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z", 
+      icon: "mail",
       onClick: handleCopy,
       copyToClipboard: true,
       text: email
     },
     { 
       label: "Resume", 
-      icon: "M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", 
+      icon: "document-download",
       onClick: downloadResume 
     }
   ];
+
+  // Circular menu layout calculations
+  const getButtonPosition = (index, total, radius = 80) => {
+    // Start from the top (270 degrees) and go clockwise
+    const angleOffset = -90;
+    const angleStep = (360 / total);
+    const angle = ((index * angleStep) + angleOffset) * (Math.PI / 180);
+    
+    return {
+      x: Math.cos(angle) * radius,
+      y: Math.sin(angle) * radius
+    };
+  };
+
+  // SVG path map
+  const iconPathMap = {
+    "arrow-up": "M5 15l7-7 7 7",
+    "timeline": "M4 5h16M4 12h16M4 19h7",
+    "lightbulb": "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z",
+    "chevron-down": "M19 9l-7 7-7-7",
+    "mail": "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+    "document-download": "M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+  };
 
   return (
     <>
@@ -84,59 +105,126 @@ const FloatingActionButton = ({ email }) => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="absolute -inset-10 flex items-center justify-center"
+              className="fixed inset-0 z-40 bg-black bg-opacity-0 pointer-events-none"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              {buttons.map((button, index) => {
-                // Calculate position in a circle
-                const step = (2 * Math.PI) / buttons.length;
-                const angle = index * step;
-                const radius = 80; // Distance from center
-                
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius;
-                
-                const Button = button.copyToClipboard ? CopyToClipboardButton : RegularButton;
-                
-                return (
-                  <Button
-                    key={index}
-                    button={button}
-                    index={index}
-                    position={{ x, y }}
-                    total={buttons.length}
-                  />
-                );
-              })}
-            </motion.div>
+            />
           )}
         </AnimatePresence>
 
-        {/* Main FAB button */}
-        <motion.button
-          className="fab bg-[var(--color-accent)] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg"
-          onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          animate={isOpen ? { rotate: 45 } : { rotate: 0 }}
-          transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          aria-label={isOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isOpen}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-          </svg>
-        </motion.button>
+        <div className="relative">
+          <AnimatePresence>
+            {isOpen && (
+              <>
+                {buttons.map((button, index) => {
+                  const position = getButtonPosition(index, buttons.length);
+                  
+                  if (button.copyToClipboard) {
+                    return (
+                      <CopyToClipboard key={index} text={button.text} onCopy={button.onClick}>
+                        <motion.button
+                          className="fab-menu-button"
+                          initial={{ scale: 0, x: 0, y: 0, opacity: 0 }}
+                          animate={{ 
+                            scale: 1, 
+                            x: position.x, 
+                            y: position.y,
+                            opacity: 1,
+                          }}
+                          exit={{ 
+                            scale: 0,
+                            x: 0,
+                            y: 0,
+                            opacity: 0,
+                            transition: { duration: 0.2 }
+                          }}
+                          transition={{ 
+                            type: "spring",
+                            stiffness: 350,
+                            damping: 25,
+                            delay: index * 0.04,
+                          }}
+                          aria-label={button.label}
+                          whileHover={{ 
+                            scale: 1.1, 
+                            backgroundColor: "#4F46E5",
+                            color: "white"
+                          }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={iconPathMap[button.icon]} />
+                          </svg>
+                        </motion.button>
+                      </CopyToClipboard>
+                    );
+                  }
+
+                  return (
+                    <motion.button
+                      key={index}
+                      className="fab-menu-button"
+                      initial={{ scale: 0, x: 0, y: 0, opacity: 0 }}
+                      animate={{ 
+                        scale: 1, 
+                        x: position.x, 
+                        y: position.y,
+                        opacity: 1,
+                      }}
+                      exit={{ 
+                        scale: 0,
+                        x: 0,
+                        y: 0,
+                        opacity: 0,
+                        transition: { duration: 0.2 }
+                      }}
+                      transition={{ 
+                        type: "spring",
+                        stiffness: 350,
+                        damping: 25,
+                        delay: index * 0.04,
+                      }}
+                      onClick={button.onClick}
+                      aria-label={button.label}
+                      whileHover={{ 
+                        scale: 1.1, 
+                        backgroundColor: "#4F46E5",
+                        color: "white"
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={iconPathMap[button.icon]} />
+                      </svg>
+                    </motion.button>
+                  );
+                })}
+              </>
+            )}
+          </AnimatePresence>
+
+          <motion.button
+            className="fab-main"
+            onClick={() => setIsOpen(!isOpen)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            animate={isOpen ? { rotate: 135 } : { rotate: 0 }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+          </motion.button>
+        </div>
       </div>
 
-      {/* Toast notification */}
       <AnimatePresence>
         {showToast && (
           <motion.div
-            className="toast"
+            className="toast-notification"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
@@ -148,83 +236,6 @@ const FloatingActionButton = ({ email }) => {
         )}
       </AnimatePresence>
     </>
-  );
-};
-
-// Helper component for regular button
-const RegularButton = ({ button, index, position, total }) => {
-  return (
-    <motion.button
-      className="absolute flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-dark-600 text-[var(--color-accent)] shadow-md"
-      initial={{ scale: 0, x: 0, y: 0 }}
-      animate={{ 
-        scale: 1, 
-        x: position.x, 
-        y: position.y,
-      }}
-      exit={{ 
-        scale: 0,
-        x: 0,
-        y: 0,
-      }}
-      transition={{ 
-        type: "spring",
-        stiffness: 300,
-        damping: 20,
-        delay: index * 0.03,
-      }}
-      onClick={button.onClick}
-      aria-label={button.label}
-      whileHover={{ 
-        scale: 1.1, 
-        backgroundColor: "var(--color-accent)",
-        color: "white"
-      }}
-      whileTap={{ scale: 0.9 }}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={button.icon} />
-      </svg>
-    </motion.button>
-  );
-};
-
-// Helper component for copy-to-clipboard button
-const CopyToClipboardButton = ({ button, index, position, total }) => {
-  return (
-    <CopyToClipboard text={button.text} onCopy={button.onClick}>
-      <motion.button
-        className="absolute flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-dark-600 text-[var(--color-accent)] shadow-md"
-        initial={{ scale: 0, x: 0, y: 0 }}
-        animate={{ 
-          scale: 1, 
-          x: position.x, 
-          y: position.y,
-        }}
-        exit={{ 
-          scale: 0,
-          x: 0,
-          y: 0,
-        }}
-        transition={{ 
-          type: "spring",
-          stiffness: 300,
-          damping: 20,
-          delay: index * 0.03,
-        }}
-        aria-label={button.label}
-        whileHover={{ 
-          scale: 1.1, 
-          backgroundColor: "var(--color-accent)",
-          color: "white"
-        }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={button.icon} />
-        </svg>
-      </motion.button>
-    </CopyToClipboard>
   );
 };
 

@@ -1,44 +1,61 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { motion } from 'framer-motion';
 
-const TimelineItem = ({ experience, index, handleIntersection }) => {
-  const [ref, inView] = useInView({
-    threshold: 0.3,
-    triggerOnce: true,
-  });
+const TimelineItem = ({ experience, index, inView }) => {
+  const isEven = index % 2 === 0;
+  const controls = useAnimation();
 
   useEffect(() => {
     if (inView) {
-      handleIntersection(index);
+      controls.start({
+        opacity: 1,
+        x: 0,
+        transition: {
+          type: "spring",
+          stiffness: 100,
+          damping: 20,
+          delay: index * 0.2, // Staggered delay for better effect
+        }
+      });
+    } else {
+      controls.start({
+        opacity: 0,
+        x: isEven ? -50 : 50,
+      });
     }
-  }, [inView, index, handleIntersection]);
+  }, [inView, isEven, controls, index]);
 
   return (
-    <div ref={ref} className={`timeline-item ${inView ? 'animate-in' : ''}`}>
-      <div className="timeline-item-dot"></div>
-      <div className="timeline-item-date">{experience.dates}</div>
-      <div className="timeline-item-content">
-        <h3 className="font-display font-semibold text-lg text-accent mb-1">{experience.title}</h3>
-        <h4 className="font-medium mb-2 text-sm">{experience.company}</h4>
-        <p className="text-xs italic mb-3 text-gray-500 dark:text-gray-400">{experience.location}</p>
-        <ul className="space-y-1">
+    <div className={`timeline-item ${isEven ? 'timeline-item-left' : 'timeline-item-right'}`}>
+      <div className="timeline-dot">
+        <div className="timeline-dot-inner"></div>
+      </div>
+      <motion.div 
+        className="timeline-content"
+        initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+        animate={controls}
+      >
+        <div className="timeline-date">{experience.dates}</div>
+        <h3 className="timeline-title">{experience.title}</h3>
+        <h4 className="timeline-company">{experience.company}</h4>
+        <p className="timeline-location">{experience.location}</p>
+        <ul className="timeline-points">
           {experience.blurb.slice(0, 2).map((point, i) => (
-            <li key={i} className="text-xs text-gray-600 dark:text-gray-300">{point}</li>
+            <li key={i}>{point}</li>
           ))}
         </ul>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
 const Timeline = ({ userData }) => {
-  const [animatedItems, setAnimatedItems] = useState([]);
-  const timelineRef = useRef(null);
-
-  const handleItemIntersection = (index) => {
-    setAnimatedItems(prev => [...prev, index]);
-  };
+  const containerRef = useRef(null);
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: false,
+  });
 
   // Calculate years of experience
   const currentYear = new Date().getFullYear();
@@ -46,28 +63,29 @@ const Timeline = ({ userData }) => {
   const yearsOfExperience = currentYear - startYear;
 
   return (
-    <section ref={timelineRef} id="timeline" className="py-20 bg-[var(--color-bg-secondary)]">
-      <div className="container mx-auto px-4">
+    <section ref={ref} id="timeline" className="py-20 bg-white dark:bg-dark-800">
+      <div className="container mx-auto px-4 md:px-8">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-text-primary)]">Professional Journey</h2>
-          <p className="text-base text-[var(--color-text-secondary)] max-w-xl mx-auto font-light">
+          <h2 className="text-3xl font-display font-bold mb-4 text-gray-900 dark:text-white">Professional Journey</h2>
+          <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             With over {yearsOfExperience} years of experience building innovative products that make an impact.
           </p>
         </motion.div>
 
-        <div className="timeline-container">
-          <div className="timeline-center-line"></div>
+        <div className="timeline-container" ref={containerRef}>
+          <div className="timeline-line"></div>
+          
           {userData.experiences.map((experience, index) => (
             <TimelineItem 
               key={index} 
               experience={experience} 
-              index={index} 
-              handleIntersection={handleItemIntersection}
+              index={index}
+              inView={inView}
             />
           ))}
         </div>

@@ -7,10 +7,10 @@ const Header = ({ userData }) => {
     <ParallaxBanner
       layers={[
         { speed: -20, expanded: false, children: (
-          <div className="absolute inset-0 bg-gradient-to-r from-dark-700 to-dark-800 dark:from-dark-800 dark:to-dark-900 opacity-90" />
+          <div className="absolute inset-0 bg-dark-800 dark:bg-dark-900 opacity-90" />
         )},
       ]}
-      className="relative h-[80vh] md:h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen flex items-center justify-center overflow-hidden"
       id="top"
     >
       <div className="relative z-10 container mx-auto px-6 py-8">
@@ -22,16 +22,13 @@ const Header = ({ userData }) => {
             transition={{ duration: 0.5 }}
           >
             <motion.div 
-              className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-white/20 shadow-xl"
+              className="profile-photo"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <img 
-                src={userData.photoUrl} 
-                alt={userData.fullName} 
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
+              <svg viewBox="0 0 24 24" className="w-12 h-12 text-white">
+                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4zm0-1c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" />
+              </svg>
             </motion.div>
           </motion.div>
           
@@ -42,7 +39,7 @@ const Header = ({ userData }) => {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <motion.h1 
-              className="text-3xl md:text-5xl font-bold mb-3 font-display"
+              className="text-4xl md:text-5xl font-bold mb-3 font-display"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -56,18 +53,18 @@ const Header = ({ userData }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <p className="text-xl md:text-2xl text-primary-300 mb-2">
+              <p className="text-xl text-primary-300 mb-2">
                 {userData.bioLine}
               </p>
               
               <motion.a
                 href="/nathan_dryer_resume.pdf"
                 download="Nathan_Dryer_Resume.pdf"
-                className="inline-flex items-center px-4 py-2 rounded-md bg-primary-600 text-white text-sm font-medium hover:bg-primary-700 transition-colors"
+                className="resume-download-btn"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 Download Resume
