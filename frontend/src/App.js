@@ -1,53 +1,32 @@
-import { useEffect } from "react";
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import React, { Suspense, lazy } from 'react';
+import { ParallaxProvider } from 'react-scroll-parallax';
+import './App.css';
+import { userData } from './data';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+// Lazy load components for better performance
+const Header = lazy(() => import('./components/Header'));
+const Timeline = lazy(() => import('./components/Timeline'));
+const Skills = lazy(() => import('./components/Skills'));
+const Footer = lazy(() => import('./components/Footer'));
+const FloatingActionButton = lazy(() => import('./components/FloatingActionButton'));
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <ParallaxProvider>
+      <div className="App">
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+          <Header userData={userData} />
+          
+          <main>
+            <Timeline userData={userData} />
+            <Skills userData={userData} />
+          </main>
+          
+          <Footer userData={userData} />
+          <FloatingActionButton email={userData.email} />
+        </Suspense>
+      </div>
+    </ParallaxProvider>
   );
 }
 
