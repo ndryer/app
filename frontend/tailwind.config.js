@@ -20,6 +20,15 @@ module.exports = {
           900: '#312e81',
           950: '#1e1b4b',
         },
+        neutral: {
+          750: '#2a3142',
+          850: '#1f2537',
+        }
+      },
+      fontFamily: {
+        sans: ['Poppins', 'Inter', 'sans-serif'],
+        mono: ['Fira Code', 'monospace'],
+        display: ['Playfair Display', 'serif'],
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite',
