@@ -9,37 +9,35 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #f9fafb;
-  color: #4f46e5;
-  font-size: 1.5rem;
+  background-color: var(--color-bg-primary);
+  color: var(--color-accent);
+  font-size: 1.25rem;
   font-weight: bold;
-}
-
-.vertical-timeline {
-  width: 95%;
-  max-width: 1170px;
-}
-
-@media screen and (max-width: 1024px) {
-  .vertical-timeline {
-    width: 90%;
-  }
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Smooth transitions for all elements */
 * {
-  transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 640px) {
-  .fab {
-    bottom: 1rem;
-    right: 1rem;
+/* Text styling enhancements */
+.text-accent {
+  color: var(--color-accent);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.75rem;
   }
   
-  .toast {
-    width: 80%;
-    text-align: center;
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }

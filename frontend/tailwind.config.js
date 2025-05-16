@@ -4,6 +4,7 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
     "./public/index.html",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -20,19 +21,33 @@ module.exports = {
           900: '#312e81',
           950: '#1e1b4b',
         },
-        neutral: {
-          750: '#2a3142',
-          850: '#1f2537',
+        dark: {
+          100: '#cfd1d9',
+          200: '#a2a5b9',
+          300: '#7d7f96',
+          400: '#4a4e69',
+          500: '#2a2d43',
+          600: '#1f2231',
+          700: '#171a27',
+          800: '#10121b',
+          900: '#090a10',
         }
       },
       fontFamily: {
-        sans: ['Poppins', 'Inter', 'sans-serif'],
-        mono: ['Fira Code', 'monospace'],
-        display: ['Playfair Display', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
+        display: ['Lexend', 'sans-serif'],
       },
       animation: {
         'spin-slow': 'spin 3s linear infinite',
         'bounce-slow': 'bounce 3s infinite',
+        'wiggle': 'wiggle 1s ease-in-out infinite',
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        }
       },
       transitionProperty: {
         'height': 'height',

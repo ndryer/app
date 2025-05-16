@@ -9,12 +9,14 @@ const Timeline = lazy(() => import('./components/Timeline'));
 const Skills = lazy(() => import('./components/Skills'));
 const Footer = lazy(() => import('./components/Footer'));
 const FloatingActionButton = lazy(() => import('./components/FloatingActionButton'));
+const ThemeToggle = lazy(() => import('./components/ThemeToggle'));
 
 function App() {
   return (
     <ParallaxProvider>
       <div className="App">
         <Suspense fallback={<div className="loading">Loading...</div>}>
+          <ThemeToggle />
           <Header userData={userData} />
           
           <main>
