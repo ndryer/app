@@ -7,39 +7,35 @@ const Header = ({ userData }) => {
     <ParallaxBanner
       layers={[
         { speed: -20, expanded: false, children: (
-          <div className="absolute inset-0 bg-dark-800 dark:bg-dark-900 opacity-90" />
+          <div className="absolute inset-0 bg-dark-800 dark:bg-dark-900 opacity-95" />
         )},
       ]}
       className="relative h-screen flex items-center justify-center overflow-hidden"
       id="top"
     >
       <div className="relative z-10 container mx-auto px-6 py-8">
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col items-center justify-center h-full text-center">
           <motion.div 
-            className="mb-6"
+            className="mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
           >
-            <motion.div 
-              className="profile-photo"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <svg viewBox="0 0 24 24" className="w-12 h-12 text-white">
-                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4zm0-1c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" />
+            <div className="profile-photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-12 h-12 text-white">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-            </motion.div>
+            </div>
           </motion.div>
           
           <motion.div 
-            className="text-center text-white"
+            className="text-center text-white max-w-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <motion.h1 
-              className="text-4xl md:text-5xl font-bold mb-3 font-display"
+              className="text-4xl md:text-5xl font-bold mb-4 font-display"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -48,12 +44,12 @@ const Header = ({ userData }) => {
             </motion.h1>
             
             <motion.div
-              className="flex flex-col items-center space-y-3"
+              className="flex flex-col items-center space-y-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <p className="text-xl text-primary-300 mb-2">
+              <p className="text-xl text-primary-300">
                 {userData.bioLine}
               </p>
               

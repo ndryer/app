@@ -12,8 +12,6 @@ export const userData = {
       blurb: [
         "Built new user management tools from scratch for the Enterprise Suite Platform, reducing support costs by allowing clients to fully self-serve user populations",
         "Built new Feedback collection tools for clients, providing more dynamic methodologies for collecting user feedback on clients' websites",
-        "Led cross-functional effort to overhaul and replace Survey Builder platform within the Enterprise Suite Platform, while using Google Design Sprint methodologies",
-        "Product Manager for Alerts framework, Survey Builder, and User Management tool within Enterprise platform"
       ]
     },
     {
@@ -24,9 +22,6 @@ export const userData = {
       blurb: [
         "Defined roadmap for a $40M healthcare management product lines",
         "New product features helped grow user base by 35% from 4.1 to 5.5M in a 1 year period",
-        "Own development of product strategy of next generation healthcare data exchange framework",
-        "Led usability testing of desktop and mobile management apps, which led to a ~$1M decrease in supportability costs, 5% increase in site registrations, and overall improved usability",
-        "Built big data visualizations using TIBCO Spotfire to understand how market segmentation impacts conversion of patients to Patient Portal apps"
       ]
     },
     {
@@ -37,9 +32,6 @@ export const userData = {
       blurb: [
         "Defined digital product requirements and functional specs with business partners",
         "Led the functional design of 5/3's first apps, mobile websites, and mobile deposit functionality",
-        "Launched an Agile project management foundation to support mobile software development",
-        "Increased mobile user base 2000% from 20K to 400K between 2011 to 2014",
-        "Mobile deposits grew to represent over 10% of bank deposits ($100 million/month) in 3 years"
       ]
     },
     {

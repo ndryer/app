@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 const Skills = ({ userData }) => {
   const [ref, inView] = useInView({
     threshold: 0.1,
-    triggerOnce: true,
+    triggerOnce: false,
   });
 
   // Animation variants
@@ -26,7 +26,8 @@ const Skills = ({ userData }) => {
       y: 0,
       transition: {
         type: 'spring',
-        stiffness: 100,
+        stiffness: 50,
+        damping: 10,
       },
     },
   };
@@ -35,7 +36,7 @@ const Skills = ({ userData }) => {
     <section id="skills" ref={ref} className="py-20 bg-white dark:bg-dark-800">
       <div className="container mx-auto px-6">
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}

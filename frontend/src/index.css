@@ -69,14 +69,13 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #4f46e5;
   overflow: hidden;
   margin: 0 auto;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .resume-download-btn {
   display: inline-flex;
   align-items: center;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   background-color: #4f46e5;
   color: white;
@@ -95,6 +94,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 2rem 0;
   margin: 0 auto;
   max-width: 1000px;
+  min-height: 600px; /* Ensure adequate spacing for timeline */
 }
 
 .timeline-line {
@@ -109,7 +109,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .timeline-item {
   position: relative;
-  margin: 6rem 0;
+  margin: 8rem 0; /* Increased spacing between items */
   width: 100%;
   display: flex;
 }
@@ -129,8 +129,8 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background-color: white;
   display: flex;
@@ -141,8 +141,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .timeline-dot-inner {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: var(--color-accent);
 }
@@ -155,6 +155,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 2px solid var(--color-accent); /* Border at the top */
 }
 
 .timeline-content:hover {
@@ -215,31 +216,13 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-  border-top: 2px solid transparent;
+  border-top: 2px solid var(--color-accent);
   position: relative;
-  overflow: hidden;
 }
 
 .skill-card:hover {
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
-  border-top-color: var(--color-accent);
-}
-
-.skill-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--color-accent);
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-  transition: transform .5s ease-out;
-}
-
-.skill-card:hover::before {
-  transform: scaleX(1);
+  transform: translateY(-5px);
 }
 
 .skill-icon {
@@ -250,7 +233,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  background-color: var(--color-bg-secondary);
+  background-color: #eef2ff; /* Light indigo background */
 }
 
 .skill-icon-inner {
@@ -315,14 +298,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* FAB and menu */
-.fab-container {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 100;
-}
-
-.fab-main {
+.main-button {
   width: 56px;
   height: 56px;
   border-radius: 28px;
@@ -337,7 +313,7 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-.fab-menu-button {
+.menu-button {
   position: absolute;
   width: 40px;
   height: 40px;
@@ -352,7 +328,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.2s ease;
 }
 
-.toast-notification {
+.toast {
   position: fixed;
   bottom: 2rem;
   left: 50%;
@@ -406,12 +382,12 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1rem;
   }
   
-  .fab-main {
+  .main-button {
     width: 48px;
     height: 48px;
   }
   
-  .fab-menu-button {
+  .menu-button {
     width: 36px;
     height: 36px;
   }

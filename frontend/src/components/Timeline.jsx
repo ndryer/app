@@ -13,35 +13,35 @@ const TimelineItem = ({ experience, index, inView }) => {
         x: 0,
         transition: {
           type: "spring",
-          stiffness: 100,
-          damping: 20,
+          stiffness: 50,
+          damping: 15,
           delay: index * 0.2, // Staggered delay for better effect
         }
       });
     } else {
       controls.start({
         opacity: 0,
-        x: isEven ? -50 : 50,
+        x: isEven ? -80 : 80,
       });
     }
   }, [inView, isEven, controls, index]);
 
   return (
     <div className={`timeline-item ${isEven ? 'timeline-item-left' : 'timeline-item-right'}`}>
-      <div className="timeline-dot">
+      <div className="timeline-dot" data-date={experience.dates}>
         <div className="timeline-dot-inner"></div>
       </div>
       <motion.div 
         className="timeline-content"
-        initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+        initial={{ opacity: 0, x: isEven ? -80 : 80 }}
         animate={controls}
       >
-        <div className="timeline-date">{experience.dates}</div>
+        <span className="timeline-date">{experience.dates}</span>
         <h3 className="timeline-title">{experience.title}</h3>
         <h4 className="timeline-company">{experience.company}</h4>
         <p className="timeline-location">{experience.location}</p>
         <ul className="timeline-points">
-          {experience.blurb.slice(0, 2).map((point, i) => (
+          {experience.blurb.map((point, i) => (
             <li key={i}>{point}</li>
           ))}
         </ul>
@@ -55,6 +55,7 @@ const Timeline = ({ userData }) => {
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: false,
+    rootMargin: "-100px 0px",
   });
 
   // Calculate years of experience
@@ -63,7 +64,7 @@ const Timeline = ({ userData }) => {
   const yearsOfExperience = currentYear - startYear;
 
   return (
-    <section ref={ref} id="timeline" className="py-20 bg-white dark:bg-dark-800">
+    <section ref={ref} id="timeline" className="py-24 bg-white dark:bg-dark-800">
       <div className="container mx-auto px-4 md:px-8">
         <motion.div 
           className="text-center mb-16"

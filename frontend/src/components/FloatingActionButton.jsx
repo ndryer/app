@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
@@ -6,10 +6,11 @@ const FloatingActionButton = ({ email }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+  const containerRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (!e.target.closest('.fab-container')) {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
         setIsOpen(false);
       }
     };
@@ -78,8 +79,8 @@ const FloatingActionButton = ({ email }) => {
 
   // Circular menu layout calculations
   const getButtonPosition = (index, total, radius = 80) => {
-    // Start from the top (270 degrees) and go clockwise
-    const angleOffset = -90;
+    // Start from the top position and distribute buttons evenly in a circle
+    const angleOffset = -90; // Start from top (negative y-axis in screen coordinates)
     const angleStep = (360 / total);
     const angle = ((index * angleStep) + angleOffset) * (Math.PI / 180);
     
@@ -101,22 +102,11 @@ const FloatingActionButton = ({ email }) => {
 
   return (
     <>
-      <div className="fab-container fixed bottom-8 right-8 z-50">
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              className="fixed inset-0 z-40 bg-black bg-opacity-0 pointer-events-none"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
-          )}
-        </AnimatePresence>
-
+      <div ref={containerRef} className="fixed bottom-8 right-8 z-50">
         <div className="relative">
           <AnimatePresence>
             {isOpen && (
-              <>
+              <div className="absolute top-0 left-0">
                 {buttons.map((button, index) => {
                   const position = getButtonPosition(index, buttons.length);
                   
@@ -124,7 +114,7 @@ const FloatingActionButton = ({ email }) => {
                     return (
                       <CopyToClipboard key={index} text={button.text} onCopy={button.onClick}>
                         <motion.button
-                          className="fab-menu-button"
+                          className="menu-button"
                           initial={{ scale: 0, x: 0, y: 0, opacity: 0 }}
                           animate={{ 
                             scale: 1, 
@@ -164,7 +154,7 @@ const FloatingActionButton = ({ email }) => {
                   return (
                     <motion.button
                       key={index}
-                      className="fab-menu-button"
+                      className="menu-button"
                       initial={{ scale: 0, x: 0, y: 0, opacity: 0 }}
                       animate={{ 
                         scale: 1, 
@@ -200,12 +190,12 @@ const FloatingActionButton = ({ email }) => {
                     </motion.button>
                   );
                 })}
-              </>
+              </div>
             )}
           </AnimatePresence>
 
           <motion.button
-            className="fab-main"
+            className="main-button"
             onClick={() => setIsOpen(!isOpen)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -224,7 +214,7 @@ const FloatingActionButton = ({ email }) => {
       <AnimatePresence>
         {showToast && (
           <motion.div
-            className="toast-notification"
+            className="toast"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
