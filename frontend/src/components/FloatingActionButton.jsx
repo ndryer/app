@@ -1,145 +1,133 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
 const FloatingActionButton = ({ email }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  // Close menu on page click (except when clicking the menu itself)
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.fab-container')) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   const handleCopy = () => {
+    setToastMessage('Email copied to clipboard!');
     setShowToast(true);
-    setIsOpen(false);
     setTimeout(() => setShowToast(false), 2000);
   };
 
   const scrollToTop = () => {
     document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' });
-    setIsOpen(false);
+  };
+
+  const scrollToTimeline = () => {
+    document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToSkills = () => {
+    document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToBottom = () => {
     document.getElementById('end')?.scrollIntoView({ behavior: 'smooth' });
-    setIsOpen(false);
   };
 
-  // Circular menu animation setup
-  const circleRadius = 70; // Distance from the center to the buttons
-  
-  // Calculate the position for each button
-  const getButtonPosition = (index, total) => {
-    const angle = (index * (360 / total)) * (Math.PI / 180);
-    return {
-      x: Math.cos(angle) * circleRadius,
-      y: Math.sin(angle) * circleRadius
-    };
+  const downloadResume = () => {
+    // Create a link to download the resume (placeholder URL)
+    const link = document.createElement('a');
+    link.href = '/nathan_dryer_resume.pdf';
+    link.download = 'Nathan_Dryer_Resume.pdf';
+    link.click();
+    
+    setToastMessage('Resume downloaded!');
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2000);
   };
 
-  // Button variants for floating animations
-  const buttonVariants = {
-    closed: {
-      scale: 0,
-      opacity: 0,
+  // Button configuration
+  const buttons = [
+    { label: "Top", icon: "M5 15l7-7 7 7", onClick: scrollToTop },
+    { label: "Timeline", icon: "M4 5h16M4 12h16M4 19h7", onClick: scrollToTimeline },
+    { label: "Skills", icon: "M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z", onClick: scrollToSkills },
+    { label: "Bottom", icon: "M19 9l-7 7-7-7", onClick: scrollToBottom },
+    { 
+      label: "Email", 
+      icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z", 
+      onClick: handleCopy,
+      copyToClipboard: true,
+      text: email
     },
-    open: (i) => ({
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 20,
-        delay: i * 0.05,
-      }
-    })
-  };
+    { 
+      label: "Resume", 
+      icon: "M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z", 
+      onClick: downloadResume 
+    }
+  ];
 
   return (
     <>
-      <div className="relative z-20">
+      <div className="fab-container fixed bottom-8 right-8 z-50">
         <AnimatePresence>
           {isOpen && (
-            <>
-              {/* Top action */}
-              <motion.button
-                className="fab-action"
-                custom={0}
-                variants={buttonVariants}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                onClick={scrollToTop}
-                aria-label="Scroll to top"
-                style={{
-                  x: getButtonPosition(0, 3).x,
-                  y: getButtonPosition(0, 3).y,
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
-                </svg>
-              </motion.button>
-              
-              {/* Bottom action */}
-              <motion.button
-                className="fab-action"
-                custom={1}
-                variants={buttonVariants}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                onClick={scrollToBottom}
-                aria-label="Scroll to bottom"
-                style={{
-                  x: getButtonPosition(1, 3).x,
-                  y: getButtonPosition(1, 3).y,
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </motion.button>
-              
-              {/* Copy email action */}
-              <CopyToClipboard text={email} onCopy={handleCopy}>
-                <motion.button
-                  className="fab-action"
-                  custom={2}
-                  variants={buttonVariants}
-                  initial="closed"
-                  animate="open"
-                  exit="closed"
-                  aria-label="Copy email address"
-                  style={{
-                    x: getButtonPosition(2, 3).x,
-                    y: getButtonPosition(2, 3).y,
-                  }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                    <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                  </svg>
-                </motion.button>
-              </CopyToClipboard>
-            </>
+            <motion.div
+              className="absolute -inset-10 flex items-center justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              {buttons.map((button, index) => {
+                // Calculate position in a circle
+                const step = (2 * Math.PI) / buttons.length;
+                const angle = index * step;
+                const radius = 80; // Distance from center
+                
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+                
+                const Button = button.copyToClipboard ? CopyToClipboardButton : RegularButton;
+                
+                return (
+                  <Button
+                    key={index}
+                    button={button}
+                    index={index}
+                    position={{ x, y }}
+                    total={buttons.length}
+                  />
+                );
+              })}
+            </motion.div>
           )}
         </AnimatePresence>
 
         {/* Main FAB button */}
         <motion.button
-          className="fab"
+          className="fab bg-[var(--color-accent)] text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg"
           onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           animate={isOpen ? { rotate: 45 } : { rotate: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
           aria-label={isOpen ? "Close menu" : "Open menu"}
           aria-expanded={isOpen}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            {isOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-            )}
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
         </motion.button>
       </div>
@@ -155,11 +143,88 @@ const FloatingActionButton = ({ email }) => {
             transition={{ duration: 0.3 }}
             role="alert"
           >
-            Email copied to clipboard!
+            {toastMessage}
           </motion.div>
         )}
       </AnimatePresence>
     </>
+  );
+};
+
+// Helper component for regular button
+const RegularButton = ({ button, index, position, total }) => {
+  return (
+    <motion.button
+      className="absolute flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-dark-600 text-[var(--color-accent)] shadow-md"
+      initial={{ scale: 0, x: 0, y: 0 }}
+      animate={{ 
+        scale: 1, 
+        x: position.x, 
+        y: position.y,
+      }}
+      exit={{ 
+        scale: 0,
+        x: 0,
+        y: 0,
+      }}
+      transition={{ 
+        type: "spring",
+        stiffness: 300,
+        damping: 20,
+        delay: index * 0.03,
+      }}
+      onClick={button.onClick}
+      aria-label={button.label}
+      whileHover={{ 
+        scale: 1.1, 
+        backgroundColor: "var(--color-accent)",
+        color: "white"
+      }}
+      whileTap={{ scale: 0.9 }}
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={button.icon} />
+      </svg>
+    </motion.button>
+  );
+};
+
+// Helper component for copy-to-clipboard button
+const CopyToClipboardButton = ({ button, index, position, total }) => {
+  return (
+    <CopyToClipboard text={button.text} onCopy={button.onClick}>
+      <motion.button
+        className="absolute flex items-center justify-center w-10 h-10 rounded-full bg-white dark:bg-dark-600 text-[var(--color-accent)] shadow-md"
+        initial={{ scale: 0, x: 0, y: 0 }}
+        animate={{ 
+          scale: 1, 
+          x: position.x, 
+          y: position.y,
+        }}
+        exit={{ 
+          scale: 0,
+          x: 0,
+          y: 0,
+        }}
+        transition={{ 
+          type: "spring",
+          stiffness: 300,
+          damping: 20,
+          delay: index * 0.03,
+        }}
+        aria-label={button.label}
+        whileHover={{ 
+          scale: 1.1, 
+          backgroundColor: "var(--color-accent)",
+          color: "white"
+        }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={button.icon} />
+        </svg>
+      </motion.button>
+    </CopyToClipboard>
   );
 };
 
