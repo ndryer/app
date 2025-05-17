@@ -30,8 +30,9 @@ const ThemeToggle = () => {
 
   return (
     <motion.button
-      className="theme-toggle"
+      className="theme-toggle-modern"
       onClick={toggleTheme}
+      whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >

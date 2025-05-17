@@ -15,28 +15,32 @@ const TimelineItem = ({ experience, index, inView }) => {
           type: "spring",
           stiffness: 50,
           damping: 15,
-          delay: index * 0.2, // Staggered delay for better effect
+          delay: index * 0.2,
         }
       });
     } else {
       controls.start({
         opacity: 0,
-        x: isEven ? -80 : 80,
+        x: isEven ? -40 : 40,
       });
     }
   }, [inView, isEven, controls, index]);
 
+  // On mobile, all cards are on the right side
+  const isMobile = window.innerWidth < 768;
+
   return (
-    <div className={`timeline-item ${isEven ? 'timeline-item-left' : 'timeline-item-right'}`}>
-      <div className="timeline-dot" data-date={experience.dates}>
+    <div className={`timeline-card-container ${isEven && !isMobile ? 'timeline-left' : 'timeline-right'}`}>
+      <div className="timeline-dot">
         <div className="timeline-dot-inner"></div>
       </div>
+      
       <motion.div 
-        className="timeline-content"
-        initial={{ opacity: 0, x: isEven ? -80 : 80 }}
+        className="timeline-card"
+        initial={{ opacity: 0, x: isEven && !isMobile ? -40 : 40 }}
         animate={controls}
       >
-        <span className="timeline-date">{experience.dates}</span>
+        <div className="timeline-date">{experience.dates}</div>
         <h3 className="timeline-title">{experience.title}</h3>
         <h4 className="timeline-company">{experience.company}</h4>
         <p className="timeline-location">{experience.location}</p>
@@ -64,21 +68,9 @@ const Timeline = ({ userData }) => {
   const yearsOfExperience = currentYear - startYear;
 
   return (
-    <section ref={ref} id="timeline" className="py-24 bg-white dark:bg-dark-800">
-      <div className="container mx-auto px-4 md:px-8">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="text-3xl font-display font-bold mb-4 text-gray-900 dark:text-white">Professional Journey</h2>
-          <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            With over {yearsOfExperience} years of experience building innovative products that make an impact.
-          </p>
-        </motion.div>
-
-        <div className="timeline-container" ref={containerRef}>
+    <section ref={ref} id="timeline" className="py-24 bg-gray-950 dark:bg-gray-950 text-white">
+      <div className="container mx-auto px-4">
+        <div className="timeline-wrapper">
           <div className="timeline-line"></div>
           
           {userData.experiences.map((experience, index) => (

@@ -33,7 +33,7 @@ const Skills = ({ userData }) => {
   };
 
   return (
-    <section id="skills" ref={ref} className="py-20 bg-gray-50 dark:bg-dark-700">
+    <section id="skills" ref={ref} className="py-20 bg-gray-950 dark:bg-gray-950">
       <div className="container mx-auto px-6">
         <motion.div 
           className="text-center mb-16"
@@ -41,8 +41,8 @@ const Skills = ({ userData }) => {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-display font-bold mb-4 text-gray-900 dark:text-white">Expertise & Skills</h2>
-          <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold mb-4 text-white">Expertise & Skills</h2>
+          <p className="text-base text-gray-300 max-w-2xl mx-auto">
             I specialize in building AI/ML products with a focus on exceptional user experience.
           </p>
         </motion.div>
@@ -56,15 +56,15 @@ const Skills = ({ userData }) => {
           {userData.skills.map((skill, index) => (
             <motion.div
               key={index}
-              className="skill-card"
+              className="skill-card-modern"
               variants={itemVariants}
               whileHover={{ y: -5 }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="skill-icon">
-                <div className="skill-icon-inner"></div>
+              <div className="skill-icon-modern">
+                <div className="skill-dot"></div>
               </div>
-              <h3 className="skill-name">{skill.name}</h3>
+              <h3 className="skill-name-modern">{skill.name}</h3>
             </motion.div>
           ))}
         </motion.div>

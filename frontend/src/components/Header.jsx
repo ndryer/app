@@ -7,7 +7,7 @@ const Header = ({ userData }) => {
     <ParallaxBanner
       layers={[
         { speed: -20, expanded: false, children: (
-          <div className="absolute inset-0 bg-gradient-to-br from-teal-400 to-teal-600 opacity-100">
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-teal-600 opacity-100">
             {/* Hexagon Pattern - created with multiple divs */}
             <div className="hexagon-pattern">
               {Array.from({ length: 20 }).map((_, i) => (
@@ -28,12 +28,13 @@ const Header = ({ userData }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="profile-circle">
-              <img 
-                src={userData.photoUrl} 
-                alt={userData.fullName}
-                className="w-full h-full object-cover"
-              />
+            <div className="power-button-logo">
+              <div className="power-button-inner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-10 h-10">
+                  <path d="M18.36 6.64a9 9 0 1 1-12.73 0" />
+                  <line x1="12" y1="2" x2="12" y2="12" />
+                </svg>
+              </div>
             </div>
           </motion.div>
           
@@ -44,7 +45,7 @@ const Header = ({ userData }) => {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <motion.h1 
-              className="text-5xl md:text-6xl font-bold mb-4 font-sans"
+              className="text-4xl md:text-5xl font-bold mb-4 font-sans"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -62,18 +63,35 @@ const Header = ({ userData }) => {
                 {userData.bioLine}
               </p>
               
-              <motion.a
-                href="/nathan_dryer_resume.pdf"
-                download="Nathan_Dryer_Resume.pdf"
-                className="modern-button"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Download Resume
-              </motion.a>
+              <div className="flex space-x-4">
+                <motion.a
+                  href="/nathan_dryer_resume.pdf"
+                  download="Nathan_Dryer_Resume.pdf"
+                  className="round-button"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span className="ml-2">Download Resume</span>
+                </motion.a>
+
+                <motion.button
+                  onClick={() => {
+                    navigator.clipboard.writeText(userData.email);
+                    // You would add a toast notification here
+                  }}
+                  className="round-button-icon"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-label="Copy email"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </motion.button>
+              </div>
             </motion.div>
           </motion.div>
         </div>
