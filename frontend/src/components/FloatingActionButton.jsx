@@ -138,7 +138,7 @@ const FloatingActionButton = ({ email }) => {
                           aria-label={button.label}
                           whileHover={{ 
                             scale: 1.1, 
-                            backgroundColor: "#4F46E5",
+                            backgroundColor: "#38b2ac",
                             color: "white"
                           }}
                           whileTap={{ scale: 0.95 }}
@@ -179,7 +179,7 @@ const FloatingActionButton = ({ email }) => {
                       aria-label={button.label}
                       whileHover={{ 
                         scale: 1.1, 
-                        backgroundColor: "#4F46E5",
+                        backgroundColor: "#38b2ac",
                         color: "white"
                       }}
                       whileTap={{ scale: 0.95 }}
@@ -203,6 +203,7 @@ const FloatingActionButton = ({ email }) => {
             transition={{ type: "spring", stiffness: 500, damping: 30 }}
             aria-label={isOpen ? "Close menu" : "Open menu"}
             aria-expanded={isOpen}
+            style={{ backgroundColor: '#38b2ac' }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -220,6 +221,7 @@ const FloatingActionButton = ({ email }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             role="alert"
+            style={{ backgroundColor: '#38b2ac' }}
           >
             {toastMessage}
           </motion.div>

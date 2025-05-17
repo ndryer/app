@@ -33,7 +33,7 @@ const Skills = ({ userData }) => {
   };
 
   return (
-    <section id="skills" ref={ref} className="py-20 bg-white dark:bg-dark-800">
+    <section id="skills" ref={ref} className="py-20 bg-gray-50 dark:bg-dark-700">
       <div className="container mx-auto px-6">
         <motion.div 
           className="text-center mb-16"

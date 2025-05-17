@@ -7,7 +7,14 @@ const Header = ({ userData }) => {
     <ParallaxBanner
       layers={[
         { speed: -20, expanded: false, children: (
-          <div className="absolute inset-0 bg-dark-800 dark:bg-dark-900 opacity-95" />
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-400 to-teal-600 opacity-100">
+            {/* Hexagon Pattern - created with multiple divs */}
+            <div className="hexagon-pattern">
+              {Array.from({ length: 20 }).map((_, i) => (
+                <div key={i} className="hexagon"></div>
+              ))}
+            </div>
+          </div>
         )},
       ]}
       className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -16,15 +23,17 @@ const Header = ({ userData }) => {
       <div className="relative z-10 container mx-auto px-6 py-8">
         <div className="flex flex-col items-center justify-center h-full text-center">
           <motion.div 
-            className="mb-8"
+            className="mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="profile-photo">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-12 h-12 text-white">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+            <div className="profile-circle">
+              <img 
+                src={userData.photoUrl} 
+                alt={userData.fullName}
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
           
@@ -35,7 +44,7 @@ const Header = ({ userData }) => {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <motion.h1 
-              className="text-4xl md:text-5xl font-bold mb-4 font-display"
+              className="text-5xl md:text-6xl font-bold mb-4 font-sans"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -49,14 +58,14 @@ const Header = ({ userData }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <p className="text-xl text-primary-300">
+              <p className="text-xl text-white font-light">
                 {userData.bioLine}
               </p>
               
               <motion.a
                 href="/nathan_dryer_resume.pdf"
                 download="Nathan_Dryer_Resume.pdf"
-                className="resume-download-btn"
+                className="modern-button"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -70,26 +79,28 @@ const Header = ({ userData }) => {
         </div>
       </div>
       
-      <motion.div 
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-      >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          className="h-8 w-8 text-primary-400 cursor-pointer" 
-          fill="none" 
-          viewBox="0 0 24 24" 
-          stroke="currentColor"
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+        <motion.div 
+          className="scroll-down-circle"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
           onClick={() => document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth' })}
-          aria-label="Scroll down to timeline"
-          role="button"
-          tabIndex={0}
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </motion.div>
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-6 w-6 text-white" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+            aria-label="Scroll down to timeline"
+            role="button"
+            tabIndex={0}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </motion.div>
+      </div>
     </ParallaxBanner>
   );
 };
