@@ -54,9 +54,9 @@ html {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Smooth transitions for all elements */
+/* Smooth transitions for all elements - reduced for better performance */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Reduced motion preferences */
@@ -70,8 +70,13 @@ html {
   
   .animate-bounce-slow,
   .animate-pulse-slow,
-  .animate-spin-slow {
+  .animate-spin-slow,
+  .animate-wiggle {
     animation: none !important;
+  }
+  
+  html {
+    scroll-behavior: auto !important;
   }
 }
 
@@ -128,68 +133,24 @@ html {
   outline-offset: 2px;
 }
 
-/* Ship log (timeline) styling */
-.shiplog {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  height: 80vh;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  padding-bottom: 2rem;
-}
-
-.shiplog > li {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-@media (min-width: 768px) {
-  .shiplog {
-    flex-direction: row;
-    height: auto;
-    overflow-x: auto;
-    overflow-y: visible;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 3rem;
-  }
-  
-  .shiplog > li {
-    flex: 0 0 auto;
-    width: 260px;
-    scroll-snap-align: center;
-  }
-}
-
 /* Scrollbar styling */
-.shiplog::-webkit-scrollbar {
+::-webkit-scrollbar {
   height: 8px;
   width: 8px;
 }
 
-.shiplog::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: var(--color-bg-secondary);
   border-radius: 4px;
 }
 
-.shiplog::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: var(--color-accent-light);
   border-radius: 4px;
 }
 
-.shiplog::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent);
-}
-
-/* Pulse animation for latest item */
-.animate-pulse-slow {
-  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
 }
 
 /* Text styling enhancements */
@@ -198,7 +159,7 @@ html {
 }
 
 /* Skills section styling */
-.skill-card-modern {
+.skill-card {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -212,22 +173,13 @@ html {
   transition: all 0.3s ease;
 }
 
-.dark .skill-card-modern {
+.dark .skill-card {
   background-color: rgba(30, 41, 59, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
-.skill-card-modern:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
-}
-
-.dark .skill-card-modern:hover {
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
-}
-
-.skill-icon-modern {
+.skill-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -238,7 +190,7 @@ html {
   margin-bottom: 1rem;
 }
 
-.dark .skill-icon-modern {
+.dark .skill-icon {
   background-color: rgba(59, 130, 246, 0.2);
 }
 
@@ -250,7 +202,7 @@ html {
   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
 }
 
-.skill-name-modern {
+.skill-name {
   font-size: 1rem;
   font-weight: 600;
   text-align: center;
@@ -258,8 +210,53 @@ html {
   line-height: 1.4;
 }
 
-.dark .skill-name-modern {
-  color: var(--color-text-primary);
+/* Timeline styling */
+.timeline-container {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  width: 2px;
+  background-color: var(--color-accent-light);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-dot-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+}
+
+.timeline-content {
+  background-color: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px var(--color-shadow);
+  border: 1px solid var(--color-border);
 }
 
 /* Mobile optimizations */
@@ -277,16 +274,16 @@ html {
     padding-right: 1rem;
   }
   
-  .skill-card-modern {
+  .skill-card {
     padding: 1.25rem 0.75rem;
   }
   
-  .skill-icon-modern {
+  .skill-icon {
     width: 40px;
     height: 40px;
   }
   
-  .skill-name-modern {
+  .skill-name {
     font-size: 0.875rem;
   }
 }

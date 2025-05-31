@@ -1,149 +1,169 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Command } from 'cmdk';
-import { Download, Mail, Linkedin, Github, Moon, Sun, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { 
+  Search, 
+  Mail, 
+  Clock, 
+  Linkedin, 
+  Github,
+  X,
+  Check
+} from 'lucide-react';
 
-const CommandMenu = ({ userData, toggleTheme, darkMode }) => {
-  const [open, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const inputRef = useRef(null);
-  const listRef = useRef(null);
-
-  // Define command items
-  const items = [
-    { 
-      label: "Download résumé", 
-      icon: Download, 
-      href: "/nathan_dryer_resume.pdf", 
-      shortcut: "⏎", 
-      primary: true 
+const CommandMenu = ({ isOpen, setIsOpen }) => {
+  const [search, setSearch] = useState('');
+  const [copied, setCopied] = useState(false);
+  
+  // Handle copy notification
+  const handleCopyEmail = useCallback(() => {
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+      setIsOpen(false);
+    }, 1500);
+  }, [setIsOpen]);
+  
+  // Scroll to section helper
+  const scrollToSection = useCallback((id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsOpen(false);
+    }
+  }, [setIsOpen]);
+  
+  // Open link in new tab helper
+  const openLink = useCallback((url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+    setIsOpen(false);
+  }, [setIsOpen]);
+  
+  // Simplified commands array (removed resume and skills)
+  const commands = [
+    {
+      id: 'email',
+      name: 'Copy Email Address',
+      icon: <Mail size={18} className="text-blue-500" />,
+      keywords: 'contact mail reach',
+      action: handleCopyEmail,
+      component: (
+        <CopyToClipboard text="nathan.dryer@example.com" onCopy={handleCopyEmail}>
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-3">
+              <Mail size={18} className="text-blue-500" />
+              <div className="flex flex-col">
+                <span className="font-medium">Copy Email</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">nathan.dryer@example.com</span>
+              </div>
+            </div>
+          </div>
+        </CopyToClipboard>
+      )
     },
-    { 
-      label: "Email Nate", 
-      icon: Mail, 
-      href: `mailto:${userData.email}` 
+    {
+      id: 'linkedin',
+      name: 'LinkedIn Profile',
+      icon: <Linkedin size={18} className="text-blue-500" />,
+      keywords: 'social network professional connect',
+      action: () => openLink('https://linkedin.com/in/nathan-dryer')
     },
-    { 
-      label: "LinkedIn", 
-      icon: Linkedin, 
-      href: userData.socialLinks.find(link => link.name === "LinkedIn")?.url || "#" 
+    {
+      id: 'github',
+      name: 'GitHub Profile',
+      icon: <Github size={18} className="text-blue-500" />,
+      keywords: 'code repository projects source',
+      action: () => openLink('https://github.com/nathan-dryer')
     },
-    { 
-      label: "GitHub", 
-      icon: Github, 
-      href: userData.socialLinks.find(link => link.name === "GitHub")?.url || "#" 
-    },
-    { 
-      label: `Toggle ${darkMode ? 'light' : 'dark'} mode`, 
-      icon: darkMode ? Sun : Moon, 
-      action: "theme" 
-    },
+    {
+      id: 'timeline',
+      name: 'View Experience Timeline',
+      icon: <Clock size={18} className="text-blue-500" />,
+      keywords: 'experience history career work jobs',
+      action: () => scrollToSection('timeline')
+    }
   ];
 
-  // Filter items based on search input
-  const filteredItems = inputValue === '' 
-    ? items 
-    : items.filter(item => 
-        item.label.toLowerCase().includes(inputValue.toLowerCase())
-      );
-
-  // Handle keyboard shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      // Open command palette with Cmd+K or Ctrl+K
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        setOpen(true);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  // Auto-focus input on palette open only on desktop
-  useEffect(() => {
-    if (open && window.innerWidth >= 768) {
-      setTimeout(() => {
-        inputRef.current?.focus();
-      }, 100);
-    }
-  }, [open]);
-
-  // Handle email copy
-  const handleEmailCopy = () => {
-    navigator.clipboard.writeText(userData.email);
-    // You could add a toast notification here
-    setOpen(false);
-  };
-
   return (
-    <Command
-      label="Site command palette"
-      className="w-full max-w-full md:max-w-md mx-auto rounded-2xl bg-white/65 dark:bg-slate-900/50
-                backdrop-blur-sm shadow-lg ring-1 ring-black/5 dark:ring-white/10
-                focus-within:ring-blue-500 dark:focus-within:ring-blue-400 transition"
-    >
-      <Command.Input
-        ref={inputRef}
-        value={inputValue}
-        onValueChange={setInputValue}
-        placeholder="Type a command…"
-        className="h-12 w-full bg-transparent px-4 text-base text-gray-800 dark:text-white outline-none"
-        autoComplete="off"
-      />
-      <Command.List 
-        ref={listRef}
-        className="grid gap-1 p-2"
-      >
-        {filteredItems.map(({ label, icon: Icon, href, shortcut, primary, action }) => (
-          <Command.Item 
-            key={label} 
-            className="rounded-xl focus:bg-slate-100 dark:focus:bg-white/5 outline-none"
-            role="menuitem"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div 
+          className="fixed inset-0 bg-black/60 dark:bg-black/80 z-50 flex items-start justify-center pt-[15vh] sm:pt-[20vh] px-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={() => setIsOpen(false)}
+        >
+          <motion.div 
+            className="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700"
+            initial={{ scale: 0.95, opacity: 0, y: -10 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: -10 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            onClick={(e) => e.stopPropagation()}
           >
-            {href ? (
-              <a
-                href={href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl w-full min-h-[48px]
-                          ${primary 
-                            ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700" 
-                            : "hover:bg-slate-100 dark:hover:bg-white/5"}`}
-                download={href.includes('resume') ? "Nathan_Dryer_Resume.pdf" : undefined}
-              >
-                <div className={`flex items-center justify-center w-8 h-8 ${primary 
-                  ? "bg-white/20 rounded-full" 
-                  : "text-blue-500 dark:text-blue-400"}`}>
-                  <Icon className="w-5 h-5 shrink-0" />
+            <Command className="w-full">
+              <div className="flex items-center px-4 pt-4 pb-3 border-b border-gray-200 dark:border-gray-700">
+                <Search className="w-4 h-4 mr-3 text-gray-500 dark:text-gray-400" />
+                <Command.Input 
+                  value={search}
+                  onValueChange={setSearch}
+                  className="w-full py-2 bg-transparent focus:outline-none text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 text-base font-medium"
+                  placeholder="Find contact info or navigate..."
+                  autoFocus
+                />
+                <button 
+                  className="p-1.5 rounded-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <X size={16} />
+                </button>
+              </div>
+
+              {copied && (
+                <div className="px-4 py-3 bg-blue-50 dark:bg-blue-900/20 border-b border-blue-100 dark:border-blue-800/30">
+                  <div className="flex items-center text-blue-700 dark:text-blue-300">
+                    <Check size={16} className="mr-2" />
+                    <p className="text-sm font-medium">
+                      Email copied to clipboard
+                    </p>
+                  </div>
                 </div>
-                <span className="grow text-left">{label}</span>
-                {shortcut && (
-                  <kbd className="px-2 py-1 text-xs bg-black/5 dark:bg-white/10 rounded">
-                    {shortcut}
-                  </kbd>
-                )}
-                {!primary && !shortcut && <ChevronRight className="w-4 h-4 opacity-50" />}
-              </a>
-            ) : (
-              <button
-                onClick={() => {
-                  if (action === "theme") {
-                    toggleTheme();
-                  }
-                  setOpen(false);
-                }}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl w-full min-h-[48px]
-                          hover:bg-slate-100 dark:hover:bg-white/5"
-              >
-                <div className="flex items-center justify-center w-8 h-8 text-blue-500 dark:text-blue-400">
-                  <Icon className="w-5 h-5 shrink-0" />
-                </div>
-                <span className="grow text-left text-gray-800 dark:text-white">{label}</span>
-              </button>
-            )}
-          </Command.Item>
-        ))}
-      </Command.List>
-    </Command>
+              )}
+
+              <Command.List className="max-h-[300px] overflow-y-auto py-3">
+                <Command.Empty className="py-8 text-center">
+                  <p className="text-gray-500 dark:text-gray-400 font-medium">
+                    No matching commands found
+                  </p>
+                  <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
+                    Try a different search term
+                  </p>
+                </Command.Empty>
+                
+                {commands.map((command) => (
+                  <Command.Item
+                    key={command.id}
+                    value={`${command.name.toLowerCase()} ${command.keywords}`}
+                    onSelect={() => command.action()}
+                    className="mx-2 px-4 py-3 rounded-lg flex items-center justify-between cursor-pointer text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-700 dark:hover:text-blue-300 transition-all duration-200"
+                  >
+                    {command.component || (
+                      <div className="flex items-center gap-3">
+                        {command.icon}
+                        <span className="font-medium">{command.name}</span>
+                      </div>
+                    )}
+                  </Command.Item>
+                ))}
+              </Command.List>
+            </Command>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
