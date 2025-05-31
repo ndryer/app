@@ -24,6 +24,8 @@
   --gradient-from: #1E293B;
   --gradient-to: #3B82F6;
   --gradient-to-dark: #2563EB;
+  --space-component: 24px;
+  --space-section: 64px;
 }
 
 /* Smooth scrolling for the entire page, with reduced motion preference support */

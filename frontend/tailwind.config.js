@@ -56,6 +56,16 @@ module.exports = {
           900: '#090a10',
         }
       },
+      spacing: {
+        0: '0',
+        2: '8px',
+        4: '16px',
+        6: '24px',
+        8: '32px',
+        12: '48px',
+        16: '64px',
+        24: '96px',
+      },
       fontFamily: {
         sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
