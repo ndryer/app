@@ -28,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({ userData, toggleTheme, darkMode,
       transition: {
         duration: 1.5,
         repeat: Infinity,
-        repeatType: "loop",
+        repeatType: "loop" as const,
         ease: "easeInOut"
       }
     }

@@ -6,7 +6,7 @@ Legend 🔴 High 🟠 Medium 🟢 Low
 
 | # | Priority | Files / Path | Issue | Fix |
 |---|----------|--------------|-------|-----|
-| 1 | 🔴 | `frontend/src/App.js`, `frontend/src/components/*.jsx` | Components in plain JS/JSX; project standard is **TypeScript (`.tsx`)** | Rename each file to `.tsx`, add typed prop interfaces, and switch to **named exports** (`export const Header`). |
+| 1 | 🔴 | `frontend/src/App.tsx`, `frontend/src/components/*.tsx` | Components migrated to strict TypeScript (`.tsx`) with **named exports** (`export const Header`) | ✅ |
 | 2 | 🔴 | `frontend/eslint.config.js` | ESLint ignores `.ts/.tsx`; no TS parser | `yarn add -D @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-tailwindcss` → update config: include `**/*.{js,jsx,ts,tsx}`; set `parser:'@typescript-eslint/parser'`. |
 | 3 | 🔴 | `tailwind.config.js` & `src/styles/global.css` | 8-px spacing scale + CSS vars missing | Extend `theme.spacing` with keys `0,2,4,6,8,12,16,24`. In `global.css` add:<br>`--space-component: clamp(16px,3vw,24px);`<br>`--space-section: clamp(40px,6vw,64px);` |
 | 4 | 🔴 | Buttons / FAB (e.g. `FloatingActionButton.jsx`) | Tap target smaller than 44 px | Add `min-w-[44px] min-h-[44px]` classes or wrap with shared `Button` component. |

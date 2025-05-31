@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Command } from 'cmdk';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { 
   Search, 
   Mail, 
@@ -27,7 +27,7 @@ interface CommandItem {
 }
 
 export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, setIsOpen }) => {
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<string>('')
   const [copied, setCopied] = useState<boolean>(false);
   
   // Handle copy notification

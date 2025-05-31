@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timeline Component renders correctly with collapsed items 1`] = `
+<div>
+  <section
+    class="py-16 bg-gray-50 dark:bg-gray-900"
+    id="timeline"
+  >
+    <div
+      class="container mx-auto px-4"
+    >
+      <h2
+        class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white"
+      >
+        Professional Timeline
+      </h2>
+      <div
+        data-testid="vertical-timeline"
+        linecolor="rgba(156, 163, 175, 0.2)"
+      >
+        <div
+          class="timeline-element-container "
+        >
+          <div
+            contentarrowstyle="[object Object]"
+            contentstyle="[object Object]"
+            data-testid="timeline-element"
+            date="2020 - Present"
+            icon="[object Object]"
+            iconstyle="[object Object]"
+          >
+            <div
+              aria-controls="timeline-content-exp-1"
+              aria-expanded="false"
+              class="timeline-card group opacity-100 transition-opacity duration-300"
+              role="button"
+              tabindex="0"
+            >
+              <div
+                class="flex justify-between items-start"
+              >
+                <div>
+                  <h3
+                    class="text-xl font-semibold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+                  >
+                    Test Position
+                  </h3>
+                  <h4
+                    class="text-lg font-medium text-blue-600 dark:text-blue-400"
+                  >
+                    Test Company
+                  </h4>
+                  <p
+                    class="text-gray-600 dark:text-gray-300 mb-2"
+                  >
+                    Test Location
+                  </p>
+                </div>
+                <div
+                  class="text-gray-400 dark:text-gray-500 mt-1 transition-transform duration-300"
+                >
+                  <div
+                    data-testid="chevron-down"
+                  >
+                    Down
+                  </div>
+                </div>
+              </div>
+              <p
+                class="text-gray-600 dark:text-gray-400 mb-2"
+              >
+                Test description
+              </p>
+              <div
+                class="mt-2 text-sm text-gray-500 dark:text-gray-400 italic"
+              >
+                Click to expand
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="timeline-element-container "
+        >
+          <div
+            contentarrowstyle="[object Object]"
+            contentstyle="[object Object]"
+            data-testid="timeline-element"
+            date="2018 - 2020"
+            icon="[object Object]"
+            iconstyle="[object Object]"
+          >
+            <div
+              aria-controls="timeline-content-exp-2"
+              aria-expanded="false"
+              class="timeline-card group opacity-100 transition-opacity duration-300"
+              role="button"
+              tabindex="0"
+            >
+              <div
+                class="flex justify-between items-start"
+              >
+                <div>
+                  <h3
+                    class="text-xl font-semibold text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+                  >
+                    Previous Position
+                  </h3>
+                  <h4
+                    class="text-lg font-medium text-blue-600 dark:text-blue-400"
+                  >
+                    Previous Company
+                  </h4>
+                  <p
+                    class="text-gray-600 dark:text-gray-300 mb-2"
+                  >
+                    Previous Location
+                  </p>
+                </div>
+                <div
+                  class="text-gray-400 dark:text-gray-500 mt-1 transition-transform duration-300"
+                >
+                  <div
+                    data-testid="chevron-down"
+                  >
+                    Down
+                  </div>
+                </div>
+              </div>
+              <p
+                class="text-gray-600 dark:text-gray-400 mb-2"
+              >
+                Previous role description
+              </p>
+              <div
+                class="mt-2 text-sm text-gray-500 dark:text-gray-400 italic"
+              >
+                Click to expand
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;

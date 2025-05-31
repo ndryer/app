@@ -48,6 +48,11 @@ export const Timeline: React.FC<TimelineProps> = ({ experienceData }) => {
     }
   }, [expandedId]);
 
+  // Create a callback function that assigns the ref and returns void
+  const setTimelineRef = (id: string) => (el: HTMLDivElement | null): void => {
+    timelineRefs.current[id] = el;
+  };
+
   return (
     <section id="timeline" className="py-16 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
@@ -62,7 +67,7 @@ export const Timeline: React.FC<TimelineProps> = ({ experienceData }) => {
             return (
               <div
                 key={item.id}
-                ref={el => timelineRefs.current[item.id] = el}
+                ref={setTimelineRef(item.id)}
                 className={`timeline-element-container ${isExpanded ? 'z-10' : ''}`}
               >
                 <VerticalTimelineElement

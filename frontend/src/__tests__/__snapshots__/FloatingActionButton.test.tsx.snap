@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FloatingActionButton Component renders correctly 1`] = `
+<div>
+  <div
+    class="fixed bottom-6 right-6 z-40"
+  >
+    <div
+      animate="[object Object]"
+      class="absolute bottom-full mb-4 right-0 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-3 py-2 rounded-lg shadow-md text-sm"
+      data-testid="motion-div"
+      exit="[object Object]"
+      initial="[object Object]"
+    >
+      Press 
+      <kbd
+        class="px-1.5 py-0.5 text-xs rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-mono"
+      >
+        ⌘
+        +K
+      </kbd>
+       for commands
+    </div>
+    <button
+      aria-label="Open command palette"
+      class="w-14 h-14 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
+      data-testid="motion-button"
+      whilehover="[object Object]"
+      whiletap="[object Object]"
+    >
+      <div
+        data-testid="command-icon"
+      >
+        Command Icon
+      </div>
+    </button>
+  </div>
+</div>
+`;

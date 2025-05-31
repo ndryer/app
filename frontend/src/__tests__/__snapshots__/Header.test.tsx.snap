@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component renders correctly 1`] = `
+<div>
+  <div
+    class="relative h-screen flex items-center justify-center overflow-hidden pb-20 md:pb-32"
+    data-testid="parallax-banner"
+    id="top"
+    layers="[object Object]"
+  >
+    <button
+      aria-label="Switch to dark mode"
+      class="absolute top-6 right-6 z-20 p-2 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+      data-testid="motion-button"
+      whilehover="[object Object]"
+      whiletap="[object Object]"
+    >
+      <div
+        data-testid="moon-icon"
+      >
+        Moon Icon
+      </div>
+    </button>
+    <div
+      class="relative z-10 container mx-auto px-6 py-8"
+    >
+      <div
+        class="flex flex-col items-center justify-center h-full text-center"
+      >
+        <div
+          animate="[object Object]"
+          class="text-center text-white max-w-xl mb-8"
+          data-testid="motion-div"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <h1
+            animate="[object Object]"
+            class="text-5xl md:text-6xl font-bold mb-6 font-sans tracking-tight"
+            data-testid="motion-h1"
+            initial="[object Object]"
+            transition="[object Object]"
+          >
+            Test User
+          </h1>
+          <div
+            animate="[object Object]"
+            data-testid="motion-div"
+            initial="[object Object]"
+            transition="[object Object]"
+          >
+            <p
+              class="text-2xl md:text-3xl text-blue-300 font-medium"
+            >
+              Test Bio
+            </p>
+          </div>
+        </div>
+        <div
+          animate="[object Object]"
+          class="relative w-full max-w-md"
+          data-testid="motion-div"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <div
+            aria-keyshortcuts="⌘+K"
+            aria-label="Open command palette"
+            class="flex items-center px-4 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white cursor-pointer hover:bg-white/15 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            data-testid="motion-div"
+            whilehover="[object Object]"
+            whiletap="[object Object]"
+          >
+            <div
+              data-testid="command-icon"
+            >
+              Command Icon
+            </div>
+            <span
+              class="text-white/70 flex-1 text-left"
+            >
+              Search or type a command...
+            </span>
+            <kbd
+              class="hidden md:flex items-center justify-center rounded border border-white/20 bg-white/5 px-2 py-1 text-xs text-white/70"
+            >
+              Ctrl+K
+            </kbd>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      animate="[object Object]"
+      class="absolute -bottom-32 left-1/2 transform -translate-x-1/2"
+      data-testid="motion-div"
+      initial="[object Object]"
+      transition="[object Object]"
+    >
+      <div
+        animate="bounce"
+        class="relative"
+        data-testid="motion-div"
+        variants="[object Object]"
+      >
+        <div
+          class="absolute inset-0 rounded-full bg-blue-500/20 blur-md"
+        />
+        <div
+          class="relative z-10"
+        >
+          <div
+            data-testid="scroll-cue"
+          >
+            Scroll Cue
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header Component renders with dark mode 1`] = `
+<div>
+  <div
+    class="relative h-screen flex items-center justify-center overflow-hidden pb-20 md:pb-32"
+    data-testid="parallax-banner"
+    id="top"
+    layers="[object Object]"
+  >
+    <button
+      aria-label="Switch to light mode"
+      class="absolute top-6 right-6 z-20 p-2 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+      data-testid="motion-button"
+      whilehover="[object Object]"
+      whiletap="[object Object]"
+    >
+      <div
+        data-testid="sun-icon"
+      >
+        Sun Icon
+      </div>
+    </button>
+    <div
+      class="relative z-10 container mx-auto px-6 py-8"
+    >
+      <div
+        class="flex flex-col items-center justify-center h-full text-center"
+      >
+        <div
+          animate="[object Object]"
+          class="text-center text-white max-w-xl mb-8"
+          data-testid="motion-div"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <h1
+            animate="[object Object]"
+            class="text-5xl md:text-6xl font-bold mb-6 font-sans tracking-tight"
+            data-testid="motion-h1"
+            initial="[object Object]"
+            transition="[object Object]"
+          >
+            Test User
+          </h1>
+          <div
+            animate="[object Object]"
+            data-testid="motion-div"
+            initial="[object Object]"
+            transition="[object Object]"
+          >
+            <p
+              class="text-2xl md:text-3xl text-blue-300 font-medium"
+            >
+              Test Bio
+            </p>
+          </div>
+        </div>
+        <div
+          animate="[object Object]"
+          class="relative w-full max-w-md"
+          data-testid="motion-div"
+          initial="[object Object]"
+          transition="[object Object]"
+        >
+          <div
+            aria-keyshortcuts="⌘+K"
+            aria-label="Open command palette"
+            class="flex items-center px-4 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white cursor-pointer hover:bg-white/15 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            data-testid="motion-div"
+            whilehover="[object Object]"
+            whiletap="[object Object]"
+          >
+            <div
+              data-testid="command-icon"
+            >
+              Command Icon
+            </div>
+            <span
+              class="text-white/70 flex-1 text-left"
+            >
+              Search or type a command...
+            </span>
+            <kbd
+              class="hidden md:flex items-center justify-center rounded border border-white/20 bg-white/5 px-2 py-1 text-xs text-white/70"
+            >
+              Ctrl+K
+            </kbd>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      animate="[object Object]"
+      class="absolute -bottom-32 left-1/2 transform -translate-x-1/2"
+      data-testid="motion-div"
+      initial="[object Object]"
+      transition="[object Object]"
+    >
+      <div
+        animate="bounce"
+        class="relative"
+        data-testid="motion-div"
+        variants="[object Object]"
+      >
+        <div
+          class="absolute inset-0 rounded-full bg-blue-500/20 blur-md"
+        />
+        <div
+          class="relative z-10"
+        >
+          <div
+            data-testid="scroll-cue"
+          >
+            Scroll Cue
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
