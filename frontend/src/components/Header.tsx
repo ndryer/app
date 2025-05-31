@@ -43,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({ userData, toggleTheme, darkMode,
           </div>
         )},
       ]}
-      className="relative h-screen flex items-center justify-center overflow-hidden pb-20 md:pb-32"
+      className="relative h-screen flex items-center justify-center overflow-hidden pb-20 md:pb-32 pt-[var(--space-section)]"
       id="top"
     >
       {/* Theme Toggle Button */}

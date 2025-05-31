@@ -362,3 +362,9 @@ kbd {
 .text-low-contrast {
   @apply text-gray-500 dark:text-gray-400;
 }
+
+/* Spacing utility classes using CSS variables */
+.margin-component-y {
+  margin-top: var(--space-component) !important;
+  margin-bottom: var(--space-component) !important;
+}

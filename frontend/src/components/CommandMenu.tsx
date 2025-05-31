@@ -109,9 +109,10 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, setIsOpen }) =
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           onClick={() => setIsOpen(false)}
+          role="dialog"
         >
           <motion.div 
-            className="relative w-full max-w-md bg-white dark:bg-gray-900 rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700"
+            className="relative w-full max-w-md margin-component-y bg-white dark:bg-gray-900 rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700"
             initial={{ scale: 0.95, opacity: 0, y: -10 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: -10 }}
