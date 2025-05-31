@@ -1,9 +1,13 @@
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
+  // Test directory and file patterns
+  testDir: './tests',
+  testMatch: '**/*.spec.ts',
+  
   // Dev server configuration
   webServer: {
-    command: 'yarn start',
+    command: 'yarn --cwd frontend start',
     port: 3000,
     reuseExistingServer: true,
   },

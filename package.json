@@ -6,6 +6,14 @@
   ],
   "scripts": {
     "predeploy": "yarn --cwd frontend build",
-    "deploy": "yarn --cwd frontend deploy"
+    "deploy": "yarn --cwd frontend deploy",
+    "test:unit": "yarn --cwd frontend test",
+    "test:e2e": "playwright test",
+    "test": "yarn test:unit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@axe-core/playwright": "^4.10.1",
+    "playwright": "^1.52.0"
   }
 }

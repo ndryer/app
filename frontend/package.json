@@ -29,8 +29,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:unit": "yarn test",
-    "test:e2e": "playwright test",
-    "smoke": "playwright test",
+    "test:e2e": "cd .. && playwright test",
+    "smoke": "cd .. && playwright test",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build -b gh-pages",
     "lint": "eslint src",
@@ -48,15 +48,28 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}"
+    ]
+  },
   "devDependencies": {
-    "@axe-core/playwright": "^4.10.1",
+
+    "@babel/core": "^7.24.0",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.24.0",
+    "@babel/preset-typescript": "^7.24.0",
     "@eslint/js": "9.23.0",
-    "@playwright/test": "^1.52.0",
+
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^29.5.14",
+    "babel-jest": "^29.7.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-transform-stub": "^2.0.0",
     "@types/react-copy-to-clipboard": "^5.0.7",
     "@typescript-eslint/eslint-plugin": "8.33.0",
     "@typescript-eslint/parser": "8.33.0",
@@ -68,7 +81,7 @@
     "eslint-plugin-tailwindcss": "3.18.0",
     "gh-pages": "^6.1.1",
     "globals": "15.15.0",
-    "playwright": "^1.52.0",
+
     "postcss": "^8.5.0",
     "tailwindcss": "^3.4.17"
   }
