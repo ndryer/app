@@ -55,6 +55,20 @@ export const Timeline: React.FC<TimelineProps> = ({ experienceData }) => {
 
   return (
     <section id="timeline" className="py-16 bg-gray-50 dark:bg-gray-900">
+      {/* Add CSS override for timeline spacing */}
+      <style>
+        {`
+          /* Timeline line margin-end (mr-4 = 16px) */
+          .vertical-timeline-element::before {
+            margin-right: 16px !important;
+          }
+          
+          /* Vertical spacing between timeline items (space-y-8 = 32px) */
+          .vertical-timeline-element {
+            margin-bottom: 32px !important;
+          }
+        `}
+      </style>
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white">
           Professional Timeline
