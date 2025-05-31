@@ -3,38 +3,46 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { CommandMenu } from '../components/CommandMenu';
 
 // Mock cmdk
-jest.mock('cmdk', () => ({
-  Command: ({ children, className }: React.PropsWithChildren<{className?: string}>) => (
+jest.mock('cmdk', () => {
+  // Create main Command component
+  const CommandComponent = ({ children, className }: React.PropsWithChildren<{className?: string}>) => (
     <div data-testid="cmdk-command" className={className}>{children}</div>
-  ),
-  Command: {
-    Input: ({ value, onValueChange, className, placeholder }: any) => (
-      <input 
-        data-testid="cmdk-input"
-        value={value}
-        onChange={(e) => onValueChange(e.target.value)}
-        className={className}
-        placeholder={placeholder}
-      />
-    ),
-    List: ({ children, className }: React.PropsWithChildren<{className?: string}>) => (
-      <div data-testid="cmdk-list" className={className}>{children}</div>
-    ),
-    Empty: ({ children, className }: React.PropsWithChildren<{className?: string}>) => (
-      <div data-testid="cmdk-empty" className={className}>{children}</div>
-    ),
-    Item: ({ children, value, onSelect, className }: React.PropsWithChildren<{value: string, onSelect: () => void, className?: string}>) => (
-      <div 
-        data-testid="cmdk-item"
-        data-value={value}
-        onClick={onSelect}
-        className={className}
-      >
-        {children}
-      </div>
-    ),
-  }
-}));
+  );
+  
+  // Add subcomponents as properties
+  CommandComponent.Input = ({ value, onValueChange, className, placeholder }: any) => (
+    <input 
+      data-testid="cmdk-input"
+      value={value}
+      onChange={(e) => onValueChange(e.target.value)}
+      className={className}
+      placeholder={placeholder}
+    />
+  );
+  
+  CommandComponent.List = ({ children, className }: React.PropsWithChildren<{className?: string}>) => (
+    <div data-testid="cmdk-list" className={className}>{children}</div>
+  );
+  
+  CommandComponent.Empty = ({ children, className }: React.PropsWithChildren<{className?: string}>) => (
+    <div data-testid="cmdk-empty" className={className}>{children}</div>
+  );
+  
+  CommandComponent.Item = ({ children, value, onSelect, className }: React.PropsWithChildren<{value: string, onSelect: () => void, className?: string}>) => (
+    <div 
+      data-testid="cmdk-item"
+      data-value={value}
+      onClick={onSelect}
+      className={className}
+    >
+      {children}
+    </div>
+  );
+  
+  return {
+    Command: CommandComponent
+  };
+});
 
 // Mock framer-motion
 jest.mock('framer-motion', () => ({

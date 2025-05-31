@@ -1,3 +1,4 @@
+
 # CURRENT_ISSUES_AND_FIXES.md  
 _Actionable checklist to finish the simple one-page portfolio_  
 _Last scan : 2025-05-31_
@@ -7,7 +8,7 @@ Legend 🔴 High 🟠 Medium 🟢 Low
 | # | Priority | Files / Path | Issue | Fix |
 |---|----------|--------------|-------|-----|
 | 1 | 🔴 | `frontend/src/App.tsx`, `frontend/src/components/*.tsx` | Components migrated to strict TypeScript (`.tsx`) with **named exports** (`export const Header`) | ✅ |
-| 2 | 🔴 | `frontend/eslint.config.js` | ESLint ignores `.ts/.tsx`; no TS parser | `yarn add -D @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-config-prettier eslint-plugin-tailwindcss` → update config: include `**/*.{js,jsx,ts,tsx}`; set `parser:'@typescript-eslint/parser'`. |
+| 2 | 🔴 | `frontend/eslint.config.js` | ESLint ignores `.ts/.tsx`; no TS parser | ✅ |
 | 3 | 🔴 | `tailwind.config.js` & `src/styles/global.css` | 8-px spacing scale + CSS vars missing | Extend `theme.spacing` with keys `0,2,4,6,8,12,16,24`. In `global.css` add:<br>`--space-component: clamp(16px,3vw,24px);`<br>`--space-section: clamp(40px,6vw,64px);` |
 | 4 | 🔴 | Buttons / FAB (e.g. `FloatingActionButton.jsx`) | Tap target smaller than 44 px | Add `min-w-[44px] min-h-[44px]` classes or wrap with shared `Button` component. |
 | 5 | 🟠 | Focus styles inconsistent | Some interactive elements lack visible focus | Create `.focus-ring` utility in `global.css` and apply to all `<button>` / `<a>` elements. |
@@ -45,3 +46,4 @@ All 🔴 items complete and site loads correctly from `dist/` with:
 Mark each row ✅ in PR descriptions when finished.  
 
 ✅ Dev-tooling bootstrap
+</facFileContent
