@@ -1,0 +1,297 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Skills Component renders correctly 1`] = `
+<div>
+  <section
+    class="py-16 bg-white dark:bg-gray-800"
+    id="skills"
+  >
+    <div
+      class="container mx-auto px-4"
+    >
+      <h2
+        class="text-3xl font-bold text-center mb-2 text-gray-800 dark:text-white tracking-tight"
+      >
+        Skills & Expertise
+      </h2>
+      <p
+        class="text-center text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto font-light tracking-wide"
+      >
+        Professional competencies across AI, product, and technical domains
+      </p>
+      <div
+        class="flex flex-wrap justify-center gap-3 mb-10"
+      >
+        <button
+          class="px-5 py-2.5 rounded-full text-sm md:text-base font-medium transition-all duration-300 shadow-sm bg-blue-600 text-white shadow-md"
+          data-testid="motion-button"
+          whilehover="[object Object]"
+          whiletap="[object Object]"
+        >
+          All Skills
+        </button>
+        <button
+          class="px-5 py-2.5 rounded-full text-sm md:text-base font-medium transition-all duration-300 shadow-sm bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600"
+          data-testid="motion-button"
+          style="border-left: 3px solid #3B82F6;"
+          whilehover="[object Object]"
+          whiletap="[object Object]"
+        >
+          AI/ML & Product
+        </button>
+        <button
+          class="px-5 py-2.5 rounded-full text-sm md:text-base font-medium transition-all duration-300 shadow-sm bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600"
+          data-testid="motion-button"
+          style="border-left: 3px solid #10B981;"
+          whilehover="[object Object]"
+          whiletap="[object Object]"
+        >
+          Technical Skills
+        </button>
+        <button
+          class="px-5 py-2.5 rounded-full text-sm md:text-base font-medium transition-all duration-300 shadow-sm bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600"
+          data-testid="motion-button"
+          style="border-left: 3px solid #F59E0B;"
+          whilehover="[object Object]"
+          whiletap="[object Object]"
+        >
+          Leadership & Strategy
+        </button>
+      </div>
+      <div
+        data-testid="animate-presence"
+      />
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <div
+          data-testid="animate-presence"
+        >
+          <div
+            animate="[object Object]"
+            class="skill-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+            data-skill-id="skill-1"
+            data-testid="motion-div"
+            exit="[object Object]"
+            initial="[object Object]"
+            transition="[object Object]"
+            whilehover="[object Object]"
+          >
+            <div
+              class="h-2"
+              style="background-color: rgb(16, 185, 129);"
+            />
+            <div
+              class="p-5"
+            >
+              <div
+                class="flex justify-between items-start mb-3"
+              >
+                <h3
+                  class="font-semibold text-lg text-gray-800 dark:text-white"
+                >
+                  Test Skill 1
+                </h3>
+                <span
+                  class="text-xs px-2 py-1 rounded-full font-medium"
+                  style="background-color: rgba(59, 130, 246, 0.125); color: rgb(59, 130, 246);"
+                >
+                  Expert
+                </span>
+              </div>
+              <div
+                class="mt-4 relative"
+              >
+                <div
+                  class="flex justify-between items-center mb-1"
+                >
+                  <span
+                    class="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide"
+                  >
+                    Proficiency
+                  </span>
+                  <span
+                    class="text-lg font-bold"
+                    style="color: rgb(16, 185, 129);"
+                  >
+                    95
+                    %
+                  </span>
+                </div>
+                <div
+                  class="h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"
+                >
+                  <div
+                    animate="[object Object]"
+                    class="h-full rounded-full"
+                    data-testid="motion-div"
+                    style="width: 0%; background-color: rgb(16, 185, 129);"
+                    transition="[object Object]"
+                  />
+                </div>
+              </div>
+              <div
+                class="mt-4"
+              >
+                <span
+                  class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium"
+                >
+                  Technical Skills
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            animate="[object Object]"
+            class="skill-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+            data-skill-id="skill-2"
+            data-testid="motion-div"
+            exit="[object Object]"
+            initial="[object Object]"
+            transition="[object Object]"
+            whilehover="[object Object]"
+          >
+            <div
+              class="h-2"
+              style="background-color: rgb(16, 185, 129);"
+            />
+            <div
+              class="p-5"
+            >
+              <div
+                class="flex justify-between items-start mb-3"
+              >
+                <h3
+                  class="font-semibold text-lg text-gray-800 dark:text-white"
+                >
+                  Test Skill 2
+                </h3>
+                <span
+                  class="text-xs px-2 py-1 rounded-full font-medium"
+                  style="background-color: rgba(16, 185, 129, 0.125); color: rgb(16, 185, 129);"
+                >
+                  Advanced
+                </span>
+              </div>
+              <div
+                class="mt-4 relative"
+              >
+                <div
+                  class="flex justify-between items-center mb-1"
+                >
+                  <span
+                    class="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide"
+                  >
+                    Proficiency
+                  </span>
+                  <span
+                    class="text-lg font-bold"
+                    style="color: rgb(16, 185, 129);"
+                  >
+                    85
+                    %
+                  </span>
+                </div>
+                <div
+                  class="h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"
+                >
+                  <div
+                    animate="[object Object]"
+                    class="h-full rounded-full"
+                    data-testid="motion-div"
+                    style="width: 0%; background-color: rgb(16, 185, 129);"
+                    transition="[object Object]"
+                  />
+                </div>
+              </div>
+              <div
+                class="mt-4"
+              >
+                <span
+                  class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium"
+                >
+                  Technical Skills
+                </span>
+              </div>
+            </div>
+          </div>
+          <div
+            animate="[object Object]"
+            class="skill-card bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300"
+            data-skill-id="skill-3"
+            data-testid="motion-div"
+            exit="[object Object]"
+            initial="[object Object]"
+            transition="[object Object]"
+            whilehover="[object Object]"
+          >
+            <div
+              class="h-2"
+              style="background-color: rgb(16, 185, 129);"
+            />
+            <div
+              class="p-5"
+            >
+              <div
+                class="flex justify-between items-start mb-3"
+              >
+                <h3
+                  class="font-semibold text-lg text-gray-800 dark:text-white"
+                >
+                  Test Skill 3
+                </h3>
+                <span
+                  class="text-xs px-2 py-1 rounded-full font-medium"
+                  style="background-color: rgba(245, 158, 11, 0.125); color: rgb(245, 158, 11);"
+                >
+                  Intermediate
+                </span>
+              </div>
+              <div
+                class="mt-4 relative"
+              >
+                <div
+                  class="flex justify-between items-center mb-1"
+                >
+                  <span
+                    class="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide"
+                  >
+                    Proficiency
+                  </span>
+                  <span
+                    class="text-lg font-bold"
+                    style="color: rgb(16, 185, 129);"
+                  >
+                    75
+                    %
+                  </span>
+                </div>
+                <div
+                  class="h-2.5 w-full rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"
+                >
+                  <div
+                    animate="[object Object]"
+                    class="h-full rounded-full"
+                    data-testid="motion-div"
+                    style="width: 0%; background-color: rgb(16, 185, 129);"
+                    transition="[object Object]"
+                  />
+                </div>
+              </div>
+              <div
+                class="mt-4"
+              >
+                <span
+                  class="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 font-medium"
+                >
+                  Technical Skills
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;

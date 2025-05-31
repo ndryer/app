@@ -1,29 +1,21 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
-import { Skills } from '../components/Skills';
 import { Skill } from '../types';
+import { Skills } from '../components/Skills';
 
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: React.PropsWithChildren<any>) => (
+    div: ({ children, ...props }) => (
       <div data-testid="motion-div" {...props}>{children}</div>
     ),
-    button: ({ children, ...props }: React.PropsWithChildren<any>) => (
+    button: ({ children, ...props }) => (
       <button data-testid="motion-button" {...props}>{children}</button>
     ),
   },
-  AnimatePresence: ({ children, mode }: React.PropsWithChildren<any>) => <div data-testid="animate-presence">{children}</div>,
+  AnimatePresence: ({ children }) => <div data-testid="animate-presence">{children}</div>,
 }));
-
-// Mock IntersectionObserver
-const mockIntersectionObserver = jest.fn();
-mockIntersectionObserver.mockReturnValue({
-  observe: jest.fn(),
-  unobserve: jest.fn(),
-  disconnect: jest.fn(),
-});
-window.IntersectionObserver = mockIntersectionObserver;
 
 describe('Skills Component', () => {
   // Create minimal mock data
@@ -90,6 +82,20 @@ describe('Skills Component', () => {
       expect(screen.getByText('Test Skill 1')).toBeInTheDocument();
       expect(screen.getByText('Test Skill 2')).toBeInTheDocument();
       expect(screen.getByText('Test Skill 3')).toBeInTheDocument();
+    }
+  });
+
+  it('has correct grid spacing with column-gap of 24px', () => {
+    const { container } = render(<Skills skillsData={mockSkillsData} />);
+    
+    // Find the skills grid container
+    const gridContainer = container.querySelector('.grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3.gap-6');
+    expect(gridContainer).toBeInTheDocument();
+    
+    // Check computed styles for column-gap
+    if (gridContainer) {
+      const computedStyle = window.getComputedStyle(gridContainer);
+      expect(computedStyle.columnGap).toBe('24px');
     }
   });
 });

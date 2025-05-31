@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+
 import { Skill } from '../types';
 
 interface SkillsProps {
@@ -233,7 +234,7 @@ export const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
                     </div>
                     
                     <div className="mt-4 relative">
-                      <div className="flex justify-between items-center mb-1">
+                      <div className="flex justify-between items-center space-x-3 mb-1">
                         <span className="text-xs text-gray-500 dark:text-gray-400 font-medium tracking-wide">
                           Proficiency
                         </span>

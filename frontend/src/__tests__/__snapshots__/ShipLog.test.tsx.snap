@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShipLog Component renders correctly 1`] = `
+<div>
+  <section
+    class="py-16 bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-white mt-20 md:mt-32"
+    id="shiplog"
+  >
+    <div
+      class="container mx-auto px-4"
+    >
+      <h2
+        class="text-3xl font-bold mb-12 text-center"
+      >
+        Professional Journey
+      </h2>
+      <div
+        animate="hidden"
+        class="flex flex-col items-center justify-center py-16"
+        data-testid="motion-div"
+        initial="hidden"
+        variants="[object Object]"
+      >
+        <div
+          class="bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-xl shadow-sm ring-1 ring-black/5 dark:ring-white/10 p-8 max-w-md text-center"
+          data-testid="motion-div"
+          variants="[object Object]"
+        >
+          <h3
+            class="text-xl font-bold mb-4 text-blue-600 dark:text-blue-400"
+          >
+            Coming Soon
+          </h3>
+          <p
+            class="text-gray-600 dark:text-gray-300"
+          >
+            The professional journey timeline is currently being updated with a new interactive format. Check back soon to explore my career path in detail.
+          </p>
+          <div
+            class="mt-6"
+          >
+            <div
+              class="inline-block w-10 h-1 bg-blue-500 rounded-full"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;

@@ -47,6 +47,7 @@ yarn dev
 
 # 3 · Optional quality checks
 yarn lint        # ESLint + Prettier
+yarn smoke       # Accessibility contrast tests (axe-core + Playwright)
 yarn tsc --noEmit
 ```
 
