@@ -1,10 +1,10 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
-const ScrollCue = () => {
+export const ScrollCue: React.FC = () => {
   // Animation variants for the button
-  const buttonVariants = {
+  const buttonVariants: Variants = {
     initial: { opacity: 0, y: -10 },
     animate: { 
       opacity: 1, 
@@ -45,7 +45,7 @@ const ScrollCue = () => {
   };
 
   // Handle click to scroll to the shiplog section
-  const handleScrollToShiplog = () => {
+  const handleScrollToShiplog = (): void => {
     document.getElementById("shiplog")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -74,5 +74,3 @@ const ScrollCue = () => {
     </motion.button>
   );
 };
-
-export default ScrollCue;

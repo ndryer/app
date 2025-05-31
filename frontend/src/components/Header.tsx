@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ParallaxBanner } from 'react-scroll-parallax';
 import { Command, Sun, Moon } from 'lucide-react';
-import ScrollCue from './ScrollCue';
+import { ScrollCue } from './ScrollCue';
+import { UserData } from '../types';
 
-const Header = ({ userData, toggleTheme, darkMode, toggleCommandMenu }) => {
-  const [isMac, setIsMac] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
+interface HeaderProps {
+  userData: UserData;
+  toggleTheme: () => void;
+  darkMode: boolean;
+  toggleCommandMenu: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ userData, toggleTheme, darkMode, toggleCommandMenu }) => {
+  const [isMac, setIsMac] = useState<boolean>(false);
+  const [showTooltip, setShowTooltip] = useState<boolean>(false);
   
   // Detect OS for keyboard shortcut display
   useEffect(() => {
@@ -143,5 +151,3 @@ const Header = ({ userData, toggleTheme, darkMode, toggleCommandMenu }) => {
     </ParallaxBanner>
   );
 };
-
-export default Header;

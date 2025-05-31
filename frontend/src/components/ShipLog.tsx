@@ -1,16 +1,21 @@
 import React, { useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { UserData, LegacyExperience } from '../types';
 
-const ShipLog = ({ userData }) => {
-  const containerRef = useRef(null);
+interface ShipLogProps {
+  userData: UserData; // Note: This component uses legacy data structure
+}
+
+export const ShipLog: React.FC<ShipLogProps> = ({ userData }) => {
+  const containerRef = useRef<HTMLUListElement | null>(null);
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: false,
   });
 
   // Animation variants
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -21,7 +26,7 @@ const ShipLog = ({ userData }) => {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
@@ -54,7 +59,7 @@ const ShipLog = ({ userData }) => {
           animate={inView ? "visible" : "hidden"}
           aria-label="Professional timeline"
         >
-          {userData.experiences.map((experience, index) => (
+          {userData.experiences?.map((experience: LegacyExperience, index: number) => (
             <motion.li 
               key={index}
               className="relative flex items-start gap-4 p-6
@@ -104,7 +109,7 @@ const ShipLog = ({ userData }) => {
                 
                 {/* Achievements */}
                 <ul className="space-y-2">
-                  {experience.blurb.map((point, i) => (
+                  {experience.blurb.map((point: string, i: number) => (
                     <li 
                       key={i} 
                       className="text-sm leading-relaxed"
@@ -121,5 +126,3 @@ const ShipLog = ({ userData }) => {
     </section>
   );
 };
-
-export default ShipLog;

@@ -2,20 +2,28 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import { experienceData } from '../data';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { Experience } from '../types';
 
-const Timeline = () => {
-  const [expandedId, setExpandedId] = useState(null);
-  const timelineRefs = useRef({});
+interface TimelineProps {
+  experienceData: Experience[];
+}
+
+interface TimelineRefs {
+  [key: string]: HTMLDivElement | null;
+}
+
+export const Timeline: React.FC<TimelineProps> = ({ experienceData }) => {
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const timelineRefs = useRef<TimelineRefs>({});
 
   // Handle expanding/collapsing a timeline card
-  const toggleExpand = (id) => {
+  const toggleExpand = (id: string): void => {
     setExpandedId(expandedId === id ? null : id);
   };
 
   // Handle keyboard navigation
-  const handleKeyDown = (e, id) => {
+  const handleKeyDown = (e: React.KeyboardEvent, id: string): void => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       toggleExpand(id);
@@ -26,6 +34,8 @@ const Timeline = () => {
   useEffect(() => {
     if (expandedId && timelineRefs.current[expandedId]) {
       const element = timelineRefs.current[expandedId];
+      if (!element) return;
+      
       const rect = element.getBoundingClientRect();
       const isInView = rect.top >= 0 && rect.bottom <= window.innerHeight;
       
@@ -214,5 +224,3 @@ const Timeline = () => {
     </section>
   );
 };
-
-export default Timeline;

@@ -1,9 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { skillsData } from '../data';
+import { Skill } from '../types';
+
+interface SkillsProps {
+  skillsData: Skill[];
+}
+
+interface SkillCategory {
+  id: string;
+  name: string;
+  color: string;
+  description: string;
+}
+
+interface SkillLevel {
+  min: number;
+  name: string;
+  color: string;
+}
+
+interface CategorizedSkill extends Skill {
+  category: string;
+}
 
 // Refined skill categories with better descriptions
-const skillCategories = [
+const skillCategories: SkillCategory[] = [
   {
     id: 'ai-ml',
     name: 'AI/ML & Product',
@@ -25,7 +46,7 @@ const skillCategories = [
 ];
 
 // Skill level definitions
-const skillLevels = [
+const skillLevels: SkillLevel[] = [
   { min: 90, name: 'Expert', color: '#3B82F6' },
   { min: 80, name: 'Advanced', color: '#10B981' },
   { min: 70, name: 'Intermediate', color: '#F59E0B' },
@@ -33,47 +54,47 @@ const skillLevels = [
 ];
 
 // Get skill level
-const getSkillLevel = (level) => {
-  return skillLevels.find(sl => level >= sl.min);
+const getSkillLevel = (level: number): SkillLevel => {
+  return skillLevels.find(sl => level >= sl.min) || skillLevels[skillLevels.length - 1];
 };
 
-// Map skills to simplified categories
-const categorizedSkills = skillsData.map(skill => {
-  let category = 'technical'; // Default category
+export const Skills: React.FC<SkillsProps> = ({ skillsData }) => {
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [inViewSkills, setInViewSkills] = useState<Record<string, boolean>>({});
+  const skillsContainerRef = useRef<HTMLDivElement | null>(null);
   
-  // Simplified category determination
-  if (/ai|ml|agent|llm|nlp|gpt|model|embedding|vector|orchestration|product|roadmap|strategy/i.test(skill.name)) {
-    category = 'ai-ml';
-  } else if (/lead|leadership|manage|team|strategy|vision|executive/i.test(skill.name)) {
-    category = 'leadership';
-  }
-  
-  return {
-    ...skill,
-    category
-  };
-});
-
-const Skills = () => {
-  const [activeCategory, setActiveCategory] = useState(null);
-  const [inViewSkills, setInViewSkills] = useState({});
-  const skillsContainerRef = useRef(null);
+  // Map skills to simplified categories
+  const categorizedSkills: CategorizedSkill[] = skillsData.map(skill => {
+    let category = 'technical'; // Default category
+    
+    // Simplified category determination
+    if (/ai|ml|agent|llm|nlp|gpt|model|embedding|vector|orchestration|product|roadmap|strategy/i.test(skill.name)) {
+      category = 'ai-ml';
+    } else if (/lead|leadership|manage|team|strategy|vision|executive/i.test(skill.name)) {
+      category = 'leadership';
+    }
+    
+    return {
+      ...skill,
+      category
+    };
+  });
   
   // Toggle category filter
-  const toggleCategory = (categoryId) => {
+  const toggleCategory = (categoryId: string | null): void => {
     setActiveCategory(prev => prev === categoryId ? null : categoryId);
     // Reset in-view skills when changing categories
     setInViewSkills({});
   };
   
   // Get filtered skills
-  const getFilteredSkills = () => {
+  const getFilteredSkills = (): CategorizedSkill[] => {
     if (!activeCategory) return categorizedSkills;
     return categorizedSkills.filter(skill => skill.category === activeCategory);
   };
   
   // Get category color
-  const getCategoryColor = (categoryId) => {
+  const getCategoryColor = (categoryId: string): string => {
     const category = skillCategories.find(cat => cat.id === categoryId);
     return category ? category.color : '#3B82F6';
   };
@@ -83,10 +104,10 @@ const Skills = () => {
     if (!skillsContainerRef.current) return;
 
     const observer = new IntersectionObserver(
-      (entries) => {
+      (entries: IntersectionObserverEntry[]) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const skillId = entry.target.dataset.skillId;
+            const skillId = (entry.target as HTMLElement).dataset.skillId;
             if (skillId) {
               setInViewSkills(prev => ({ ...prev, [skillId]: true }));
             }
@@ -267,5 +288,3 @@ const Skills = () => {
     </section>
   );
 };
-
-export default Skills;

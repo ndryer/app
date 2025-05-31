@@ -5,12 +5,12 @@ import './App.css';
 import { userData, experienceData, skillsData } from './data';
 
 // Lazy load components for better performance
-const Header = lazy(() => import('./components/Header'));
-const Timeline = lazy(() => import('./components/Timeline'));
-const Skills = lazy(() => import('./components/Skills'));
-const Footer = lazy(() => import('./components/Footer'));
-const FloatingActionButton = lazy(() => import('./components/FloatingActionButton'));
-const CommandMenu = lazy(() => import('./components/CommandMenu'));
+const Header = lazy(() => import('./components/Header').then(module => ({ default: module.Header })));
+const Timeline = lazy(() => import('./components/Timeline').then(module => ({ default: module.Timeline })));
+const Skills = lazy(() => import('./components/Skills').then(module => ({ default: module.Skills })));
+const Footer = lazy(() => import('./components/Footer').then(module => ({ default: module.Footer })));
+const FloatingActionButton = lazy(() => import('./components/FloatingActionButton').then(module => ({ default: module.FloatingActionButton })));
+const CommandMenu = lazy(() => import('./components/CommandMenu').then(module => ({ default: module.CommandMenu })));
 
 // Error fallback component - kept for future use
 /* 
@@ -31,7 +31,7 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
 */
 
 // Loading component
-const LoadingFallback = () => (
+const LoadingFallback: React.FC = () => (
   <div className="flex items-center justify-center min-h-screen bg-white dark:bg-gray-900">
     <div className="text-center">
       <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -40,9 +40,9 @@ const LoadingFallback = () => (
   </div>
 );
 
-function App() {
+export const App: React.FC = () => {
   // Centralized theme management
-  const [darkMode, setDarkMode] = useState(() => {
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
     // Check localStorage first
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -53,21 +53,21 @@ function App() {
   });
 
   // Command menu state
-  const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false);
+  const [isCommandMenuOpen, setIsCommandMenuOpen] = useState<boolean>(false);
 
   // Toggle theme function to pass to components
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
     setDarkMode(!darkMode);
   };
 
   // Command menu toggle
-  const toggleCommandMenu = () => {
+  const toggleCommandMenu = (): void => {
     setIsCommandMenuOpen(!isCommandMenuOpen);
   };
 
   // Keyboard shortcut for command menu (Cmd+K / Ctrl+K)
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent): void => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
         toggleCommandMenu();
@@ -119,6 +119,4 @@ function App() {
       </div>
     </ParallaxProvider>
   );
-}
-
-export default App;
+};

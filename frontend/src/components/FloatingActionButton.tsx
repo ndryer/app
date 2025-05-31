@@ -2,9 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Command } from 'lucide-react';
 
-const FloatingActionButton = ({ toggleCommandMenu }) => {
-  const [isMac, setIsMac] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(true);
+interface FloatingActionButtonProps {
+  toggleCommandMenu: () => void;
+}
+
+export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({ toggleCommandMenu }) => {
+  const [isMac, setIsMac] = useState<boolean>(false);
+  const [showTooltip, setShowTooltip] = useState<boolean>(true);
   
   // Detect OS for keyboard shortcut display
   useEffect(() => {
@@ -23,7 +27,7 @@ const FloatingActionButton = ({ toggleCommandMenu }) => {
   }, [showTooltip]);
   
   // Show tooltip on hover
-  const handleMouseEnter = () => {
+  const handleMouseEnter = (): void => {
     setShowTooltip(true);
   };
   
@@ -61,5 +65,3 @@ const FloatingActionButton = ({ toggleCommandMenu }) => {
     </div>
   );
 };
-
-export default FloatingActionButton;

@@ -1,7 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { UserData } from '../types';
 
-const Footer = ({ userData }) => {
+interface FooterProps {
+  userData: UserData;
+}
+
+export const Footer: React.FC<FooterProps> = ({ userData }) => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -52,5 +57,3 @@ const Footer = ({ userData }) => {
     </footer>
   );
 };
-
-export default Footer;

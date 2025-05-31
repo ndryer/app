@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const ThemeToggle = () => {
+export const ThemeToggle: React.FC = () => {
   // Initialize with system preference or saved preference
-  const [isDark, setIsDark] = useState(() => {
+  const [isDark, setIsDark] = useState<boolean>(() => {
     // Check localStorage first
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -24,7 +24,7 @@ const ThemeToggle = () => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
     setIsDark(!isDark);
   };
 
@@ -62,5 +62,3 @@ const ThemeToggle = () => {
     </motion.button>
   );
 };
-
-export default ThemeToggle;

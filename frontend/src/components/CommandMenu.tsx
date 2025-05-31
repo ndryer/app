@@ -12,12 +12,26 @@ import {
   Check
 } from 'lucide-react';
 
-const CommandMenu = ({ isOpen, setIsOpen }) => {
-  const [search, setSearch] = useState('');
-  const [copied, setCopied] = useState(false);
+interface CommandMenuProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
+
+interface CommandItem {
+  id: string;
+  name: string;
+  icon: React.ReactNode;
+  keywords: string;
+  action: () => void;
+  component?: React.ReactNode;
+}
+
+export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, setIsOpen }) => {
+  const [search, setSearch] = useState<string>('');
+  const [copied, setCopied] = useState<boolean>(false);
   
   // Handle copy notification
-  const handleCopyEmail = useCallback(() => {
+  const handleCopyEmail = useCallback((): void => {
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
@@ -26,7 +40,7 @@ const CommandMenu = ({ isOpen, setIsOpen }) => {
   }, [setIsOpen]);
   
   // Scroll to section helper
-  const scrollToSection = useCallback((id) => {
+  const scrollToSection = useCallback((id: string): void => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -35,13 +49,13 @@ const CommandMenu = ({ isOpen, setIsOpen }) => {
   }, [setIsOpen]);
   
   // Open link in new tab helper
-  const openLink = useCallback((url) => {
+  const openLink = useCallback((url: string): void => {
     window.open(url, '_blank', 'noopener,noreferrer');
     setIsOpen(false);
   }, [setIsOpen]);
   
   // Simplified commands array (removed resume and skills)
-  const commands = [
+  const commands: CommandItem[] = [
     {
       id: 'email',
       name: 'Copy Email Address',
@@ -166,5 +180,3 @@ const CommandMenu = ({ isOpen, setIsOpen }) => {
     </AnimatePresence>
   );
 };
-
-export default CommandMenu;
