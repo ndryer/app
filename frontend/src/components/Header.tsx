@@ -93,20 +93,36 @@ const HeaderComponent: React.FC<HeaderProps> = ({
               transition={{ duration: 0.6, delay: 0.5 }}
             >
               <motion.div
-                className='flex cursor-pointer items-center rounded-full px-4 py-3 text-white backdrop-blur-sm transition-all duration-200 hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'
-                style={{ background: 'var(--token-bg-frosted)' }}
-                /* Frosted glass effect for overlays */
+                className='flex cursor-pointer items-center rounded-full px-4 py-3 text-white backdrop-blur-md border border-white/20 shadow-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'
+                style={{
+                  background: 'var(--token-bg-frosted-strong)',
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                }}
+                /* Enhanced frosted glass effect for better visibility */
                 onClick={toggleCommandMenu}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{
+                  scale: 1.05,
+                  y: -1,
+                  boxShadow: '0 12px 28px -4px rgba(59, 130, 246, 0.5)',
+                  transition: {
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 20
+                  }
+                }}
+                whileTap={{
+                  scale: 0.98,
+                  y: 0,
+                  transition: { duration: 0.1 }
+                }}
                 aria-label='Open command palette'
                 aria-keyshortcuts='⌘+K'
               >
-                <Command size={18} className='mr-3 text-white/70' />
-                <span className='flex-1 text-left text-white/70'>
+                <Command size={18} className='mr-3 text-white/90' />
+                <span className='flex-1 text-left text-white/90'>
                   Open Command Menu
                 </span>
-                <kbd className='hidden items-center justify-center rounded bg-white/5 px-2 py-1 text-xs text-white/70 md:flex'>
+                <kbd className='hidden items-center justify-center rounded bg-white/10 px-2 py-1 text-xs text-white/80 md:flex'>
                   {isMac ? '⌘K' : 'Ctrl+K'}
                 </kbd>
               </motion.div>
