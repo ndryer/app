@@ -6,32 +6,20 @@ exports[`FloatingActionButton Component renders correctly 1`] = `
     class="fixed bottom-6 right-6 z-40"
   >
     <div
-      animate="[object Object]"
-      class="absolute bottom-full mb-4 right-0 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-3 py-2 rounded-lg shadow-md text-sm"
+      class="absolute bottom-full right-0 mb-4 rounded-lg bg-white px-3 py-2 text-sm text-gray-700 shadow-md dark:bg-gray-800 dark:text-gray-200"
       data-testid="motion-div"
-      exit="[object Object]"
-      initial="[object Object]"
     >
-      Press 
-      <kbd
-        class="px-1.5 py-0.5 text-xs rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-mono"
-      >
-        ⌘
-        +K
-      </kbd>
-       for commands
+      Scroll to timeline
     </div>
     <button
-      aria-label="Open command palette"
-      class="w-14 h-14 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
+      aria-label="Scroll to timeline"
+      class="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg transition-colors duration-300 hover:from-blue-600 hover:to-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900"
       data-testid="motion-button"
-      whilehover="[object Object]"
-      whiletap="[object Object]"
     >
       <div
-        data-testid="command-icon"
+        data-testid="chevron-down-icon"
       >
-        Command Icon
+        ChevronDown Icon
       </div>
     </button>
   </div>

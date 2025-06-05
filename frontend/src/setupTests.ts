@@ -23,12 +23,12 @@ class MockIntersectionObserver {
   readonly root: Element | null = null;
   readonly rootMargin: string = '';
   readonly thresholds: ReadonlyArray<number> = [];
-  
+
   constructor(
     private callback: IntersectionObserverCallback,
     private options?: IntersectionObserverInit
   ) {}
-  
+
   observe = jest.fn();
   unobserve = jest.fn();
   disconnect = jest.fn();

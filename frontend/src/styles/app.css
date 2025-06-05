@@ -9,7 +9,8 @@
   --color-accent-light: #93c5fd;
   --color-accent-dark: #1d4ed8;
   --color-border: #e2e8f0;
-  --color-shadow: rgba(15, 23, 42, 0.08);
+  --color-shadow: var(--token-bg-frosted);
+  /* Frosted glass effect for overlays */
   --gradient-primary: linear-gradient(135deg, #3b82f6, #2563eb);
 }
 
@@ -23,7 +24,8 @@
   --color-accent-hover: #60a5fa;
   --color-accent-light: #60a5fa;
   --color-accent-dark: #1d4ed8;
-  --color-border: #334155;
+  --color-border: var(--token-text-secondary);
+  /* Secondary body copy tone */
   --color-shadow: rgba(0, 0, 0, 0.25);
   --gradient-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
 }
@@ -33,6 +35,8 @@
   overflow-x: hidden;
   color: var(--color-text-primary);
   background-color: var(--color-bg-primary);
+  min-width: 320px;
+  /* Ensure minimum width for very small screens */
 }
 
 /* Smooth scrolling for the entire page */
@@ -51,12 +55,17 @@ html {
   color: var(--color-accent);
   font-size: 1.25rem;
   font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
-/* Smooth transitions for all elements - reduced for better performance */
+/* Smooth transitions for all elements - optimized for 60fps performance */
 * {
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 /* Reduced motion preferences */
@@ -67,14 +76,14 @@ html {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   .animate-bounce-slow,
   .animate-pulse-slow,
   .animate-spin-slow,
   .animate-wiggle {
     animation: none !important;
   }
-  
+
   html {
     scroll-behavior: auto !important;
   }
@@ -113,7 +122,8 @@ html {
 .cmdk-root {
   width: 100%;
   max-width: 100%;
-  background: rgba(255, 255, 255, 0.65);
+  background: var(--token-bg-frosted);
+  /* Frosted glass effect for overlays */
   border-radius: 16px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -264,25 +274,25 @@ html {
   h1 {
     font-size: 1.75rem;
   }
-  
+
   h2 {
     font-size: 1.5rem;
   }
-  
+
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  
+
   .skill-card {
     padding: 1.25rem 0.75rem;
   }
-  
+
   .skill-icon {
     width: 40px;
     height: 40px;
   }
-  
+
   .skill-name {
     font-size: 0.875rem;
   }

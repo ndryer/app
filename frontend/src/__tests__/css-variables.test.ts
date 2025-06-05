@@ -9,15 +9,16 @@ describe('CSS Variables', () => {
     try {
       // First try to find the compiled CSS file
       const buildCssDir = path.resolve(__dirname, '../../build/static/css');
-      
+
       if (fs.existsSync(buildCssDir)) {
-        const cssFiles = fs.readdirSync(buildCssDir)
+        const cssFiles = fs
+          .readdirSync(buildCssDir)
           .filter(file => file.startsWith('main.') && file.endsWith('.css'));
-        
+
         if (cssFiles.length > 0) {
           // Read the compiled CSS file
           cssContent = fs.readFileSync(
-            path.resolve(buildCssDir, cssFiles[0]), 
+            path.resolve(buildCssDir, cssFiles[0]),
             'utf8'
           );
           isCompiledCss = true;
@@ -50,20 +51,23 @@ describe('CSS Variables', () => {
     expect(cssContent).toMatch(/--space-component:\s*24px/);
   });
 
-  it('should contain the --space-section variable with value 48px', () => {
+  it('should contain the --space-section variable with value 64px', () => {
     // Check if the CSS contains the --space-section variable with the correct value
-    expect(cssContent).toMatch(/--space-section:\s*48px/);
+    expect(cssContent).toMatch(/--space-section:\s*64px/);
   });
 
   it('should include both spacing variables in the :root selector', () => {
     // Verify that the variables are defined within a :root selector
-    const rootRegex = /:root\s*{[^}]*--space-component:[^}]*--space-section:[^}]*}|:root\s*{[^}]*--space-section:[^}]*--space-component:[^}]*}/;
+    const rootRegex =
+      /:root\s*{[^}]*--space-component:[^}]*--space-section:[^}]*}|:root\s*{[^}]*--space-section:[^}]*--space-component:[^}]*}/;
     expect(cssContent).toMatch(rootRegex);
   });
 
   // Additional test to verify which CSS file was used
   it('should log which CSS file was used for testing', () => {
-    console.log(`Testing with ${isCompiledCss ? 'compiled' : 'source'} CSS file`);
+    console.log(
+      `Testing with ${isCompiledCss ? 'compiled' : 'source'} CSS file`
+    );
     // This is just an informational test that always passes
     expect(true).toBe(true);
   });

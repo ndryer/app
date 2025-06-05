@@ -3,14 +3,14 @@
 exports[`ShipLog Component renders correctly 1`] = `
 <div>
   <section
-    class="py-16 bg-gray-50 dark:bg-gray-950 text-gray-800 dark:text-white mt-20 md:mt-32"
+    class="mt-20 bg-gray-50 py-16 text-gray-800 dark:bg-gray-950 dark:text-white md:mt-32"
     id="shiplog"
   >
     <div
       class="container mx-auto px-4"
     >
       <h2
-        class="text-3xl font-bold mb-12 text-center"
+        class="mb-12 text-center text-3xl font-bold"
       >
         Professional Journey
       </h2>
@@ -22,12 +22,12 @@ exports[`ShipLog Component renders correctly 1`] = `
         variants="[object Object]"
       >
         <div
-          class="bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-xl shadow-sm ring-1 ring-black/5 dark:ring-white/10 p-8 max-w-md text-center"
+          class="max-w-md rounded-xl bg-white/50 p-8 text-center shadow-sm ring-1 ring-black/5 backdrop-blur-sm dark:bg-slate-900/50 dark:ring-white/10"
           data-testid="motion-div"
           variants="[object Object]"
         >
           <h3
-            class="text-xl font-bold mb-4 text-blue-600 dark:text-blue-400"
+            class="mb-4 text-xl font-bold text-blue-600 dark:text-blue-400"
           >
             Coming Soon
           </h3>
@@ -40,7 +40,7 @@ exports[`ShipLog Component renders correctly 1`] = `
             class="mt-6"
           >
             <div
-              class="inline-block w-10 h-1 bg-blue-500 rounded-full"
+              class="inline-block h-1 w-10 rounded-full bg-blue-500"
             />
           </div>
         </div>

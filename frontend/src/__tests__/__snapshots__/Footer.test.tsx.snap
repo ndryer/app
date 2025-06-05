@@ -3,7 +3,7 @@
 exports[`Footer Component renders correctly 1`] = `
 <div>
   <footer
-    class="py-8 bg-navy-DEFAULT dark:bg-navy-DEFAULT text-white"
+    class="bg-navy-DEFAULT dark:bg-navy-DEFAULT py-8 text-white"
     id="end"
   >
     <div
@@ -26,7 +26,7 @@ exports[`Footer Component renders correctly 1`] = `
             whiletap="[object Object]"
           >
             <svg
-              class="w-5 h-5"
+              class="h-5 w-5"
               viewBox="0 0 24 24"
             >
               <path
@@ -46,7 +46,7 @@ exports[`Footer Component renders correctly 1`] = `
             whiletap="[object Object]"
           >
             <svg
-              class="w-5 h-5"
+              class="h-5 w-5"
               viewBox="0 0 24 24"
             >
               <path
@@ -64,7 +64,7 @@ exports[`Footer Component renders correctly 1`] = `
             whiletap="[object Object]"
           >
             <svg
-              class="w-5 h-5"
+              class="h-5 w-5"
               viewBox="0 0 24 24"
             >
               <path
@@ -76,10 +76,10 @@ exports[`Footer Component renders correctly 1`] = `
         </div>
       </div>
       <div
-        class="border-t border-white/10 mt-2 pt-4 flex flex-col items-center"
+        class="mt-2 flex flex-col items-center border-t border-white/10 pt-4"
       >
         <p
-          class="text-white/60 text-sm"
+          class="text-sm text-white/60"
         >
           © 
           2025

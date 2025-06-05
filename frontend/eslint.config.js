@@ -10,7 +10,7 @@ import tailwindcssPlugin from 'eslint-plugin-tailwindcss';
 export default [
   // Base ESLint recommended rules
   js.configs.recommended,
-  
+
   // Global variables for browser and node environments
   {
     languageOptions: {
@@ -29,7 +29,7 @@ export default [
       },
     },
   },
-  
+
   // JavaScript and TypeScript files
   {
     files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
@@ -56,22 +56,24 @@ export default [
     rules: {
       // React recommended rules
       ...reactPlugin.configs.recommended.rules,
-      
+
       // TypeScript recommended rules
       ...typescriptEslintPlugin.configs.recommended.rules,
-      
-      // Tailwind CSS rules
-      'tailwindcss/classnames-order': 'warn',
-      
+
       // Custom rules
       'react/react-in-jsx-scope': 'off', // Not needed in React 17+
       'react/prop-types': 'off',
+      'react/display-name': 'off', // Allow anonymous components in tests
+      'react/no-unknown-property': ['error', { ignore: ['animate', 'transition', 'initial', 'layout'] }], // Framer Motion props
       'no-unused-vars': 'off', // Using TypeScript's version instead
-      '@typescript-eslint/no-unused-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-explicit-any': 'warn', // Allow any but warn
+      '@typescript-eslint/no-require-imports': 'off', // Allow require in tests
       'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'tailwindcss/classnames-order': 'warn', // Warn instead of error
     },
   },
-  
+
   // Test files specific configuration
   {
     files: ['**/__tests__/**/*.{js,jsx,ts,tsx}', '**/*.test.{js,jsx,ts,tsx}', '**/setupTests.ts'],
@@ -97,7 +99,7 @@ export default [
       'no-undef': 'off', // Jest globals are defined
     },
   },
-  
+
   // Ignore patterns - removed TypeScript file ignores
   {
     ignores: [

@@ -1,18 +1,18 @@
 declare module 'react-scroll-parallax' {
   import * as React from 'react';
-  
+
   export interface ParallaxProviderProps {
     children: React.ReactNode;
     scrollAxis?: 'vertical' | 'horizontal';
     scrollContainer?: HTMLElement;
   }
-  
+
   export interface ParallaxBannerProps {
     layers: Array<{
       amount?: number;
       children?: React.ReactNode;
       expanded?: boolean;
-      props?: any;
+      props?: Record<string, unknown>;
       speed?: number;
       image?: string;
       translateX?: number[] | number;
@@ -30,7 +30,7 @@ declare module 'react-scroll-parallax' {
     children?: React.ReactNode;
     id?: string;
   }
-  
+
   export const ParallaxProvider: React.FC<ParallaxProviderProps>;
   export const ParallaxBanner: React.FC<ParallaxBannerProps>;
 }

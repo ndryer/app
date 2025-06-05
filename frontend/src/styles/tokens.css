@@ -198,8 +198,8 @@
   --token-bg-tertiary: var(--token-secondary-700);
   /* #334155 */
 
-  --token-text-primary: var(--token-surface-100);
-  /* #fafafa - WCAG AA: 15.8:1 */
+  --token-text-primary: #ffffff;
+  /* Pure white for maximum contrast */
   --token-text-secondary: #E2E8F0;
   /* WCAG AA compliant */
   --token-text-tertiary: var(--token-neutral-400);
@@ -247,8 +247,8 @@
   /* #0f172a to #2563eb */
 
   /* Header background gradient - Slate to Blue */
-  --gradient-header: linear-gradient(to bottom right, var(--token-secondary-900), var(--token-primary-600));
-  /* slate-900 to blue-600 */
+  --gradient-header: linear-gradient(to bottom right, var(--token-secondary-900), var(--token-hero-gradient-mid), var(--token-primary-600));
+  /* Hero gradient middle stop for enhanced contrast */
 
   /* Button gradients - Blue theme */
   --gradient-button: linear-gradient(to right, var(--token-primary-500), var(--token-primary-600));

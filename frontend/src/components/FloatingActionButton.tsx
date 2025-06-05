@@ -1,67 +1,202 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Command } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
-interface FloatingActionButtonProps {
-  toggleCommandMenu: () => void;
-}
+export const FloatingActionButton: React.FC = () => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [animationPhase, setAnimationPhase] = useState<'hidden' | 'visible' | 'pulse' | 'bounce'>('hidden');
+  const [hasShownInitially, setHasShownInitially] = useState<boolean>(false);
+  const [isPermanentlyHidden, setIsPermanentlyHidden] = useState<boolean>(false);
 
-export const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({ toggleCommandMenu }) => {
-  const [isMac, setIsMac] = useState<boolean>(false);
-  const [showTooltip, setShowTooltip] = useState<boolean>(true);
-  
-  // Detect OS for keyboard shortcut display
+  // Initial delayed appearance with subtle bounce - synchronized with command button
   useEffect(() => {
-    setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0);
-  }, []);
-  
-  // Hide tooltip after 5 seconds
+    if (isPermanentlyHidden) return;
+
+    const delayTimer = setTimeout(() => {
+      setIsVisible(true);
+      setHasShownInitially(true);
+      setAnimationPhase('visible');
+
+      // Switch to bounce after fade-in completes (0.75s delay + 1s fade-in = 1.75s total)
+      setTimeout(() => {
+        setAnimationPhase('bounce');
+      }, 1750); // Start bounce after synchronized fade-in completes
+    }, 750); // 0.75 second initial delay - synchronized with command button
+
+    return () => clearTimeout(delayTimer);
+  }, [isPermanentlyHidden]);
+
+  // Intersection Observer for scroll-based hiding logic
   useEffect(() => {
-    if (showTooltip) {
-      const timer = setTimeout(() => {
-        setShowTooltip(false);
-      }, 5000);
-      
-      return () => clearTimeout(timer);
+    if (!hasShownInitially || isPermanentlyHidden) return; // Only activate after initial show and if not permanently hidden
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Hide button permanently when timeline becomes visible (user scrolled down)
+        if (entry.isIntersecting) {
+          setIsPermanentlyHidden(true);
+          setIsVisible(false);
+        }
+      },
+      {
+        threshold: 0.25,
+        rootMargin: '0px 0px -25% 0px'
+      }
+    );
+
+    const timelineElement = document.getElementById('timeline');
+    if (timelineElement) {
+      observer.observe(timelineElement);
     }
-  }, [showTooltip]);
-  
-  // Show tooltip on hover
-  const handleMouseEnter = (): void => {
-    setShowTooltip(true);
+
+    return () => observer.disconnect();
+  }, [hasShownInitially, isPermanentlyHidden]);
+
+
+
+  // Enhanced scroll handler with permanent hide
+  const handleScrollToTimeline = useCallback((): void => {
+    const timelineElement = document.getElementById('timeline') ||
+      document.querySelector('[data-section="timeline"]') ||
+      document.querySelector('main');
+
+    if (timelineElement) {
+      timelineElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+
+      // Permanently hide button after scroll
+      setIsPermanentlyHidden(true);
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 800);
+    }
+  }, []);
+
+  // Enhanced Framer Motion variants with synchronized fade-in animation
+  const buttonVariants: Variants = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        opacity: { duration: 1, ease: 'easeOut' }, // 1 second fade-in duration
+        scale: {
+          type: 'spring',
+          stiffness: 300,
+          damping: 20,
+          duration: 0.5
+        },
+        y: {
+          type: 'spring',
+          stiffness: 300,
+          damping: 20,
+          duration: 1 // 1 second upward slide
+        }
+      }
+    },
+    hidden: {
+      opacity: 0,
+      scale: 0.4,
+      y: 16, // Synchronized initial position (translate-y-4 = 16px)
+      transition: {
+        duration: 0.2,
+        ease: 'easeIn'
+      }
+    },
+    bounce: {
+      y: [0, -3, 0], // More visible bounce animation
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: 'loop' as const,
+        ease: 'easeInOut'
+        // No delay here - delay is handled by the animationPhase timing
+      }
+    },
+    initialPulse: {
+      scale: [1, 1.1, 1, 1.05, 1], // Reduced for mobile
+      boxShadow: [
+        '0 8px 20px -4px rgba(59, 130, 246, 0.4)',
+        '0 12px 28px -4px rgba(59, 130, 246, 0.6)',
+        '0 8px 20px -4px rgba(59, 130, 246, 0.4)',
+        '0 10px 24px -4px rgba(59, 130, 246, 0.5)',
+        '0 8px 20px -4px rgba(59, 130, 246, 0.4)'
+      ],
+      transition: {
+        duration: 1.0, // Shortened for mobile
+        ease: 'easeInOut',
+        times: [0, 0.3, 0.6, 0.8, 1]
+      }
+    },
+    hover: {
+      scale: 1.05, // Reduced for mobile touch targets
+      y: -1,
+      boxShadow: '0 12px 28px -4px rgba(59, 130, 246, 0.5)',
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 20
+      }
+    },
+    tap: {
+      scale: 0.98, // Gentler tap for mobile
+      y: 0,
+      transition: { duration: 0.1 }
+    }
   };
-  
+
+  // Check for reduced motion preference safely
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(false);
+
+  // Set up reduced motion detection
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setPrefersReducedMotion(mediaQuery.matches);
+
+      const handleChange = (e: MediaQueryListEvent) => {
+        setPrefersReducedMotion(e.matches);
+      };
+
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
+  }, []);
+
   return (
-    <div 
-      className="fixed bottom-6 right-6 z-40"
-      onMouseEnter={handleMouseEnter}
-    >
-      {/* Keyboard shortcut tooltip */}
-      <AnimatePresence>
-        {showTooltip && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="absolute bottom-full mb-4 right-0 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-3 py-2 rounded-lg shadow-md text-sm"
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          className="fixed bottom-4 left-1/2 z-30 -translate-x-1/2 transform md:bottom-6"
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={buttonVariants}
+        >
+
+          <motion.button
+            className="flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition-all duration-300 bg-gradient-button hover:bg-gradient-button-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-token-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-token-secondary-900 md:h-14 md:w-14"
+            onClick={handleScrollToTimeline}
+            whileHover="hover"
+            whileTap="tap"
+            variants={buttonVariants}
+            animate={prefersReducedMotion ? undefined : animationPhase}
+            aria-label="Scroll to timeline section"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleScrollToTimeline();
+              }
+            }}
           >
-            Press <kbd className="px-1.5 py-0.5 text-xs rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-mono">
-              {isMac ? '⌘' : 'Ctrl'}+K
-            </kbd> for commands
-          </motion.div>
-        )}
-      </AnimatePresence>
-      
-      {/* Command Button */}
-      <motion.button
-        onClick={toggleCommandMenu}
-        className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900 bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-300"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        aria-label="Open command palette"
-      >
-        <Command size={24} />
-      </motion.button>
-    </div>
+            <ChevronDown className="h-5 w-5 md:h-6 md:w-6" />
+          </motion.button>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

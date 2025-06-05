@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -8,6 +10,146 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Token-based color system with CSS custom properties
+        token: {
+          // Primary palette
+          primary: {
+            50: 'var(--token-primary-50)',
+            100: 'var(--token-primary-100)',
+            200: 'var(--token-primary-200)',
+            300: 'var(--token-primary-300)',
+            400: 'var(--token-primary-400)',
+            500: 'var(--token-primary-500)',
+            600: 'var(--token-primary-600)',
+            700: 'var(--token-primary-700)',
+            800: 'var(--token-primary-800)',
+            900: 'var(--token-primary-900)',
+            950: 'var(--token-primary-950)',
+          },
+          // Secondary palette
+          secondary: {
+            50: 'var(--token-secondary-50)',
+            100: 'var(--token-secondary-100)',
+            200: 'var(--token-secondary-200)',
+            300: 'var(--token-secondary-300)',
+            400: 'var(--token-secondary-400)',
+            500: 'var(--token-secondary-500)',
+            600: 'var(--token-secondary-600)',
+            700: 'var(--token-secondary-700)',
+            800: 'var(--token-secondary-800)',
+            900: 'var(--token-secondary-900)',
+            950: 'var(--token-secondary-950)',
+          },
+          // Accent palette
+          accent: {
+            50: 'var(--token-accent-50)',
+            100: 'var(--token-accent-100)',
+            200: 'var(--token-accent-200)',
+            300: 'var(--token-accent-300)',
+            400: 'var(--token-accent-400)',
+            500: 'var(--token-accent-500)',
+            600: 'var(--token-accent-600)',
+            700: 'var(--token-accent-700)',
+            800: 'var(--token-accent-800)',
+            900: 'var(--token-accent-900)',
+            950: 'var(--token-accent-950)',
+          },
+          // Success palette
+          success: {
+            50: 'var(--token-success-50)',
+            100: 'var(--token-success-100)',
+            200: 'var(--token-success-200)',
+            300: 'var(--token-success-300)',
+            400: 'var(--token-success-400)',
+            500: 'var(--token-success-500)',
+            600: 'var(--token-success-600)',
+            700: 'var(--token-success-700)',
+            800: 'var(--token-success-800)',
+            900: 'var(--token-success-900)',
+            950: 'var(--token-success-950)',
+          },
+          // Warning palette
+          warning: {
+            50: 'var(--token-warning-50)',
+            100: 'var(--token-warning-100)',
+            200: 'var(--token-warning-200)',
+            300: 'var(--token-warning-300)',
+            400: 'var(--token-warning-400)',
+            500: 'var(--token-warning-500)',
+            600: 'var(--token-warning-600)',
+            700: 'var(--token-warning-700)',
+            800: 'var(--token-warning-800)',
+            900: 'var(--token-warning-900)',
+            950: 'var(--token-warning-950)',
+          },
+          // Error palette
+          error: {
+            50: 'var(--token-error-50)',
+            100: 'var(--token-error-100)',
+            200: 'var(--token-error-200)',
+            300: 'var(--token-error-300)',
+            400: 'var(--token-error-400)',
+            500: 'var(--token-error-500)',
+            600: 'var(--token-error-600)',
+            700: 'var(--token-error-700)',
+            800: 'var(--token-error-800)',
+            900: 'var(--token-error-900)',
+            950: 'var(--token-error-950)',
+          },
+          // Neutral palette
+          neutral: {
+            50: 'var(--token-neutral-50)',
+            100: 'var(--token-neutral-100)',
+            200: 'var(--token-neutral-200)',
+            300: 'var(--token-neutral-300)',
+            400: 'var(--token-neutral-400)',
+            500: 'var(--token-neutral-500)',
+            600: 'var(--token-neutral-600)',
+            700: 'var(--token-neutral-700)',
+            800: 'var(--token-neutral-800)',
+            900: 'var(--token-neutral-900)',
+            950: 'var(--token-neutral-950)',
+          },
+          // Surface palette
+          surface: {
+            50: 'var(--token-surface-50)',
+            100: 'var(--token-surface-100)',
+            200: 'var(--token-surface-200)',
+            300: 'var(--token-surface-300)',
+            400: 'var(--token-surface-400)',
+            500: 'var(--token-surface-500)',
+            600: 'var(--token-surface-600)',
+            700: 'var(--token-surface-700)',
+            800: 'var(--token-surface-800)',
+            900: 'var(--token-surface-900)',
+            950: 'var(--token-surface-950)',
+          },
+          // Semantic colors
+          bg: {
+            primary: 'var(--token-bg-primary)',
+            secondary: 'var(--token-bg-secondary)',
+            tertiary: 'var(--token-bg-tertiary)',
+          },
+          text: {
+            primary: 'var(--token-text-primary)',
+            secondary: 'var(--token-text-secondary)',
+            tertiary: 'var(--token-text-tertiary)',
+          },
+          border: {
+            primary: 'var(--token-border-primary)',
+            secondary: 'var(--token-border-secondary)',
+          },
+          interactive: {
+            primary: 'var(--token-interactive-primary)',
+            'primary-hover': 'var(--token-interactive-primary-hover)',
+            'primary-active': 'var(--token-interactive-primary-active)',
+            secondary: 'var(--token-interactive-secondary)',
+            'secondary-hover': 'var(--token-interactive-secondary-hover)',
+            'secondary-active': 'var(--token-interactive-secondary-active)',
+          },
+        },
+
+        // Legacy color system (for backward compatibility)
         canvas: {
           light: '#FAFAFA',
           DEFAULT: '#FAFAFA',
@@ -57,14 +199,37 @@ module.exports = {
         }
       },
       spacing: {
-        0: '0',
-        2: '8px',
-        4: '16px',
-        6: '24px',
-        8: '32px',
-        12: '48px',
-        16: '64px',
-        24: '96px',
+        // Token-based spacing system (8px scale)
+        0: 'var(--space-0)',
+        1: 'var(--space-1)',
+        2: 'var(--space-2)',
+        3: 'var(--space-3)',
+        4: 'var(--space-4)',
+        5: 'var(--space-5)',
+        6: 'var(--space-6)',
+        8: 'var(--space-8)',
+        10: 'var(--space-10)',
+        12: 'var(--space-12)',
+        16: 'var(--space-16)',
+        20: 'var(--space-20)',
+        24: 'var(--space-24)',
+
+        // Legacy spacing (for backward compatibility)
+        'legacy-2': '8px',
+        'legacy-4': '16px',
+        'legacy-6': '24px',
+        'legacy-8': '32px',
+        'legacy-12': '48px',
+        'legacy-16': '64px',
+        'legacy-24': '96px',
+      },
+      borderRadius: {
+        // Token-based radius system
+        'token-sm': 'var(--radius-sm)',
+        'token-md': 'var(--radius-md)',
+        'token-lg': 'var(--radius-lg)',
+        'token-xl': 'var(--radius-xl)',
+        'token-full': 'var(--radius-full)',
       },
       fontFamily: {
         sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
@@ -119,7 +284,7 @@ module.exports = {
     },
   },
   plugins: [
-    function({ addUtilities }) {
+    function ({ addUtilities }) {
       const newUtilities = {
         '.scroll-snap-type-x': {
           'scroll-snap-type': 'x mandatory',
@@ -170,17 +335,85 @@ module.exports = {
           }
         },
         '.icon-btn-primary': {
-          'background': 'linear-gradient(90deg, #1E293B, #3B82F6, #2563EB)',
+          'background': 'var(--gradient-secondary)',
           'background-size': '200% 100%',
           'color': 'white',
-          'box-shadow': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+          'box-shadow': '0 4px 6px -1px var(--token-shadow-primary), 0 2px 4px -1px var(--token-shadow-primary)',
           '&:hover': {
             'animation': 'sheen 2.5s ease-in-out infinite',
-            'box-shadow': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            'box-shadow': '0 10px 15px -3px var(--token-shadow-secondary), 0 4px 6px -2px var(--token-shadow-secondary)',
           },
-          '.dark &': {
-            'background': 'linear-gradient(90deg, #1E293B, #3B82F6, #2563EB)',
-          }
+        },
+
+        // Token-based utility classes
+        '.bg-token-primary': {
+          'background-color': 'var(--token-bg-primary)',
+        },
+        '.bg-token-secondary': {
+          'background-color': 'var(--token-bg-secondary)',
+        },
+        '.bg-token-tertiary': {
+          'background-color': 'var(--token-bg-tertiary)',
+        },
+        '.text-token-primary': {
+          'color': 'var(--token-text-primary)',
+        },
+        '.text-token-secondary': {
+          'color': 'var(--token-text-secondary)',
+        },
+        '.text-token-tertiary': {
+          'color': 'var(--token-text-tertiary)',
+        },
+        '.border-token-primary': {
+          'border-color': 'var(--token-border-primary)',
+        },
+        '.border-token-secondary': {
+          'border-color': 'var(--token-border-secondary)',
+        },
+        '.bg-interactive-primary': {
+          'background-color': 'var(--token-interactive-primary)',
+        },
+        '.bg-interactive-primary-hover': {
+          'background-color': 'var(--token-interactive-primary-hover)',
+        },
+        '.bg-interactive-secondary': {
+          'background-color': 'var(--token-interactive-secondary)',
+        },
+        '.bg-interactive-secondary-hover': {
+          'background-color': 'var(--token-interactive-secondary-hover)',
+        },
+        '.bg-gradient-primary': {
+          'background': 'var(--gradient-primary)',
+        },
+        '.bg-gradient-primary-light': {
+          'background': 'var(--gradient-primary-light)',
+        },
+        '.bg-gradient-secondary': {
+          'background': 'var(--gradient-secondary)',
+        },
+        '.bg-gradient-secondary-dark': {
+          'background': 'var(--gradient-secondary-dark)',
+        },
+        '.bg-gradient-header': {
+          'background': 'var(--gradient-header)',
+        },
+        '.bg-gradient-button': {
+          'background': 'var(--gradient-button)',
+        },
+        '.bg-gradient-button-hover': {
+          'background': 'var(--gradient-button-hover)',
+        },
+        '.bg-gradient-accent': {
+          'background': 'var(--gradient-accent)',
+        },
+        '.bg-gradient-timeline': {
+          'background': 'var(--gradient-timeline)',
+        },
+        '.shadow-token-primary': {
+          'box-shadow': '0 1px 3px 0 var(--token-shadow-primary), 0 1px 2px 0 var(--token-shadow-primary)',
+        },
+        '.shadow-token-secondary': {
+          'box-shadow': '0 4px 6px -1px var(--token-shadow-secondary), 0 2px 4px -1px var(--token-shadow-secondary)',
         }
       }
       addUtilities(newUtilities, ['responsive', 'hover', 'dark'])
