@@ -126,15 +126,36 @@
   /* #f5f5f5 */
 
   --token-bg-frosted: rgba(15, 23, 42, 0.08);
-  --token-bg-frosted-strong: rgba(255, 255, 255, 0.20);
-  /* Enhanced frosted glass for better visibility */
+  --token-bg-frosted-light: rgba(15, 23, 42, 0.08);
+  --token-bg-frosted-strong: rgba(255, 255, 255, 0.12);
+  /* ◀︎ LLM-modified: Further reduced opacity for better transparency */
+
+  /* === GLASS SURFACE ALIAS TOKENS === */
+  /* ◀︎ LLM-modified: Glass surface aliases for consistent frosted glass effects */
+  --glass-surface-card: var(--token-bg-frosted);
+  /* inherits per theme */
+  --glass-surface-card-b: rgba(255, 255, 255, 0.20);
+  /* border alias */
+
+  /* Backdrop blur intensity tokens */
+  --token-backdrop-blur-sm: blur(4px);
+  --token-backdrop-blur-md: blur(8px);
+  --token-backdrop-blur-lg: blur(16px);
+
+  /* Glow effect tokens for interactive elements */
+  --token-glow-primary: 0 12px 32px -8px rgba(59, 130, 246, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.2);
+  --token-glow-primary-subtle: 0 8px 24px -6px rgba(59, 130, 246, 0.4);
 
   --token-hero-gradient-mid: #2f73e7;
+  --token-hero-gradient-mid-light: #2F73E7;
 
   --token-text-primary: var(--token-secondary-900);
   /* #0f172a - WCAG AA: 15.8:1 */
-  --token-text-secondary: #334155;
-  /* WCAG AA compliant */
+  --token-text-secondary: var(--token-text-secondary-light);
+  /* WCAG AA compliant - ◀︎ LLM-modified: Improved contrast from #334155 to #1e293b for better light mode readability */
+  --token-text-secondary-light: #1e293b;
+
+
   --token-text-tertiary: var(--token-neutral-500);
   /* #6b7280 - WCAG AA: 4.6:1 */
 
@@ -161,6 +182,52 @@
   --token-interactive-secondary-active: var(--token-neutral-300);
   /* #d1d5db */
 
+  /* === HOVER SYSTEM TOKENS === */
+  /* Mobile-first hover states with transform-based animations */
+
+  /* Hover transforms - performance optimized */
+  --hover-scale-sm: scale(1.02);
+  --hover-scale-md: scale(1.05);
+  --hover-scale-lg: scale(1.08);
+  --hover-translate-y-sm: translateY(-2px);
+  --hover-translate-y-md: translateY(-4px);
+  --hover-translate-y-lg: translateY(-8px);
+
+  /* === MOTION TOKENS === */
+  /* Material 3 inspired timing system */
+  --easing-standard: cubic-bezier(.4, 0, .2, 1);
+  --motion-fast: 0.18s;
+  --motion-medium: 0.25s;
+
+  /* Hover timing functions */
+  --hover-duration-fast: 150ms;
+  --hover-duration-normal: 300ms;
+  --hover-duration-slow: 500ms;
+  --hover-ease: var(--easing-standard);
+  --hover-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Hover background states */
+  --hover-bg-primary: var(--token-interactive-primary-hover);
+  --hover-bg-secondary: var(--token-interactive-secondary-hover);
+  --hover-bg-tertiary: var(--token-neutral-50);
+  --hover-bg-accent: var(--token-accent-100);
+
+  /* Hover text states */
+  --hover-text-primary: var(--token-text-primary);
+  --hover-text-secondary: var(--token-primary-600);
+  --hover-text-accent: var(--token-accent-600);
+
+  /* Hover border states */
+  --hover-border-primary: var(--token-primary-300);
+  --hover-border-secondary: var(--token-neutral-300);
+  --hover-border-accent: var(--token-accent-300);
+
+  /* Hover shadow states */
+  --hover-shadow-sm: 0 2px 4px -1px var(--token-shadow-primary);
+  --hover-shadow-md: 0 4px 6px -1px var(--token-shadow-secondary), 0 2px 4px -1px var(--token-shadow-primary);
+  --hover-shadow-lg: 0 10px 15px -3px var(--token-shadow-secondary), 0 4px 6px -2px var(--token-shadow-primary);
+  --hover-shadow-glow: var(--token-glow-primary-subtle);
+
   /* === RADIUS TOKENS === */
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -182,12 +249,380 @@
   --space-16: 128px;
   --space-20: 160px;
   --space-24: 192px;
+  --space-32: 256px;
 
   /* Component & Section Spacing */
   --space-component: var(--space-3);
   /* 24px */
   --space-section: var(--space-8);
   /* 64px */
+
+  /* Touch Target Spacing - WCAG 2.1 AA Compliance */
+  --touch-target-min: 44px;
+  /* Minimum touch target size */
+  --touch-target-optimal: 48px;
+  /* Optimal touch target size for better UX */
+  --touch-clearance: var(--space-1);
+  /* 8px thumb clearance around touch targets */
+
+  /* === MOBILE-SPECIFIC SPACING TOKENS === */
+  /* Optimized spacing for mobile viewports and thumb-friendly interactions */
+
+  /* Mobile content spacing - reduced for screen efficiency */
+  --mobile-space-xs: 4px;
+  /* Extra small mobile spacing */
+  --mobile-space-sm: 8px;
+  /* Small mobile spacing */
+  --mobile-space-md: 12px;
+  /* Medium mobile spacing */
+  --mobile-space-lg: 16px;
+  /* Large mobile spacing */
+  --mobile-space-xl: 20px;
+  /* Extra large mobile spacing */
+
+  /* Mobile touch zones - thumb-friendly interaction areas */
+  --mobile-touch-zone-sm: 40px;
+  /* Small touch zone */
+  --mobile-touch-zone-md: 48px;
+  /* Medium touch zone (optimal) */
+  --mobile-touch-zone-lg: 56px;
+  /* Large touch zone */
+
+  /* Mobile safe areas - avoiding difficult reach zones */
+  --mobile-safe-top: 16px;
+  /* Safe distance from top edge */
+  --mobile-safe-bottom: 24px;
+  /* Safe distance from bottom edge */
+  --mobile-safe-sides: 16px;
+  /* Safe distance from side edges */
+
+
+
+  /* === COMMAND MENU TOKENS === */
+  /* ◀︎ LLM-modified: CommandMenu token system - updated for white text in light mode */
+
+  /* CommandMenu text - light mode */
+  --token-command-text: #0f172a;
+  /* Dark text (text-secondary-900 equivalent) for better contrast in light mode */
+
+  /* Section header text - light mode */
+  --token-text-on-section: #ffffff;
+  /* White text for section headers on dark section backgrounds */
+
+  /* CommandMenu section labels - light mode */
+  --token-command-label: #ffffff;
+  /* White text for section labels in light mode for better visibility on frosted backgrounds */
+
+  /* CommandMenu background - consistent across themes */
+  --token-command-bg: var(--token-bg-frosted-strong);
+  /* Frosted glass background */
+
+  /* === CONSOLIDATED SPACING TOKENS === */
+  /* ◀︎ LLM-modified: Consolidated spacing tokens - removed redundant tokens, kept only responsive versions following --token-category-property-variant naming convention */
+
+  /* Legacy tokens - DEPRECATED: Use responsive versions below */
+  /* --token-spacing-item-gap: REMOVED - use --token-spacing-responsive-item-gap */
+  /* --token-command-item-gap: REMOVED - use --token-spacing-responsive-item-gap */
+
+  /* CommandMenu container padding - legacy (non-responsive) */
+  --token-command-padding-x: 1rem;
+  /* 16px - horizontal padding for menu container */
+  --token-command-padding-y: 0.75rem;
+  /* 12px - vertical padding for menu container */
+
+  /* CommandMenu item padding - legacy (non-responsive) */
+  --token-command-item-padding-x: 0.75rem;
+  /* 12px - horizontal padding for menu items */
+  --token-command-item-padding-y: 0.5rem;
+  /* 8px - vertical padding for menu items */
+
+  /* CommandMenu group heading margin */
+  --token-command-group-heading-margin: 0.5rem;
+  /* 8px - margin below group headings */
+
+  /* === FLOATING ACTION BUTTON POSITIONING === */
+  /* ◀︎ LLM-modified: Responsive positioning tokens to prevent CTA overlap */
+
+  /* Mobile positioning - prevent overlap with header content */
+  --fab-mobile-bottom: var(--space-2);
+  /* 16px */
+  --fab-mobile-side: var(--space-2);
+  /* 16px */
+
+  /* Tablet positioning */
+  --fab-tablet-bottom: var(--space-3);
+  /* 24px */
+  --fab-tablet-side: var(--space-3);
+  /* 24px */
+
+  /* Desktop positioning */
+  --fab-desktop-bottom: var(--space-6);
+  /* 48px */
+  --fab-desktop-side: var(--space-6);
+  /* 48px */
+
+  /* Alignment tokens for perfect horizontal/vertical alignment */
+  --fab-alignment-offset: 0px;
+  /* Fine-tune alignment between buttons */
+  --fab-center-offset: 50%;
+  /* Center positioning for scroll button */
+
+  /* Ring accent color for focus states */
+  --ring-accent: var(--token-primary-500);
+  /* Hover scale for floating action buttons */
+  --fab-hover-scale: 1.05;
+
+  /* === RESPONSIVE FLOATING BUTTON SIZING === */
+  /* ◀︎ LLM-modified: Responsive sizing tokens for floating buttons to prevent oversizing on tablets */
+
+  /* Button sizes using clamp() for smooth responsive scaling */
+  --fab-size-mobile: 2.75rem;
+  /* 44px - minimum touch target */
+  --fab-size-tablet: 3rem;
+  /* 48px - slightly larger for tablet */
+  --fab-size-desktop: 3.5rem;
+  /* 56px - comfortable for desktop */
+
+  /* Icon sizes that scale proportionally */
+  --fab-icon-mobile: 1rem;
+  /* 16px */
+  --fab-icon-tablet: 1.25rem;
+  /* 20px */
+  --fab-icon-desktop: 1.5rem;
+  /* 24px */
+
+  /* Responsive sizing using clamp for smooth scaling */
+  --fab-size-responsive: clamp(var(--fab-size-mobile), 4vw, var(--fab-size-desktop));
+  --fab-icon-responsive: clamp(var(--fab-icon-mobile), 2vw, var(--fab-icon-desktop));
+
+  /* === RESPONSIVE COMMAND MENU TOKENS === */
+  /* ◀︎ LLM-modified: Enhanced responsive tokens for CommandMenu component */
+
+  /* CommandMenu container responsive sizing */
+  --token-command-width-mobile: calc(100vw - 2rem);
+  /* Full width minus 32px margin */
+  --token-command-width-tablet: 28rem;
+  /* 448px - comfortable tablet width */
+  --token-command-width-desktop: 32rem;
+  /* 512px - optimal desktop width */
+
+  /* Responsive padding using clamp() for smooth scaling */
+  --token-command-padding-responsive-x: clamp(1rem, 3vw, 1.5rem);
+  /* 16px to 24px horizontal padding */
+  --token-command-padding-responsive-y: clamp(0.75rem, 2vw, 1rem);
+  /* 12px to 16px vertical padding */
+
+  /* Responsive item padding */
+  --token-command-item-padding-responsive-x: clamp(0.75rem, 2vw, 1rem);
+  /* 12px to 16px item horizontal padding */
+  --token-command-item-padding-responsive-y: clamp(0.5rem, 1.5vw, 0.75rem);
+  /* 8px to 12px item vertical padding */
+
+  /* Responsive typography scaling */
+  --token-typography-size-responsive-md: clamp(0.875rem, 2.5vw, 1rem);
+  /* 14px to 16px for headings */
+  --token-typography-size-responsive-sm: clamp(0.8125rem, 2vw, 0.875rem);
+  /* 13px to 14px for items */
+
+  /* Responsive icon sizing */
+  --token-size-icon-responsive: clamp(1.25rem, 3vw, 1.5rem);
+  /* 20px to 24px responsive icon size */
+
+  /* Responsive spacing */
+  --token-spacing-responsive-item-gap: clamp(0.5rem, 1.5vw, 0.75rem);
+  /* 8px to 12px responsive item gap */
+  --token-spacing-responsive-group-gap: clamp(1rem, 2.5vw, 1.25rem);
+  /* 16px to 20px responsive group gap */
+
+  /* === TYPOGRAPHY SCALE TOKENS === */
+  /* Semantic typography system for consistent visual hierarchy */
+
+  /* Command menu typography */
+  --text-command-title: 1.25rem;
+  /* 20px - Modal/menu titles */
+  --text-command-subtitle: 1rem;
+  /* 16px - Section headers */
+  --text-command-body: 0.875rem;
+  /* 14px - Menu items */
+  --text-command-caption: 0.75rem;
+  /* 12px - Helper text */
+
+  /* Font weights for hierarchy */
+  --weight-command-title: 600;
+  /* Semibold for titles */
+  --weight-command-subtitle: 500;
+  /* Medium for subtitles */
+  --weight-command-body: 400;
+  /* Normal for body text */
+  --weight-command-caption: 400;
+  /* Normal for captions */
+
+  /* === STANDARDIZED TYPOGRAPHY TOKENS === */
+  /* ◀︎ LLM-modified: Standardized typography tokens with consistent responsive naming convention */
+
+  /* Legacy typography tokens - DEPRECATED: Use responsive versions below */
+  /* --token-typography-size-body-md: DEPRECATED - use --token-typography-size-responsive-md */
+  /* --token-typography-size-body-sm: DEPRECATED - use --token-typography-size-responsive-sm */
+
+  /* Standardized responsive typography sizes - optimized for crisp rendering */
+  --token-typography-size-responsive-lg: clamp(1rem, 3vw, 1.125rem);
+  /* 16px to 18px - for large headings */
+  --token-typography-size-responsive-md: clamp(1rem, 2.5vw, 1.125rem);
+  /* 16px to 18px - for section headings (increased for better readability) */
+  --token-typography-size-responsive-sm: clamp(0.875rem, 2vw, 1rem);
+  /* 14px to 16px - for item labels (increased from 13px for crispness) */
+  --token-typography-size-responsive-xs: clamp(0.8125rem, 1.5vw, 0.875rem);
+  /* 13px to 14px - for captions (increased for better readability) */
+
+  /* Typography weights for visual hierarchy */
+  --token-typography-weight-bold: 700;
+  /* for primary headings */
+  --token-typography-weight-semibold: 600;
+  /* for section headings */
+  --token-typography-weight-medium: 500;
+  /* for item labels - enhanced readability */
+  --token-typography-weight-regular: 400;
+  /* for body text */
+
+  /* Line heights for readability */
+  --leading-command-title: 1.4;
+  /* Tight for titles */
+
+  /* === ICON SIZING TOKENS === */
+  /* ◀︎ LLM-modified: Standardized icon sizing tokens following --token-category-property-variant naming convention */
+
+  /* Icon sizes for consistent visual hierarchy */
+  --token-size-icon: 1.5rem;
+  /* 24px - standardized icon size for command menu items */
+  --token-size-icon-container: 2.5rem;
+  /* 40px - circular background container for icons */
+
+  /* === BORDER TOKENS === */
+  /* ◀︎ LLM-modified: Border tokens for dividers and subtle separations */
+
+  /* Border widths */
+  --token-border-width-divider: 1px;
+  /* standard divider thickness */
+
+  /* Border colors - light mode */
+  --token-color-border-subtle: var(--token-neutral-200);
+  /* subtle border color for dividers in light mode */
+
+  /* CommandMenu divider styling */
+  --token-command-divider-bg: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  /* Glassmorphism divider for light mode */
+  --token-command-divider-height: 1px;
+  /* Standard divider height */
+  --leading-command-body: 1.5;
+  /* Comfortable for body */
+  --leading-command-caption: 1.3;
+  /* Tight for captions */
+
+  /* === ACCESSIBILITY TOKENS === */
+  /* ◀︎ LLM-modified: Enhanced accessibility and interaction states with comprehensive focus tokens */
+
+  /* Global focus ring tokens */
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color: var(--token-primary-500);
+
+  /* CommandMenu-specific focus state tokens */
+  --token-command-focus-ring-width: 2px;
+  /* Standard focus ring width for command menu items */
+  --token-command-focus-ring-offset: 2px;
+  /* Focus ring offset for proper spacing */
+  --token-command-focus-ring-color: var(--token-primary-500);
+  /* Primary blue for focus indicators - WCAG AA compliant */
+  --token-command-focus-shadow: 0 0 0 var(--token-command-focus-ring-width) var(--token-command-focus-ring-color);
+  /* Complete focus shadow for enhanced visibility */
+
+  /* Touch feedback tokens */
+  --touch-feedback-scale: 0.97;
+  /* Scale down on touch */
+  --touch-feedback-duration: 100ms;
+  /* Quick feedback */
+
+  /* === SCROLLBAR TOKENS === */
+  /* Custom scrollbar styling for consistent UX */
+
+  /* Scrollbar dimensions */
+  --scrollbar-width: 6px;
+  --scrollbar-track-radius: 3px;
+  --scrollbar-thumb-radius: 3px;
+
+  /* === SHADOW TOKENS === */
+  /* Consistent shadow system for elevation hierarchy */
+
+  /* Base shadows */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Primary colored shadows for interactive elements */
+  --shadow-primary-sm: 0 8px 20px -4px rgba(59, 130, 246, 0.4);
+  --shadow-primary-md: 0 12px 28px -4px rgba(59, 130, 246, 0.5);
+  --shadow-primary-lg: 0 12px 32px -8px rgba(59, 130, 246, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.2);
+
+  /* Inset shadows */
+  --shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  --shadow-inset-md: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+
+  /* === HEIGHT TOKENS === */
+  /* Consistent height system for components */
+
+  /* Touch targets and interactive elements */
+  --height-touch-min: 44px;
+  /* WCAG AA minimum touch target */
+  --height-touch-comfortable: 48px;
+  /* Comfortable touch target */
+  --height-button-sm: 32px;
+  --height-button-md: 40px;
+  --height-button-lg: 48px;
+  --height-button-xl: 56px;
+
+  /* Component heights */
+  --height-header: 64px;
+  --height-nav: 56px;
+  --height-command-menu: 32rem;
+  /* 512px */
+  --height-command-list: 300px;
+
+  /* === BREAKPOINT TOKENS === */
+  /* Responsive design breakpoints */
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* === ANIMATION TIMING TOKENS === */
+  /* Extended timing system for consistent animations */
+
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 750ms;
+
+  /* Specific animation durations */
+  --duration-hover: 180ms;
+  --duration-focus: 200ms;
+  --duration-modal: 250ms;
+  --duration-page-transition: 400ms;
+
+  /* Scrollbar colors - will be overridden in dark mode */
+  --scrollbar-track-color: var(--token-primary-100);
+  --scrollbar-thumb-color: var(--token-primary-300);
+  --scrollbar-thumb-hover-color: var(--token-primary-400);
+
+  /* === SECTION BACKGROUND ALIASES === */
+  /* ◀︎ LLM-modified: Section background aliases for primary/secondary sections */
+  --section-primary-bg: var(--token-primary-500);
+  --section-secondary-bg: var(--token-primary-800);
 }
 
 /* === DARK MODE OVERRIDES === */
@@ -202,23 +637,75 @@
 
   --token-text-primary: #ffffff;
   /* Pure white for maximum contrast */
-  --token-text-secondary: #E2E8F0;
+  --token-text-secondary: var(--token-text-secondary-dark);
   /* WCAG AA compliant */
+  --token-text-secondary-dark: #E2E8F0;
+
+  /* ◀︎ LLM-modified: CommandMenu colors for dark mode - only color overrides, spacing tokens remain the same */
+  --token-command-text: #ffffff;
+  /* Light text for visibility on dark backgrounds */
+
+  /* Section header text - dark mode */
+  --token-text-on-section: #E2E8F0;
+  /* Light gray text for section headers on dark section backgrounds */
+  --token-command-label: #cbd5e1;
+  /* Enhanced lighter gray for better visual hierarchy and contrast in dark mode */
+  /* Note: --token-command-bg and all spacing tokens (padding, gaps, etc.) remain unchanged from light mode */
   --token-text-tertiary: var(--token-neutral-400);
   /* #9ca3af - WCAG AA: 4.6:1 */
 
   --token-timeline-label: #60A5FA;
 
-  --token-bg-frosted-strong: rgba(255, 255, 255, 0.12);
-  /* Enhanced frosted glass for dark mode - lighter but not lighter than light mode */
+  --token-bg-frosted: rgba(30, 41, 59, 0.65);
+  /* ◀︎ LLM-modified: Dark mode frosted background */
+  --token-bg-frosted-strong: rgba(255, 255, 255, 0.08);
+  /* ◀︎ LLM-modified: Further reduced opacity for better transparency in dark mode */
+
+  /* === GLASS SURFACE ALIAS TOKENS - DARK MODE === */
+  /* ◀︎ LLM-modified: Dark mode overrides for glass surface aliases */
+  --glass-surface-card: var(--token-bg-frosted);
+  /* inherits dark mode frosted bg */
+  --glass-surface-card-b: rgba(255, 255, 255, 0.15);
+  /* reduced border opacity for dark mode */
+
+  /* Backdrop blur intensity tokens - same for dark mode */
+  --token-backdrop-blur-sm: blur(4px);
+  --token-backdrop-blur-md: blur(8px);
+  --token-backdrop-blur-lg: blur(16px);
+
+  /* Glow effect tokens for dark mode - enhanced visibility */
+  --token-glow-primary: 0 12px 32px -8px rgba(96, 165, 250, 0.8), 0 0 0 1px rgba(96, 165, 250, 0.3);
+  --token-glow-primary-subtle: 0 8px 24px -6px rgba(96, 165, 250, 0.5);
 
   --token-border-primary: var(--token-secondary-700);
   /* #334155 */
   --token-border-secondary: var(--token-secondary-600);
   /* #475569 */
 
+  /* Border colors - dark mode */
+  --token-color-border-subtle: var(--token-neutral-700);
+  /* subtle border color for dividers in dark mode */
+
+  /* CommandMenu divider styling - dark mode */
+  --token-command-divider-bg: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  /* Glassmorphism divider for dark mode - reduced opacity */
+
   --token-shadow-primary: rgba(0, 0, 0, 0.25);
   --token-shadow-secondary: rgba(0, 0, 0, 0.35);
+
+  /* Dark mode scrollbar colors */
+  --scrollbar-track-color: var(--token-secondary-800);
+  --scrollbar-thumb-color: var(--token-secondary-600);
+  --scrollbar-thumb-hover-color: var(--token-secondary-500);
+
+  /* Dark mode focus ring */
+  --focus-ring-color: var(--token-primary-400);
+
+  /* CommandMenu focus tokens - dark mode overrides */
+  --token-command-focus-ring-color: var(--token-primary-400);
+  /* Lighter blue for better contrast on dark backgrounds - WCAG AA compliant */
+  --token-command-focus-shadow: 0 0 0 var(--token-command-focus-ring-width) var(--token-command-focus-ring-color);
+  /* Updated focus shadow for dark mode */
 
   /* Interactive States - Dark Mode */
   --token-interactive-primary: var(--token-primary-400);
@@ -234,6 +721,58 @@
   /* #475569 */
   --token-interactive-secondary-active: var(--token-secondary-500);
   /* #64748b */
+
+  /* === HOVER SYSTEM TOKENS - DARK MODE === */
+  /* Dark mode hover states with enhanced visibility */
+
+  /* Hover background states - dark mode */
+  --hover-bg-primary: var(--token-interactive-primary-hover);
+  --hover-bg-secondary: var(--token-interactive-secondary-hover);
+  --hover-bg-tertiary: var(--token-secondary-600);
+  --hover-bg-accent: var(--token-accent-800);
+
+  /* Hover text states - dark mode */
+  --hover-text-primary: #ffffff;
+  --hover-text-secondary: var(--token-primary-300);
+  --hover-text-accent: var(--token-accent-300);
+
+  /* Hover border states - dark mode */
+  --hover-border-primary: var(--token-primary-400);
+  --hover-border-secondary: var(--token-secondary-500);
+  --hover-border-accent: var(--token-accent-400);
+
+  /* Hover shadow states - dark mode enhanced */
+  --hover-shadow-sm: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --hover-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --hover-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --hover-shadow-glow: var(--token-glow-primary-subtle);
+
+
+
+  /* === SHADOW TOKENS - DARK MODE === */
+  /* Enhanced shadows for dark mode with better visibility */
+
+  /* Base shadows - enhanced for dark backgrounds */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+
+  /* Primary colored shadows for dark mode - enhanced visibility */
+  --shadow-primary-sm: 0 8px 20px -4px rgba(96, 165, 250, 0.5);
+  --shadow-primary-md: 0 12px 28px -4px rgba(96, 165, 250, 0.6);
+  --shadow-primary-lg: 0 12px 32px -8px rgba(96, 165, 250, 0.8), 0 0 0 1px rgba(96, 165, 250, 0.3);
+
+  /* Inset shadows for dark mode */
+  --shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  --shadow-inset-md: inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+
+  /* === SECTION BACKGROUND ALIASES - DARK MODE === */
+  /* ◀︎ LLM-modified: Dark mode overrides for section background aliases using color-mix() */
+  --section-primary-bg: color-mix(in srgb, var(--token-primary-500) 62%, black 38%);
+  --section-secondary-bg: color-mix(in srgb, var(--token-primary-800) 55%, black 45%);
 }
 
 /* === GRADIENT TOKENS === */
@@ -252,14 +791,20 @@
   /* #0f172a to #2563eb */
 
   /* Header background gradient - Slate to Blue */
-  --gradient-header: linear-gradient(to bottom right, var(--token-secondary-900), var(--token-hero-gradient-mid), var(--token-primary-600));
-  /* Hero gradient middle stop for enhanced contrast */
+  --gradient-header: linear-gradient(135deg, #4f7cdb 0%, var(--token-hero-gradient-mid) 35%, #3b82f6 100%);
+  /* ◀︎ LLM-modified: Replaced dark corner #14316a with lighter #4f7cdb for better light mode visibility while maintaining brand consistency */
 
   /* Button gradients - Blue theme */
   --gradient-button: linear-gradient(to right, var(--token-primary-500), var(--token-primary-600));
   /* blue-500 to blue-600 */
   --gradient-button-hover: linear-gradient(to right, var(--token-primary-600), var(--token-primary-700));
   /* blue-600 to blue-700 */
+
+  /* Enhanced command button styling for better discoverability */
+  --token-command-button-bg: var(--token-primary-500);
+  /* Solid background for visibility on all backgrounds - LLM-modified */
+  --token-command-button-border: var(--token-primary-600);
+  /* Solid border for better definition - LLM-modified */
 
   /* Accent gradients */
   --gradient-accent: linear-gradient(135deg, var(--token-accent-500), var(--token-accent-600));
@@ -291,9 +836,28 @@
   --gradient-button-hover: linear-gradient(to right, var(--token-primary-300), var(--token-primary-400));
   /* blue-300 to blue-400 */
 
+  /* Enhanced command button styling for dark mode */
+  --token-command-button-bg: var(--token-primary-500);
+  /* Solid background for visibility on all backgrounds - LLM-modified */
+  --token-command-button-border: var(--token-primary-600);
+  /* Solid border for better definition - LLM-modified */
+
   /* Accent gradients for dark mode */
   --gradient-accent: linear-gradient(135deg, var(--token-accent-400), var(--token-accent-500));
 
   /* Timeline gradients for dark mode */
   --gradient-timeline: linear-gradient(to bottom, var(--token-primary-300), var(--token-primary-400), var(--token-primary-500));
 }
+
+/* ◀︎ LLM-modified: CSS Debugging utilities for hero gradient troubleshooting */
+/* Debug class to test gradient application - remove after debugging */
+.debug-gradient-header {
+  background: var(--gradient-header) !important;
+  border: 2px solid red !important;
+}
+
+/* Debug class to test if custom properties are working */
+.debug-hero-gradient-mid {
+  background: var(--token-hero-gradient-mid) !important;
+  color: white !important;
+  padding: 10px !important;
