@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Experience } from '../types';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import styles from './Timeline.module.css';
 
 
 interface TimelineProps {
@@ -12,12 +13,53 @@ interface TimelineRefs {
   [key: string]: HTMLDivElement | null;
 }
 
+// ◀︎ LLM-modified: Animation variants for scroll-triggered timeline animations
+const timelineContainerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.4, 0, 0.2, 1],
+      staggerChildren: 0.15, // 150ms stagger between timeline items
+      delayChildren: 0.2, // 200ms delay before children start animating
+    },
+  },
+};
+
+const timelineItemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.4, 0, 0.2, 1],
+    },
+  },
+};
+
 const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [timelineHeight, setTimelineHeight] = useState<number>(0);
   const timelineRefs = useRef<TimelineRefs>({});
   const timelineLineRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+
+  // ◀︎ LLM-modified: useInView hook for scroll-triggered animations
+  const timelineContainerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(timelineContainerRef, {
+    amount: 0.3, // Trigger when 30% of timeline is visible
+    once: true, // Only animate once when scrolling down
+    margin: '0px 0px -100px 0px', // Start animation 100px before element enters viewport
+  });
 
 
   // PERFORMANCE OPTIMIZATION: Memoize year range extraction to avoid recalculation on re-renders
@@ -195,40 +237,48 @@ const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
       };
 
   return (
+    // ◀︎ LLM-modified: Updated container background to bg-section-secondary and timeline elements to text-section-secondary/80
     <section
       id='timeline'
-      className='py-[var(--space-section)] bg-token-secondary'
+      className='py-[var(--space-section)] bg-section-secondary'
     >
       <div className='container mx-auto px-4'>
-        <h2 className='mb-12 text-center text-3xl font-bold text-token-primary'>
+        {/* ◀︎ LLM-modified: Updated to text-white for better contrast on deep blue backgrounds */}
+        <h2 className='mb-12 text-center text-3xl font-bold text-white'>
           Professional Timeline
         </h2>
 
-        {/* Responsive Timeline Container - CSS Grid Layout */}
-        <div className='timeline-grid-container relative mx-auto w-full max-w-none px-4 md:max-w-6xl md:px-8'>
+        {/* Responsive Timeline Container - CSS Grid Layout with Scroll Animations */}
+        <motion.div
+          ref={timelineContainerRef}
+          className='timeline-grid-container relative mx-auto w-full max-w-none px-4 md:max-w-6xl md:px-8'
+          variants={shouldReduceMotion ? undefined : timelineContainerVariants}
+          initial={shouldReduceMotion ? undefined : 'hidden'}
+          animate={shouldReduceMotion ? undefined : (isInView ? 'visible' : 'hidden')}
+        >
           {/* Desktop Timeline Line - CSS Grid positioned for alternating layout */}
           <div
             ref={timelineLineRef}
-            className='timeline-line-desktop hidden w-0.5 bg-gradient-timeline md:block'
+            className='timeline-line-desktop hidden w-0.5 bg-white/60 md:block'
             style={{
               height:
                 timelineHeight > 0
                   ? `${timelineHeight}px`
-                  : `${(experienceData.length - 1) * 96}px`,
-              marginTop: '46px', // Start at first milestone icon center (24px padding + 22px icon center)
+                  : `${(experienceData.length - 1) * 96}px`, // Keep calculated height as-is
+              marginTop: 'calc(var(--space-6) + var(--space-5))', // Start at first milestone icon center (24px + 22px)
             }}
           />
 
           {/* Mobile Timeline Line - Left aligned for mobile */}
           <div
-            className='absolute w-0.5 bg-gradient-timeline md:hidden'
+            className='absolute w-0.5 bg-white/60 md:hidden'
             style={{
               height:
                 timelineHeight > 0
                   ? `${timelineHeight}px`
-                  : `${(experienceData.length - 1) * 96}px`,
-              top: '46px', // Start at first milestone icon center (24px padding + 22px icon center)
-              left: '22px', // Align with milestone icon center (44px icon width / 2 = 22px)
+                  : `${(experienceData.length - 1) * 96}px`, // Keep calculated height as-is
+              top: 'calc(var(--space-6) + var(--space-5))', // Start at first milestone icon center (24px + 22px)
+              left: 'calc(var(--height-touch-min) / 2)', // Align with milestone icon center (44px / 2)
             }}
           />
 
@@ -239,23 +289,22 @@ const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
             const baseSpacing = 96; // Reduced spacing between items (8px scale: 12 * 8 = 96px)
 
             return (
-              <div
+              <motion.div
                 key={item.id}
                 ref={setTimelineRef(item.id)}
-                className={`timeline-grid-item relative ${leftSide ? 'timeline-left' : 'timeline-right'}`}
+                className={`timeline-grid-item ${styles['timeline-item-hover']} relative ${leftSide ? 'timeline-left' : 'timeline-right'}`}
                 style={{
-                  minHeight: `${baseSpacing}px`,
-                  paddingTop: '24px', // 8px scale: 3 * 8 = 24px for better mobile spacing
-                  paddingBottom: '16px', // 8px scale: 2 * 8 = 16px reduced bottom padding
-                  marginBottom: isExpanded ? '32px' : '16px', // Reduced extra space when expanded
+                  minHeight: `${baseSpacing}px`, // Keep calculated spacing as-is
+                  paddingTop: 'var(--space-6)', // 24px for better mobile spacing
+                  paddingBottom: 'var(--space-4)', // 16px reduced bottom padding
+                  marginBottom: isExpanded ? 'var(--space-8)' : 'var(--space-4)', // Reduced extra space when expanded
                 }}
+                variants={shouldReduceMotion ? undefined : timelineItemVariants}
               >
                 {/* Timeline Icon - 44px minimum tap target for accessibility */}
+                {/* ◀︎ LLM-modified: Removed all hover effects and animations to prevent erratic movement */}
                 <button
-                  className={`timeline-icon timeline-icon-focus flex h-11 min-h-[44px] w-11 min-w-[44px] cursor-pointer items-center justify-center rounded-full bg-token-primary-500 text-white shadow-lg hover:scale-110 hover:bg-token-primary-600 hover:shadow-xl active:scale-95 ${shouldReduceMotion
-                    ? ''
-                    : 'animate-timeline-pulse transition-all duration-300'
-                    }`}
+                  className={`timeline-icon timeline-icon-focus flex h-11 min-h-touch-min w-11 min-w-touch-min cursor-pointer items-center justify-center rounded-full bg-token-primary-500 text-white shadow-token-lg`}
                   onClick={() => {
                     toggleExpand(item.id);
                     announceStateChange(item.id, expandedId !== item.id);
@@ -282,7 +331,7 @@ const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
                     } `}
                   style={{
                     // UX: Align card content with timeline icon for visual connection - reduced gap
-                    marginTop: '0px',
+                    marginTop: '0', // No margin needed
                   }}
                   initial={false}
                   animate={{
@@ -299,7 +348,7 @@ const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
                 >
                   {/* Year Label - Positioned Above Card */}
                   <div className='timeline-year-label-above'>
-                    <p className='timeline-year-text whitespace-nowrap text-lg font-semibold text-token-primary-600 transition-all duration-300 md:text-xl'>
+                    <p className='timeline-year-text whitespace-nowrap text-lg font-semibold text-white/60 transition-all duration-300 md:text-xl'>
                       {getYearRange(item.date)}
                     </p>
                   </div>
@@ -440,10 +489,10 @@ const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
                     </AnimatePresence>
                   </motion.div>
                 </motion.div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
