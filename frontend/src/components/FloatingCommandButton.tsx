@@ -134,10 +134,7 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
     },
     hover: {
       scale: 1.05, // From --token-scale-hover
-      boxShadow: [
-        'var(--token-glow-hover)',
-        'inset 0 0 0 1px rgba(59, 130, 246, 0.4)' // ◀︎ LLM-modified: Inner glow effect for better hover visibility
-      ].join(', '),
+      boxShadow: 'inset 0 0 0 1px rgba(59, 130, 246, 0.4)', // ◀︎ LLM-modified: Inner glow effect only (no external glow)
       transition: { duration: 0.18 } // 180ms from --duration-hover
     },
     tap: {
