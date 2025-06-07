@@ -198,6 +198,10 @@ module.exports = {
           900: '#090a10',
         }
       },
+      backgroundColor: {
+        'section-primary': 'var(--section-primary-bg)',
+        'section-secondary': 'var(--section-secondary-bg)',
+      },
       spacing: {
         // Token-based spacing system (8px scale)
         0: 'var(--space-0)',
@@ -214,6 +218,13 @@ module.exports = {
         20: 'var(--space-20)',
         24: 'var(--space-24)',
 
+        // ◀︎ LLM-modified: Enhanced responsive spacing tokens
+        'header-x': 'var(--token-spacing-header-x)',
+        'header-y': 'var(--token-spacing-header-y)',
+        'card-padding': 'var(--token-spacing-card-padding)',
+        'section-y': 'var(--token-spacing-section-y)',
+        'component-gap': 'var(--token-spacing-component-gap)',
+
         // Legacy spacing (for backward compatibility)
         'legacy-2': '8px',
         'legacy-4': '16px',
@@ -224,25 +235,144 @@ module.exports = {
         'legacy-24': '96px',
       },
       borderRadius: {
-        // Token-based radius system
-        'token-sm': 'var(--radius-sm)',
-        'token-md': 'var(--radius-md)',
-        'token-lg': 'var(--radius-lg)',
-        'token-xl': 'var(--radius-xl)',
-        'token-full': 'var(--radius-full)',
+        // Comprehensive token-based radius system
+        'token-none': 'var(--token-radius-none)',
+        'token-xs': 'var(--token-radius-xs)',
+        'token-sm': 'var(--token-radius-sm)',
+        'token-md': 'var(--token-radius-md)',
+        'token-lg': 'var(--token-radius-lg)',
+        'token-xl': 'var(--token-radius-xl)',
+        'token-2xl': 'var(--token-radius-2xl)',
+        'token-3xl': 'var(--token-radius-3xl)',
+        'token-full': 'var(--token-radius-full)',
+        // Semantic radius tokens
+        'token-button': 'var(--token-radius-button)',
+        'token-card': 'var(--token-radius-card)',
+        'token-input': 'var(--token-radius-input)',
+        'token-modal': 'var(--token-radius-modal)',
+        'token-tooltip': 'var(--token-radius-tooltip)',
+        'token-badge': 'var(--token-radius-badge)',
+        'token-avatar': 'var(--token-radius-avatar)',
+        // Responsive radius tokens
+        'token-responsive-sm': 'var(--token-radius-responsive-sm)',
+        'token-responsive-md': 'var(--token-radius-responsive-md)',
+        'token-responsive-lg': 'var(--token-radius-responsive-lg)',
       },
       fontFamily: {
         sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
         display: ['Lexend', 'sans-serif'],
       },
+      fontSize: {
+        // Base typography tokens
+        'token-xs': 'var(--token-typography-size-xs)',
+        'token-sm': 'var(--token-typography-size-sm)',
+        'token-base': 'var(--token-typography-size-base)',
+        'token-lg': 'var(--token-typography-size-lg)',
+        'token-xl': 'var(--token-typography-size-xl)',
+        'token-2xl': 'var(--token-typography-size-2xl)',
+        'token-3xl': 'var(--token-typography-size-3xl)',
+        'token-4xl': 'var(--token-typography-size-4xl)',
+        'token-5xl': 'var(--token-typography-size-5xl)',
+        'token-6xl': 'var(--token-typography-size-6xl)',
+        // Responsive typography tokens
+        'token-responsive-xs': 'var(--token-typography-size-responsive-xs)',
+        'token-responsive-sm': 'var(--token-typography-size-responsive-sm)',
+        'token-responsive-md': 'var(--token-typography-size-responsive-md)',
+        'token-responsive-lg': 'var(--token-typography-size-responsive-lg)',
+        'token-responsive-xl': 'var(--token-typography-size-responsive-xl)',
+        'token-responsive-2xl': 'var(--token-typography-size-responsive-2xl)',
+        'token-responsive-3xl': 'var(--token-typography-size-responsive-3xl)',
+        'token-responsive-4xl': 'var(--token-typography-size-responsive-4xl)',
+        'token-responsive-5xl': 'var(--token-typography-size-responsive-5xl)',
+        // Semantic typography tokens
+        'token-heading-hero': 'var(--token-typography-heading-hero)',
+        'token-heading-primary': 'var(--token-typography-heading-primary)',
+        'token-heading-secondary': 'var(--token-typography-heading-secondary)',
+        'token-heading-tertiary': 'var(--token-typography-heading-tertiary)',
+        'token-heading-quaternary': 'var(--token-typography-heading-quaternary)',
+        'token-body-large': 'var(--token-typography-body-large)',
+        'token-body-medium': 'var(--token-typography-body-medium)',
+        'token-body-small': 'var(--token-typography-body-small)',
+        'token-caption': 'var(--token-typography-caption)',
+        // Command menu specific
+        'token-command-heading': 'var(--token-typography-command-heading)',
+        'token-command-item': 'var(--token-typography-command-item)',
+        'token-command-caption': 'var(--token-typography-command-caption)',
+        // ◀︎ LLM-modified: Enhanced responsive typography tokens
+        'hero': 'var(--token-font-size-hero)',
+        'timeline-year': 'var(--token-font-size-timeline-year)',
+      },
+      fontWeight: {
+        'token-light': 'var(--token-typography-weight-light)',
+        'token-regular': 'var(--token-typography-weight-regular)',
+        'token-medium': 'var(--token-typography-weight-medium)',
+        'token-semibold': 'var(--token-typography-weight-semibold)',
+        'token-bold': 'var(--token-typography-weight-bold)',
+        'token-extrabold': 'var(--token-typography-weight-extrabold)',
+      },
+      lineHeight: {
+        'token-tight': 'var(--token-typography-leading-tight)',
+        'token-snug': 'var(--token-typography-leading-snug)',
+        'token-normal': 'var(--token-typography-leading-normal)',
+        'token-relaxed': 'var(--token-typography-leading-relaxed)',
+        'token-loose': 'var(--token-typography-leading-loose)',
+        // ◀︎ LLM-modified: Enhanced line height tokens
+        'hero': 'var(--token-line-height-hero)',
+        'body': 'var(--token-line-height-body)',
+        'tight': 'var(--token-line-height-tight)',
+      },
       animation: {
         'spin-slow': 'spin 3s linear infinite',
-        'bounce-slow': 'bounce 3s infinite',
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'bounce-slow': 'bounce var(--duration-bounce) infinite',
+        'pulse-slow': 'pulse var(--duration-pulse) cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'theme-toggle': 'theme-toggle 0.5s ease-in-out',
         'wiggle': 'wiggle 1s ease-in-out infinite',
-        'gradient-shift': 'sheen 2.5s ease-in-out infinite',
+        'gradient-shift': 'sheen var(--duration-shimmer) ease-in-out infinite',
+      },
+      // ◀︎ LLM-modified: Enhanced animation and effect tokens
+      transitionDuration: {
+        'hover': 'var(--duration-hover)',
+        'focus': 'var(--duration-focus)',
+        'modal': 'var(--duration-modal)',
+        'fast': 'var(--duration-fast)',
+        'normal': 'var(--duration-normal)',
+        'slow': 'var(--duration-slow)',
+        'fade-in': 'var(--duration-fade-in)',
+        'slide-up': 'var(--duration-slide-up)',
+        'tooltip': 'var(--duration-tooltip)',
+      },
+      transitionTimingFunction: {
+        'bounce': 'var(--easing-bounce)',
+        'smooth': 'var(--easing-smooth)',
+        'spring': 'var(--easing-spring)',
+        'ease-out': 'var(--easing-ease-out)',
+        'ease-in': 'var(--easing-ease-in)',
+        'ease-in-out': 'var(--easing-ease-in-out)',
+      },
+      scale: {
+        'hover': 'var(--token-scale-hover)',
+        'tap': 'var(--token-scale-tap)',
+        'focus': 'var(--token-scale-focus)',
+        'pulse-min': 'var(--token-scale-pulse-min)',
+        'pulse-max': 'var(--token-scale-pulse-max)',
+      },
+      boxShadow: {
+        'glow': 'var(--token-glow-primary)',
+        'glow-subtle': 'var(--token-glow-primary-subtle)',
+        'glow-hover': 'var(--token-glow-hover)',
+        'glow-focus': 'var(--token-glow-focus)',
+        'card': 'var(--token-shadow-card)',
+        'card-hover': 'var(--token-shadow-card-hover)',
+        'floating': 'var(--token-shadow-floating)',
+        'tooltip': 'var(--token-shadow-tooltip)',
+        'glass-light': 'var(--token-glass-shadow-light)',
+        'glass-dark': 'var(--token-glass-shadow-dark)',
+      },
+      backdropBlur: {
+        'token-sm': 'var(--token-backdrop-blur-sm)',
+        'token-md': 'var(--token-backdrop-blur-md)',
+        'token-lg': 'var(--token-backdrop-blur-lg)',
       },
       keyframes: {
         wiggle: {
@@ -414,6 +544,55 @@ module.exports = {
         },
         '.shadow-token-secondary': {
           'box-shadow': '0 4px 6px -1px var(--token-shadow-secondary), 0 2px 4px -1px var(--token-shadow-secondary)',
+        },
+        // ◀︎ LLM-modified: Enhanced token-based utility classes
+        '.bg-glass-card': {
+          'background-color': 'var(--token-glass-skill-card)',
+          'border': '1px solid var(--token-glass-skill-border)',
+          'box-shadow': 'var(--token-glass-skill-shadow)',
+          'backdrop-filter': 'var(--token-backdrop-blur-md)',
+          '-webkit-backdrop-filter': 'var(--token-backdrop-blur-md)',
+        },
+        '.bg-app-primary': {
+          'background-color': 'var(--token-app-bg-primary)',
+        },
+        '.bg-app-secondary': {
+          'background-color': 'var(--token-app-bg-secondary)',
+        },
+        '.text-app-primary': {
+          'color': 'var(--token-app-text-primary)',
+        },
+        '.text-app-secondary': {
+          'color': 'var(--token-app-text-secondary)',
+        },
+        '.text-app-accent': {
+          'color': 'var(--token-app-accent)',
+        },
+        '.bg-gradient-token': {
+          'background': 'var(--token-gradient-primary)',
+        },
+        '.bg-gradient-button-token': {
+          'background': 'var(--token-gradient-button)',
+        },
+        '.shadow-glow-hover': {
+          'box-shadow': 'var(--token-glow-hover)',
+        },
+        '.shadow-glow-focus': {
+          'box-shadow': 'var(--token-glow-focus)',
+        },
+        '.transition-hover': {
+          'transition-duration': 'var(--duration-hover)',
+          'transition-timing-function': 'var(--easing-smooth)',
+        },
+        '.transition-focus': {
+          'transition-duration': 'var(--duration-focus)',
+          'transition-timing-function': 'var(--easing-smooth)',
+        },
+        '.scale-hover': {
+          'transform': 'scale(var(--token-scale-hover))',
+        },
+        '.scale-tap': {
+          'transform': 'scale(var(--token-scale-tap))',
         }
       }
       addUtilities(newUtilities, ['responsive', 'hover', 'dark'])

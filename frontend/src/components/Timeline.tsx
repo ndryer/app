@@ -239,7 +239,7 @@ const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
     // ◀︎ LLM-modified: Updated container background to bg-section-secondary and timeline elements to text-section-secondary/80
     <section
       id='timeline'
-      className='py-[var(--space-section)] bg-section-secondary'
+      className='bg-section-secondary py-[var(--space-section)]'
     >
       <div className='container mx-auto px-4'>
         {/* ◀︎ LLM-modified: Updated to text-white for better contrast on deep blue backgrounds */}
@@ -258,13 +258,14 @@ const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
           {/* Desktop Timeline Line - CSS Grid positioned for alternating layout */}
           <div
             ref={timelineLineRef}
-            className='timeline-line-desktop hidden w-0.5 bg-white/60 md:block'
+            className="timeline-line-desktop hidden w-0.5 md:block"
             style={{
+              backgroundColor: 'var(--token-timeline-line)',
               height:
                 timelineHeight > 0
                   ? `${timelineHeight}px`
-                  : `${(experienceData.length - 1) * 96}px`, // Keep calculated height as-is
-              marginTop: 'calc(var(--space-6) + var(--space-5))', // Start at first milestone icon center (24px + 22px)
+                  : `${(experienceData.length - 1) * 96}px`,
+              marginTop: 'var(--space-12)', // 48px from our 8px spacing scale
             }}
           />
 
@@ -294,16 +295,16 @@ const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
                 className={`timeline-grid-item relative ${leftSide ? 'timeline-left' : 'timeline-right'}`}
                 style={{
                   minHeight: `${baseSpacing}px`, // Keep calculated spacing as-is
-                  paddingTop: 'var(--space-6)', // 24px for better mobile spacing
+                  paddingTop: 'var(--token-spacing-component)', // Responsive component spacing
                   paddingBottom: 'var(--space-4)', // 16px reduced bottom padding
-                  marginBottom: isExpanded ? 'var(--space-8)' : 'var(--space-4)', // Reduced extra space when expanded
+                  marginBottom: isExpanded ? 'var(--token-spacing-section)' : 'var(--space-4)', // Responsive spacing when expanded
                 }}
                 variants={shouldReduceMotion ? undefined : timelineItemVariants}
               >
                 {/* Timeline Icon - 44px minimum tap target for accessibility */}
                 {/* ◀︎ LLM-modified: Removed all hover effects and animations to prevent erratic movement */}
                 <button
-                  className={`timeline-icon timeline-icon-focus flex h-11 min-h-touch-min w-11 min-w-touch-min cursor-pointer items-center justify-center rounded-full bg-token-primary-500 text-white shadow-token-lg`}
+                  className={`timeline-icon timeline-icon-focus min-h-touch-min min-w-touch-min shadow-token-lg flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-token-primary-500 text-white`}
                   onClick={() => {
                     toggleExpand(item.id);
                     announceStateChange(item.id, expandedId !== item.id);
@@ -347,7 +348,7 @@ const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
                 >
                   {/* Year Label - Positioned Above Card */}
                   <div className='timeline-year-label-above'>
-                    <p className='timeline-year-text whitespace-nowrap text-lg font-semibold text-white/60 transition-all duration-300 md:text-xl'>
+                    <p className='timeline-year-text whitespace-nowrap text-timeline-year font-semibold text-white/60 transition-all duration-normal'>
                       {getYearRange(item.date)}
                     </p>
                   </div>

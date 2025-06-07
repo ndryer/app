@@ -12,7 +12,7 @@ const FooterComponent: React.FC<FooterProps> = ({ userData }) => {
   return (
     <footer
       id='end'
-      className='bg-navy-DEFAULT dark:bg-navy-DEFAULT py-8 text-white'
+      className='py-8 text-white bg-app-secondary'
     >
       <div className='container mx-auto px-6'>
         <div className='flex flex-col items-center'>

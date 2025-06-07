@@ -41,15 +41,15 @@ const HeaderComponent: React.FC<HeaderProps> = ({
           ),
         },
       ]}
-      className='relative flex h-screen items-center justify-center overflow-hidden pb-20 pt-[var(--space-section)] md:pb-32'
+      className='relative flex h-screen items-center justify-center overflow-hidden pb-20 pt-section-y md:pb-32'
       id='top'
     >
       {/* Theme Toggle - Positioned in top-right corner */}
       <motion.div
-        className='absolute right-4 top-4 z-20 md:right-6 md:top-6'
+        className='absolute right-header-x top-header-y z-20'
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
       >
         <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
       </motion.div>
@@ -93,17 +93,18 @@ const HeaderComponent: React.FC<HeaderProps> = ({
               transition={{ duration: 0.6, delay: 0.5 }}
             >
               <motion.div
-                className='flex cursor-pointer items-center rounded-full px-4 py-3 text-white backdrop-blur-md border border-white/20 shadow-lg transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'
+                className='command-button flex cursor-pointer items-center rounded-full border border-white/20 px-4 py-3 text-white shadow-lg backdrop-blur-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'
                 style={{
                   background: 'var(--token-bg-frosted-strong)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                  backgroundImage: 'var(--gradient-button)',
+                  backgroundSize: '200% auto'
                 }}
-                /* Enhanced frosted glass effect for better visibility */
                 onClick={toggleCommandMenu}
                 whileHover={{
                   scale: 1.05,
                   y: -1,
-                  boxShadow: '0 12px 28px -4px rgba(59, 130, 246, 0.5)',
+                  boxShadow: 'var(--token-glow-primary)',
                   transition: {
                     type: 'spring',
                     stiffness: 300,

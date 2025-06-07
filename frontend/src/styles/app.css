@@ -1,33 +1,19 @@
-:root {
-  /* Light theme colors */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f8fafc;
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-accent: #3b82f6;
-  --color-accent-hover: #2563eb;
-  --color-accent-light: #93c5fd;
-  --color-accent-dark: #1d4ed8;
-  --color-border: #e2e8f0;
-  --color-shadow: var(--token-bg-frosted);
-  /* Frosted glass effect for overlays */
-  --gradient-primary: linear-gradient(135deg, #3b82f6, #2563eb);
-}
+/* ◀︎ LLM-modified: Replaced legacy CSS variables with semantic design tokens */
+/* All color and styling values now reference the comprehensive token system */
 
 .dark {
-  /* Dark theme colors */
-  --color-bg-primary: #0f172a;
-  --color-bg-secondary: #1e293b;
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #cbd5e1;
-  --color-accent: #3b82f6;
-  --color-accent-hover: #60a5fa;
-  --color-accent-light: #60a5fa;
-  --color-accent-dark: #1d4ed8;
-  --color-border: var(--token-text-secondary);
-  /* Secondary body copy tone */
-  --color-shadow: rgba(0, 0, 0, 0.25);
-  --gradient-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  /* ◀︎ LLM-modified: Legacy variables now reference semantic tokens for backward compatibility */
+  --color-bg-primary: var(--token-app-bg-primary);
+  --color-bg-secondary: var(--token-app-bg-secondary);
+  --color-text-primary: var(--token-app-text-primary);
+  --color-text-secondary: var(--token-app-text-secondary);
+  --color-accent: var(--token-app-accent);
+  --color-accent-hover: var(--token-app-accent-hover);
+  --color-accent-light: var(--token-app-accent-light);
+  --color-accent-dark: var(--token-app-accent-dark);
+  --color-border: var(--token-app-border);
+  --color-shadow: var(--token-app-shadow);
+  --gradient-primary: var(--token-gradient-primary);
 }
 
 .App {
@@ -113,9 +99,10 @@ html {
   transition: all 0.3s ease;
 }
 
+/* ◀︎ LLM-modified: Power button hover using design tokens */
 .power-button-inner:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 24px -6px rgba(59, 130, 246, 0.6);
+  transform: scale(var(--token-scale-hover));
+  box-shadow: var(--token-shadow-card-hover);
 }
 
 /* Command palette styling */
@@ -168,27 +155,26 @@ html {
   color: var(--color-accent);
 }
 
-/* Skills section styling */
+/* ◀︎ LLM-modified: Skills section styling using design tokens */
 .skill-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.65);
+  padding: var(--token-spacing-card-padding);
+  background-color: var(--token-glass-skill-card);
   border-radius: 1rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
+  backdrop-filter: var(--token-backdrop-blur-md);
+  -webkit-backdrop-filter: var(--token-backdrop-blur-md);
+  box-shadow: var(--token-glass-skill-shadow);
+  border: 1px solid var(--token-glass-skill-border);
+  transition: all var(--duration-normal) var(--easing-smooth);
 }
 
 .dark .skill-card {
-  background-color: rgba(30, 41, 59, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  /* Dark mode values are handled by CSS custom property inheritance */
 }
 
+/* ◀︎ LLM-modified: Skill icon styling using design tokens */
 .skill-icon {
   display: flex;
   align-items: center;
@@ -196,20 +182,21 @@ html {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: rgba(59, 130, 246, 0.1);
-  margin-bottom: 1rem;
+  background-color: color-mix(in srgb, var(--token-app-accent) 10%, transparent);
+  margin-bottom: var(--token-spacing-component-gap);
 }
 
 .dark .skill-icon {
-  background-color: rgba(59, 130, 246, 0.2);
+  background-color: color-mix(in srgb, var(--token-app-accent) 20%, transparent);
 }
 
+/* ◀︎ LLM-modified: Skill dot styling using design tokens */
 .skill-dot {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--gradient-primary);
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+  background: var(--token-gradient-primary);
+  box-shadow: var(--token-glow-primary-subtle);
 }
 
 .skill-name {

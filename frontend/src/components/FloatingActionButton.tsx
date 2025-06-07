@@ -74,14 +74,14 @@ export const FloatingActionButton: React.FC = () => {
     }
   }, []);
 
-  // Enhanced Framer Motion variants with synchronized fade-in animation
+  // ◀︎ LLM-modified: Enhanced Framer Motion variants with synchronized fade-in animation
   const buttonVariants: Variants = {
     visible: {
       opacity: 1,
       scale: 1,
       y: 0,
       transition: {
-        opacity: { duration: 1, ease: 'easeOut' }, // 1 second fade-in duration
+        opacity: { duration: 1.0, ease: 'easeOut' }, // 1s fade-in
         scale: {
           type: 'spring',
           stiffness: 300,
@@ -92,7 +92,7 @@ export const FloatingActionButton: React.FC = () => {
           type: 'spring',
           stiffness: 300,
           damping: 20,
-          duration: 1 // 1 second upward slide
+          duration: 1.0 // 1s slide-up
         }
       }
     },
@@ -108,7 +108,7 @@ export const FloatingActionButton: React.FC = () => {
     bounce: {
       y: [0, -3, 0], // More visible bounce animation
       transition: {
-        duration: 2,
+        duration: 2.0, // 2s bounce duration
         repeat: Infinity,
         repeatType: 'loop' as const,
         ease: 'easeInOut'
@@ -118,11 +118,11 @@ export const FloatingActionButton: React.FC = () => {
     initialPulse: {
       scale: [1, 1.1, 1, 1.05, 1], // Reduced for mobile
       boxShadow: [
-        '0 8px 20px -4px rgba(59, 130, 246, 0.4)',
-        '0 12px 28px -4px rgba(59, 130, 246, 0.6)',
-        '0 8px 20px -4px rgba(59, 130, 246, 0.4)',
-        '0 10px 24px -4px rgba(59, 130, 246, 0.5)',
-        '0 8px 20px -4px rgba(59, 130, 246, 0.4)'
+        'var(--token-glow-primary-subtle)',
+        'var(--token-glow-primary)',
+        'var(--token-glow-primary-subtle)',
+        'var(--token-glow-hover)',
+        'var(--token-glow-primary-subtle)'
       ],
       transition: {
         duration: 1.0, // Shortened for mobile
@@ -131,9 +131,9 @@ export const FloatingActionButton: React.FC = () => {
       }
     },
     hover: {
-      scale: 1.05, // Reduced for mobile touch targets
+      scale: 1.05, // Token-based scaling converted to numeric
       y: -1,
-      boxShadow: '0 12px 28px -4px rgba(59, 130, 246, 0.5)',
+      boxShadow: 'var(--token-glow-hover)',
       transition: {
         type: 'spring',
         stiffness: 300,
@@ -141,9 +141,9 @@ export const FloatingActionButton: React.FC = () => {
       }
     },
     tap: {
-      scale: 0.98, // Gentler tap for mobile
+      scale: 0.95, // Token-based scaling converted to numeric
       y: 0,
-      transition: { duration: 0.1 }
+      transition: { duration: 0.15 } // 150ms fast duration
     }
   };
 

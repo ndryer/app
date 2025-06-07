@@ -94,7 +94,7 @@ export const App: React.FC = () => {
 
   return (
     <ParallaxProvider>
-      <div className='App min-h-screen bg-white dark:bg-gray-900'>
+      <div className='App min-h-screen bg-app-primary'>
         <Suspense fallback={<LoadingFallback />}>
           <Header
             userData={userData}

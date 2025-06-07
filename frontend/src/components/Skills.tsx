@@ -253,9 +253,9 @@ const SkillsComponent: React.FC<SkillsProps> = ({ skillsData }) => {
                         {skill.name}
                       </h3>
                       <span
-                        className='rounded-full px-2 py-1 text-xs font-medium'
+                        className='rounded-token-badge px-2 py-1 text-token-caption font-token-medium'
                         style={{
-                          backgroundColor: `${skillLevel.color}20`,
+                          backgroundColor: `color-mix(in srgb, ${skillLevel.color} 20%, transparent)`,
                           color: skillLevel.color,
                         }}
                       >

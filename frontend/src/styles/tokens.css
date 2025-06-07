@@ -131,20 +131,41 @@
   /* ◀︎ LLM-modified: Further reduced opacity for better transparency */
 
   /* === GLASS SURFACE ALIAS TOKENS === */
-  /* ◀︎ LLM-modified: Glass surface aliases for consistent frosted glass effects */
+  /* ◀︎ LLM-modified: Enhanced glass surface tokens for consistent frosted glass effects */
   --glass-surface-card: var(--token-bg-frosted);
   /* inherits per theme */
   --glass-surface-card-b: rgba(255, 255, 255, 0.20);
   /* border alias */
+
+  /* ◀︎ LLM-modified: Comprehensive glass surface tokens */
+  --token-glass-card-light: rgba(255, 255, 255, 0.65);
+  --token-glass-card-dark: rgba(30, 41, 59, 0.5);
+  --token-glass-border-light: rgba(255, 255, 255, 0.2);
+  --token-glass-border-dark: rgba(255, 255, 255, 0.08);
+  --token-glass-shadow-light: 0 4px 16px rgba(0, 0, 0, 0.05);
+  --token-glass-shadow-dark: 0 4px 16px rgba(0, 0, 0, 0.2);
 
   /* Backdrop blur intensity tokens */
   --token-backdrop-blur-sm: blur(4px);
   --token-backdrop-blur-md: blur(8px);
   --token-backdrop-blur-lg: blur(16px);
 
+  /* Glass effect combinations */
+  --token-glass-skill-card: var(--token-glass-card-light);
+  --token-glass-skill-border: var(--token-glass-border-light);
+  --token-glass-skill-shadow: var(--token-glass-shadow-light);
+
   /* Glow effect tokens for interactive elements */
   --token-glow-primary: 0 12px 32px -8px rgba(59, 130, 246, 0.6), 0 0 0 1px rgba(59, 130, 246, 0.2);
   --token-glow-primary-subtle: 0 8px 24px -6px rgba(59, 130, 246, 0.4);
+
+  /* ◀︎ LLM-modified: Enhanced glow and shadow tokens for modern effects */
+  --token-glow-hover: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+  --token-glow-focus: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  --token-shadow-card: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --token-shadow-card-hover: 0 8px 20px -4px rgba(59, 130, 246, 0.5);
+  --token-shadow-floating: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --token-shadow-tooltip: 0 4px 16px rgba(0, 0, 0, 0.15);
 
   --token-hero-gradient-mid: #2f73e7;
   --token-hero-gradient-mid-light: #2F73E7;
@@ -228,14 +249,52 @@
   --hover-shadow-lg: 0 10px 15px -3px var(--token-shadow-secondary), 0 4px 6px -2px var(--token-shadow-primary);
   --hover-shadow-glow: var(--token-glow-primary-subtle);
 
-  /* === RADIUS TOKENS === */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
+  /* === COMPREHENSIVE BORDER RADIUS TOKENS === */
+  /* Consistent border radius system with semantic tokens */
+
+  /* === BASE RADIUS TOKENS === */
+  --token-radius-none: 0px;
+  --token-radius-xs: 2px;
+  --token-radius-sm: 4px;
+  --token-radius-md: 8px;
+  --token-radius-lg: 12px;
+  --token-radius-xl: 16px;
+  --token-radius-2xl: 20px;
+  --token-radius-3xl: 24px;
+  --token-radius-full: 9999px;
+
+  /* === SEMANTIC RADIUS TOKENS === */
+  /* Component-specific border radius values */
+  --token-radius-button: var(--token-radius-md);
+  /* 8px - standard button radius */
+  --token-radius-card: var(--token-radius-lg);
+  /* 12px - card container radius */
+  --token-radius-input: var(--token-radius-md);
+  /* 8px - form input radius */
+  --token-radius-modal: var(--token-radius-xl);
+  /* 16px - modal container radius */
+  --token-radius-tooltip: var(--token-radius-sm);
+  /* 4px - tooltip radius */
+  --token-radius-badge: var(--token-radius-full);
+  /* full - badge/pill radius */
+  --token-radius-avatar: var(--token-radius-full);
+  /* full - avatar radius */
+
+  /* === RESPONSIVE RADIUS TOKENS === */
+  /* Radius values that scale with viewport */
+  --token-radius-responsive-sm: clamp(4px, 0.5vw, 6px);
+  --token-radius-responsive-md: clamp(8px, 1vw, 12px);
+  --token-radius-responsive-lg: clamp(12px, 1.5vw, 16px);
+
+  /* Legacy aliases for backward compatibility */
+  --radius-sm: var(--token-radius-sm);
+  --radius-md: var(--token-radius-md);
+  --radius-lg: var(--token-radius-lg);
+  --radius-xl: var(--token-radius-xl);
+  --radius-full: var(--token-radius-full);
 
   /* === SPACING TOKENS (8px scale) === */
+  /* Base spacing scale - 8px increments */
   --space-0: 0px;
   --space-1: 8px;
   --space-2: 16px;
@@ -251,11 +310,16 @@
   --space-24: 192px;
   --space-32: 256px;
 
-  /* Component & Section Spacing */
-  --space-component: var(--space-3);
-  /* 24px */
-  --space-section: var(--space-8);
-  /* 64px */
+  /* === RESPONSIVE SPACING TOKENS === */
+  /* Component & Section Spacing - Responsive with clamp() */
+  --token-spacing-component: clamp(16px, 3vw, 24px);
+  /* Responsive component spacing: 16px mobile → 24px desktop */
+  --token-spacing-section: clamp(40px, 6vw, 64px);
+  /* Responsive section spacing: 40px mobile → 64px desktop */
+
+  /* Legacy aliases for backward compatibility */
+  --space-component: var(--token-spacing-component);
+  --space-section: var(--token-spacing-section);
 
   /* Touch Target Spacing - WCAG 2.1 AA Compliance */
   --touch-target-min: 44px;
@@ -316,6 +380,24 @@
   /* CommandMenu background - consistent across themes */
   --token-command-bg: var(--token-bg-frosted-strong);
   /* Frosted glass background */
+
+  /* ◀︎ LLM-modified: Semantic tokens to replace legacy --color-* variables */
+  /* App-level semantic tokens */
+  --token-app-bg-primary: var(--token-bg-primary);
+  --token-app-bg-secondary: var(--token-bg-secondary);
+  --token-app-text-primary: var(--token-text-primary);
+  --token-app-text-secondary: var(--token-text-secondary);
+  --token-app-accent: var(--token-primary-500);
+  --token-app-accent-hover: var(--token-primary-400);
+  --token-app-accent-light: var(--token-primary-400);
+  --token-app-accent-dark: var(--token-primary-700);
+  --token-app-border: var(--token-text-secondary);
+  --token-app-shadow: rgba(0, 0, 0, 0.25);
+
+  /* Gradient tokens */
+  --token-gradient-primary: linear-gradient(135deg, var(--token-primary-500), var(--token-primary-700));
+  --token-gradient-button: var(--token-gradient-primary);
+  --token-gradient-button-hover: linear-gradient(135deg, var(--token-primary-400), var(--token-primary-600));
 
   /* === CONSOLIDATED SPACING TOKENS === */
   /* ◀︎ LLM-modified: Consolidated spacing tokens - removed redundant tokens, kept only responsive versions following --token-category-property-variant naming convention */
@@ -457,36 +539,89 @@
   --weight-command-caption: 400;
   /* Normal for captions */
 
-  /* === STANDARDIZED TYPOGRAPHY TOKENS === */
-  /* ◀︎ LLM-modified: Standardized typography tokens with consistent responsive naming convention */
+  /* === COMPREHENSIVE TYPOGRAPHY TOKENS === */
+  /* ◀︎ LLM-modified: Complete typography system with responsive design and semantic tokens */
 
-  /* Legacy typography tokens - DEPRECATED: Use responsive versions below */
-  /* --token-typography-size-body-md: DEPRECATED - use --token-typography-size-responsive-md */
-  /* --token-typography-size-body-sm: DEPRECATED - use --token-typography-size-responsive-sm */
+  /* === BASE FONT SIZE TOKENS === */
+  /* Fixed font sizes - 8px scale aligned */
+  --token-typography-size-xs: 0.75rem;
+  /* 12px */
+  --token-typography-size-sm: 0.875rem;
+  /* 14px */
+  --token-typography-size-base: 1rem;
+  /* 16px */
+  --token-typography-size-lg: 1.125rem;
+  /* 18px */
+  --token-typography-size-xl: 1.25rem;
+  /* 20px */
+  --token-typography-size-2xl: 1.5rem;
+  /* 24px */
+  --token-typography-size-3xl: 1.875rem;
+  /* 30px */
+  --token-typography-size-4xl: 2.25rem;
+  /* 36px */
+  --token-typography-size-5xl: 3rem;
+  /* 48px */
+  --token-typography-size-6xl: 3.75rem;
+  /* 60px */
 
-  /* Standardized responsive typography sizes - optimized for crisp rendering */
-  --token-typography-size-responsive-lg: clamp(1rem, 3vw, 1.125rem);
-  /* 16px to 18px - for large headings */
-  --token-typography-size-responsive-md: clamp(1rem, 2.5vw, 1.125rem);
-  /* 16px to 18px - for section headings (increased for better readability) */
-  --token-typography-size-responsive-sm: clamp(0.875rem, 2vw, 1rem);
-  /* 14px to 16px - for item labels (increased from 13px for crispness) */
-  --token-typography-size-responsive-xs: clamp(0.8125rem, 1.5vw, 0.875rem);
-  /* 13px to 14px - for captions (increased for better readability) */
+  /* === RESPONSIVE TYPOGRAPHY TOKENS === */
+  /* Fluid typography using clamp() for optimal scaling */
+  --token-typography-size-responsive-xs: clamp(0.75rem, 1vw, 0.875rem);
+  /* 12px → 14px */
+  --token-typography-size-responsive-sm: clamp(0.875rem, 1.2vw, 1rem);
+  /* 14px → 16px */
+  --token-typography-size-responsive-md: clamp(1rem, 1.5vw, 1.125rem);
+  /* 16px → 18px */
+  --token-typography-size-responsive-lg: clamp(1.125rem, 2vw, 1.25rem);
+  /* 18px → 20px */
+  --token-typography-size-responsive-xl: clamp(1.25rem, 2.5vw, 1.5rem);
+  /* 20px → 24px */
+  --token-typography-size-responsive-2xl: clamp(1.5rem, 3vw, 1.875rem);
+  /* 24px → 30px */
+  --token-typography-size-responsive-3xl: clamp(1.875rem, 4vw, 2.25rem);
+  /* 30px → 36px */
+  --token-typography-size-responsive-4xl: clamp(2.25rem, 5vw, 3rem);
+  /* 36px → 48px */
+  --token-typography-size-responsive-5xl: clamp(3rem, 6vw, 3.75rem);
+  /* 48px → 60px */
 
-  /* Typography weights for visual hierarchy */
-  --token-typography-weight-bold: 700;
-  /* for primary headings */
-  --token-typography-weight-semibold: 600;
-  /* for section headings */
-  --token-typography-weight-medium: 500;
-  /* for item labels - enhanced readability */
+  /* === FONT WEIGHT TOKENS === */
+  --token-typography-weight-light: 300;
   --token-typography-weight-regular: 400;
-  /* for body text */
+  --token-typography-weight-medium: 500;
+  --token-typography-weight-semibold: 600;
+  --token-typography-weight-bold: 700;
+  --token-typography-weight-extrabold: 800;
 
-  /* Line heights for readability */
-  --leading-command-title: 1.4;
-  /* Tight for titles */
+  /* === LINE HEIGHT TOKENS === */
+  --token-typography-leading-tight: 1.25;
+  --token-typography-leading-snug: 1.375;
+  --token-typography-leading-normal: 1.5;
+  --token-typography-leading-relaxed: 1.625;
+  --token-typography-leading-loose: 2;
+
+  /* === SEMANTIC TYPOGRAPHY TOKENS === */
+  /* Component-specific typography combinations */
+  --token-typography-heading-hero: var(--token-typography-size-responsive-5xl);
+  --token-typography-heading-primary: var(--token-typography-size-responsive-4xl);
+  --token-typography-heading-secondary: var(--token-typography-size-responsive-3xl);
+  --token-typography-heading-tertiary: var(--token-typography-size-responsive-2xl);
+  --token-typography-heading-quaternary: var(--token-typography-size-responsive-xl);
+  --token-typography-body-large: var(--token-typography-size-responsive-lg);
+  --token-typography-body-medium: var(--token-typography-size-responsive-md);
+  --token-typography-body-small: var(--token-typography-size-responsive-sm);
+  --token-typography-caption: var(--token-typography-size-responsive-xs);
+
+  /* === COMMAND MENU SPECIFIC TYPOGRAPHY === */
+  --token-typography-command-heading: var(--token-typography-size-responsive-md);
+  --token-typography-command-item: var(--token-typography-size-responsive-sm);
+  --token-typography-command-caption: var(--token-typography-size-responsive-xs);
+
+  /* Legacy aliases for backward compatibility */
+  --leading-command-title: var(--token-typography-leading-snug);
+  --leading-command-body: var(--token-typography-leading-normal);
+  --leading-command-caption: var(--token-typography-leading-tight);
 
   /* === ICON SIZING TOKENS === */
   /* ◀︎ LLM-modified: Standardized icon sizing tokens following --token-category-property-variant naming convention */
@@ -590,6 +725,21 @@
   /* 512px */
   --height-command-list: 300px;
 
+  /* ◀︎ LLM-modified: Enhanced responsive spacing tokens */
+  /* Responsive spacing using clamp for smooth scaling */
+  --token-spacing-header-x: clamp(1rem, 4vw, 1.5rem);
+  --token-spacing-header-y: clamp(1rem, 4vw, 1.5rem);
+  --token-spacing-card-padding: clamp(1rem, 3vw, 1.5rem);
+  --token-spacing-section-y: clamp(2rem, 6vw, 4rem);
+  --token-spacing-component-gap: clamp(1rem, 3vw, 2rem);
+
+  /* Typography responsive tokens */
+  --token-font-size-hero: clamp(2rem, 5vw, 3.5rem);
+  --token-font-size-timeline-year: clamp(1.125rem, 2.5vw, 1.25rem);
+  --token-line-height-hero: 1.1;
+  --token-line-height-body: 1.6;
+  --token-line-height-tight: 1.25;
+
   /* === BREAKPOINT TOKENS === */
   /* Responsive design breakpoints */
 
@@ -614,15 +764,45 @@
   --duration-modal: 250ms;
   --duration-page-transition: 400ms;
 
+  /* ◀︎ LLM-modified: Enhanced animation timing tokens for modern interactions */
+  /* Component-specific animation durations */
+  --duration-pulse: 3s;
+  --duration-bounce: 2s;
+  --duration-shimmer: 1.5s;
+  --duration-fade-in: 1s;
+  --duration-slide-up: 1s;
+  --duration-tooltip: 200ms;
+
+  /* Animation easing functions */
+  --easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --easing-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --easing-ease-out: ease-out;
+  --easing-ease-in: ease-in;
+  --easing-ease-in-out: ease-in-out;
+
+  /* Scale transform tokens */
+  --token-scale-hover: 1.05;
+  --token-scale-tap: 0.95;
+  --token-scale-focus: 1.02;
+  --token-scale-pulse-min: 1;
+  --token-scale-pulse-max: 1.02;
+
   /* Scrollbar colors - will be overridden in dark mode */
   --scrollbar-track-color: var(--token-primary-100);
   --scrollbar-thumb-color: var(--token-primary-300);
   --scrollbar-thumb-hover-color: var(--token-primary-400);
 
   /* === SECTION BACKGROUND ALIASES === */
-  /* ◀︎ LLM-modified: Section background aliases for primary/secondary sections */
-  --section-primary-bg: var(--token-primary-500);
-  --section-secondary-bg: var(--token-primary-800);
+  /* ◀︎ LLM-modified: Added section background aliases for consistent section styling */
+  --section-primary-bg: var(--token-surface-50);
+  --section-secondary-bg: var(--token-surface-100);
+
+  /* === TIMELINE SPECIFIC TOKENS === */
+  /* ◀︎ LLM-modified: Added timeline-specific tokens for consistent styling */
+  --token-timeline-line: var(--token-primary-400);
+  --token-timeline-dot: var(--token-primary-500);
+  --token-timeline-dot-border: var(--token-primary-300);
 }
 
 /* === DARK MODE OVERRIDES === */
@@ -644,6 +824,17 @@
   /* ◀︎ LLM-modified: CommandMenu colors for dark mode - only color overrides, spacing tokens remain the same */
   --token-command-text: #ffffff;
   /* Light text for visibility on dark backgrounds */
+
+  /* ◀︎ LLM-modified: Dark mode semantic token overrides */
+  --token-app-bg-primary: var(--token-surface-900);
+  --token-app-bg-secondary: var(--token-secondary-800);
+  --token-app-text-primary: #ffffff;
+  --token-app-text-secondary: var(--token-text-secondary-dark);
+  --token-app-accent: var(--token-primary-400);
+  --token-app-accent-hover: var(--token-primary-300);
+  --token-app-accent-light: var(--token-primary-300);
+  --token-app-accent-dark: var(--token-primary-600);
+  --token-app-shadow: rgba(0, 0, 0, 0.4);
 
   /* Section header text - dark mode */
   --token-text-on-section: #E2E8F0;
@@ -668,6 +859,11 @@
   --glass-surface-card-b: rgba(255, 255, 255, 0.15);
   /* reduced border opacity for dark mode */
 
+  /* ◀︎ LLM-modified: Dark mode glass surface overrides */
+  --token-glass-skill-card: var(--token-glass-card-dark);
+  --token-glass-skill-border: var(--token-glass-border-dark);
+  --token-glass-skill-shadow: var(--token-glass-shadow-dark);
+
   /* Backdrop blur intensity tokens - same for dark mode */
   --token-backdrop-blur-sm: blur(4px);
   --token-backdrop-blur-md: blur(8px);
@@ -676,6 +872,12 @@
   /* Glow effect tokens for dark mode - enhanced visibility */
   --token-glow-primary: 0 12px 32px -8px rgba(96, 165, 250, 0.8), 0 0 0 1px rgba(96, 165, 250, 0.3);
   --token-glow-primary-subtle: 0 8px 24px -6px rgba(96, 165, 250, 0.5);
+  --token-glow-hover: 0 10px 25px -5px rgba(96, 165, 250, 0.5);
+  --token-glow-focus: 0 0 0 2px rgba(96, 165, 250, 0.6);
+  --token-shadow-card: 0 4px 6px rgba(0, 0, 0, 0.25);
+  --token-shadow-card-hover: 0 8px 20px -4px rgba(96, 165, 250, 0.6);
+  --token-shadow-floating: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --token-shadow-tooltip: 0 4px 16px rgba(0, 0, 0, 0.4);
 
   --token-border-primary: var(--token-secondary-700);
   /* #334155 */
@@ -773,6 +975,11 @@
   /* ◀︎ LLM-modified: Dark mode overrides for section background aliases using color-mix() */
   --section-primary-bg: color-mix(in srgb, var(--token-primary-500) 62%, black 38%);
   --section-secondary-bg: color-mix(in srgb, var(--token-primary-800) 55%, black 45%);
+
+  /* Timeline-specific tokens - dark mode */
+  --token-timeline-line: var(--token-primary-500);
+  --token-timeline-dot: var(--token-primary-400);
+  --token-timeline-dot-border: var(--token-primary-600);
 }
 
 /* === GRADIENT TOKENS === */
@@ -861,4 +1068,47 @@
   background: var(--token-hero-gradient-mid) !important;
   color: white !important;
   padding: 10px !important;
+}
+
+/* === ANIMATION KEYFRAMES === */
+/* ◀︎ LLM-modified: Added missing keyframe animations for interactive elements */
+
+@keyframes sheen {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes timeline-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+@keyframes bounce-slow {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }

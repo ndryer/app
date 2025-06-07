@@ -8,28 +8,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base styles */
-:root {
-  --primary: #3b82f6;
-  --primary-dark: #2563eb;
-  --primary-light: #93c5fd;
-  --background: #fafafa;
-  --background-dark: #0f172a;
-  --text: #0f172a;
-  --text-dark: #f8fafc;
-  --text-muted: #6b7280;
-  --text-muted-dark: #9ca3af;
-  --border: #e5e7eb;
-  --border-dark: #374151;
-  --card: #ffffff;
-  --card-dark: #1e293b;
-  --accent: #0ea5e9;
-  --gradient-from: #1e293b;
-  --gradient-to: #3b82f6;
-  --gradient-to-dark: #2563eb;
-  --space-component: 24px;
-  --space-section: 64px;
-}
+/* ◀︎ LLM-modified: Removed legacy CSS variables - now using design tokens from tokens.css */
+/* All styling now uses the comprehensive token system for consistency */
 
 /* Smooth scrolling for the entire page, with reduced motion preference support */
 html {
@@ -448,16 +428,16 @@ kbd {
   z-index: 15;
 }
 
-/* Custom utility for the timeline left border highlight */
+/* ◀︎ LLM-modified: Custom utility using design tokens */
 .border-l-highlight {
   @apply border-l-4 border-blue-500;
-  transition: border-left-color 0.3s ease;
+  transition: border-left-color var(--duration-normal) var(--easing-smooth);
 }
 
-/* Organic flowing layout helpers for Skills component */
+/* ◀︎ LLM-modified: Organic flowing layout helpers using design tokens */
 .organic-position {
   position: absolute;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 0.4s var(--easing-spring);
 }
 
 .skill-filter-active {
@@ -483,9 +463,16 @@ kbd {
 
 .icon-btn-primary:hover {
   animation: sheen 2.5s ease-in-out infinite;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background-size: 200% auto;
+  box-shadow: var(--token-glow-primary);
+}
+
+/* Command button specific hover effect */
+.command-button:hover {
+  animation: sheen 2.5s ease-in-out infinite;
+  background-size: 200% auto;
+  box-shadow: var(--token-glow-primary);
+  transform: translateY(-2px) scale(1.05);
 }
 
 /* Ensure proper text contrast in all states */
@@ -510,22 +497,22 @@ kbd {
 /* Optimized CSS Transitions for Theme Changes */
 /* Smooth theme transitions without View Transitions API to prevent white flash */
 
-/* Enhanced CSS transitions for theme switching - 60fps optimized */
+/* ◀︎ LLM-modified: Enhanced CSS transitions using design tokens */
 html {
-  transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color var(--duration-hover) var(--easing-smooth);
 }
 
 body {
   transition:
-    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color var(--duration-hover) var(--easing-smooth),
+    color var(--duration-hover) var(--easing-smooth);
 }
 
 /* Smooth transitions for theme-aware elements */
 .App {
   transition:
-    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color var(--duration-hover) var(--easing-smooth),
+    color var(--duration-hover) var(--easing-smooth);
 }
 
 /* Respect reduced motion preference */
@@ -1177,4 +1164,16 @@ body {
 .dark .timeline-year-text {
   color: var(--token-timeline-label);
   /* Timeline year labels in dark mode */
+}
+
+/* Timeline specific styles */
+.timeline-line-desktop {
+  background-color: var(--token-timeline-line);
+  transition: background-color 0.3s ease;
+}
+
+.timeline-dot {
+  background-color: var(--token-timeline-dot);
+  border: 2px solid var(--token-timeline-dot-border);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }

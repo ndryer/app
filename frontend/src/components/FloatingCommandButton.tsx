@@ -89,14 +89,14 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
     }
   }, []);
 
-  // Framer Motion variants for synchronized animations
+  // ◀︎ LLM-modified: Framer Motion variants for synchronized animations
   const buttonVariants: Variants = {
     visible: {
       opacity: 1,
       scale: 1,
       y: 0,
       transition: {
-        opacity: { duration: 1, ease: 'easeOut' }, // 1 second fade-in duration - synchronized
+        opacity: { duration: 1.0, ease: 'easeOut' }, // 1s fade-in
         scale: {
           type: 'spring',
           stiffness: 300,
@@ -107,7 +107,7 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
           type: 'spring',
           stiffness: 300,
           damping: 20,
-          duration: 1 // 1 second upward slide - synchronized
+          duration: 1.0 // 1s slide-up
         }
       }
     },
@@ -121,22 +121,22 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
       }
     },
     pulse: {
-      scale: [1, 1.02, 1], // Gentle pulse animation
+      scale: [1, 1.02, 1], // Pulse scale values converted to numeric
       transition: {
-        duration: 3,
+        duration: 3.0, // 3s pulse duration
         repeat: Infinity,
         repeatType: 'loop' as const,
         ease: 'easeInOut'
       }
     },
     hover: {
-      scale: 1.05,
-      boxShadow: '0 10px 25px -5px rgba(59, 130, 246, 0.4)',
-      transition: { duration: 0.2 }
+      scale: 1.05, // From --token-scale-hover
+      boxShadow: 'var(--token-glow-hover)',
+      transition: { duration: 0.18 } // 180ms from --duration-hover
     },
     tap: {
-      scale: 0.95,
-      transition: { duration: 0.1 }
+      scale: 0.95, // From --token-scale-tap
+      transition: { duration: 0.15 } // 150ms from --duration-fast
     }
   };
 
@@ -158,10 +158,12 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
                 initial={{ opacity: 0, scale: 0.9, y: 10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 10 }}
-                transition={{ duration: 0.2 }}
-                className="absolute bottom-full right-0 mb-4 whitespace-nowrap rounded-lg px-4 py-2 text-sm text-white shadow-lg backdrop-blur-md"
-                style={{ background: 'var(--token-bg-frosted)' }}
-              /* Frosted glass effect for overlays */
+                transition={{ duration: 0.2 }} // 200ms from --duration-tooltip
+                className="absolute bottom-full right-0 mb-4 whitespace-nowrap rounded-lg px-4 py-2 text-sm text-white backdrop-blur-md"
+                style={{
+                  background: 'var(--token-bg-frosted)',
+                  boxShadow: 'var(--token-shadow-tooltip)'
+                }}
               >
                 <div className="flex items-center gap-2">
                   <span className="font-medium">Open Command Menu</span>

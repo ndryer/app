@@ -23,7 +23,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
   setIsOpen,
 }) => {
   const [copied, setCopied] = useState<boolean>(false);
-  const [selectedIndex, setSelectedIndex] = useState<number>(-1); // -1 means no selection
+  const selectedIndex = 0; // ◀︎ LLM-modified: Fixed index for consistent behavior
   const focusTrapRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -186,12 +186,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
     ],
   };
 
-  // Flatten all commands for keyboard navigation - Navigate first, then Resume
-  const allCommands = [
-    ...commandGroups.navigate,
-    ...commandGroups.resume,
-    ...commandGroups.contact,
-  ];
+  // Commands are handled individually by sections, no flattened array needed
 
   // Simplified keyboard navigation - removed for now to fix build
 
@@ -199,7 +194,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className='fixed inset-0 z-50 flex bg-black/60 md:items-start md:justify-center md:pt-[15vh] md:p-4'
+          className='fixed inset-0 z-50 flex bg-black/60 md:items-start md:justify-center md:p-4 md:pt-[15vh]'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -212,7 +207,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
         >
           <motion.div
             ref={focusTrapRef}
-            className='relative h-auto overflow-hidden shadow-token-2xl md:h-auto md:max-h-token-command-menu md:rounded-xl bg-[color:var(--token-bg-frosted)]/125 dark:bg-[color:var(--token-bg-frosted)] backdrop-blur-lg border border-white/20'
+            className='shadow-token-2xl md:max-h-token-command-menu bg-[color:var(--token-bg-frosted)]/125 relative h-auto overflow-hidden border border-white/20 backdrop-blur-lg dark:bg-[color:var(--token-bg-frosted)] md:h-auto md:rounded-xl'
             style={{
               width: 'var(--token-command-width-mobile)',
               maxWidth: 'var(--token-command-width-desktop)',
@@ -225,9 +220,9 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
           >
             <Command className='w-full' role='menu' aria-labelledby='command-menu-title'>
               {/* Mobile-only close button - positioned for thumb reach */}
-              <div className='md:hidden flex justify-end p-2'>
+              <div className='flex justify-end p-2 md:hidden'>
                 <button
-                  className='mobile-touch-md rounded-lg p-2 transition-all duration-200 hover:bg-token-primary-50 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)]'
+                  className='mobile-touch-md rounded-lg p-2 transition-all duration-200 hover:scale-105 hover:bg-token-primary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)]'
                   style={{
                     color: 'var(--token-command-text)',
                   }}
@@ -245,9 +240,9 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
               </div>
 
               {/* Desktop close button - positioned in top right */}
-              <div className='hidden md:flex justify-end p-2'>
+              <div className='hidden justify-end p-2 md:flex'>
                 <button
-                  className='mobile-touch-md rounded-lg p-2 transition-all duration-200 hover:bg-token-primary-50 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)]'
+                  className='mobile-touch-md rounded-lg p-2 transition-all duration-200 hover:scale-105 hover:bg-token-primary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)]'
                   style={{
                     color: 'var(--token-command-text)',
                   }}
@@ -292,7 +287,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
               {/* Command List with proper cmdk structure */}
               <Command.List
                 ref={containerRef}
-                className='command-menu-container overflow-hidden md:max-h-token-command-list md:overflow-y-auto'
+                className='command-menu-container md:max-h-token-command-list overflow-hidden md:overflow-y-auto'
                 style={{
                   padding: 'var(--token-command-padding-responsive-y) var(--token-command-padding-responsive-x)',
                 }}
@@ -300,12 +295,10 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                 {/* Navigate Group - moved to first position */}
                 <div>
                   <h3
-                    className="command-menu-text"
+                    className="command-menu-text text-token-command-heading font-token-semibold"
                     style={{
                       color: 'var(--token-command-label)',
                       marginBottom: 'var(--token-command-group-heading-margin)',
-                      fontSize: 'var(--token-typography-size-responsive-md)',
-                      fontWeight: 'var(--token-typography-weight-semibold)',
                     }}
                     aria-label='Navigation commands'
                   >
@@ -315,7 +308,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                   <Command.Item
                     key={commandGroups.navigate[0].id}
                     onSelect={() => commandGroups.navigate[0].action()}
-                    className={`command-menu-item w-full mobile-touch-md flex cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] md:hover:scale-[1.05] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] ${selectedIndex === 0
+                    className={`command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05] ${selectedIndex === 0
                       ? 'bg-token-primary-100'
                       : 'hover:bg-token-primary-50'
                       }`}
@@ -368,31 +361,24 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                   <Command.Item
                     key={commandGroups.navigate[1].id}
                     onSelect={() => commandGroups.navigate[1].action()}
-                    className={`command-menu-item w-full mobile-touch-md flex cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] md:hover:scale-[1.05] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] ${selectedIndex === 1
-                      ? 'bg-token-primary-100'
-                      : 'hover:bg-token-primary-50'
-                      }`}
+                    className="command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] hover:bg-token-primary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05]"
                     style={{
                       color: 'var(--token-command-text)',
-                      backgroundColor: selectedIndex === 1 ? 'var(--token-primary-100)' : 'transparent',
+                      backgroundColor: 'transparent',
                       transitionDuration: 'var(--duration-hover)',
                       padding: 'var(--token-command-item-padding-responsive-y) var(--token-command-item-padding-responsive-x)',
                       marginBottom: 'var(--token-spacing-responsive-item-gap)',
                     }}
                     onMouseEnter={(e) => {
-                      if (selectedIndex !== 1) {
-                        e.currentTarget.style.backgroundColor = 'var(--token-primary-50)';
-                      }
+                      e.currentTarget.style.backgroundColor = 'var(--token-primary-50)';
                     }}
                     onMouseLeave={(e) => {
-                      if (selectedIndex !== 1) {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                      }
+                      e.currentTarget.style.backgroundColor = 'transparent';
                     }}
                     role='button'
                     aria-label='Navigate to skills section'
                     aria-describedby={`${commandGroups.navigate[1].id}-description`}
-                    aria-selected={selectedIndex === 1}
+                    aria-selected={false}
                   >
                     <div
                       className='command-menu-item-content flex items-center'
@@ -420,7 +406,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
 
                 {/* Section Divider between Navigate and Resume */}
                 <hr
-                  className='border-0 my-4'
+                  className='my-4 border-0'
                   style={{
                     height: 'var(--token-command-divider-height)',
                     background: 'var(--token-command-divider-bg)',
@@ -450,7 +436,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                       <Command.Item
                         key={command.id}
                         onSelect={() => command.action()}
-                        className={`command-menu-item w-full mobile-touch-md flex cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] md:hover:scale-[1.05] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)]`}
+                        className={`command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05]`}
                         style={{
                           color: 'var(--token-command-text)',
                           backgroundColor: selectedIndex === globalIndex ? 'var(--token-primary-100)' : 'transparent',
@@ -501,7 +487,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
 
                 {/* Section Divider between Resume and Contact & Profiles */}
                 <hr
-                  className='border-0 my-4'
+                  className='my-4 border-0'
                   style={{
                     height: 'var(--token-command-divider-height)',
                     background: 'var(--token-command-divider-bg)',
@@ -533,7 +519,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                     <Command.Item
                       key={commandGroups.contact[0].id}
                       onSelect={() => commandGroups.contact[0].action()}
-                      className={`command-menu-item w-full mobile-touch-md flex cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] md:hover:scale-[1.05] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] ${selectedIndex === commandGroups.navigate.length + commandGroups.resume.length
+                      className={`command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05] ${selectedIndex === commandGroups.navigate.length + commandGroups.resume.length
                         ? 'bg-token-primary-100'
                         : 'hover:bg-token-primary-50'
                         }`}
@@ -586,7 +572,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                   <Command.Item
                     key={commandGroups.contact[1].id}
                     onSelect={() => commandGroups.contact[1].action()}
-                    className={`command-menu-item w-full mobile-touch-md flex cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] md:hover:scale-[1.05] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] ${selectedIndex === commandGroups.navigate.length + commandGroups.resume.length + 1
+                    className={`command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05] ${selectedIndex === commandGroups.navigate.length + commandGroups.resume.length + 1
                       ? 'bg-token-primary-100'
                       : 'hover:bg-token-primary-50'
                       }`}
@@ -638,7 +624,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                   <Command.Item
                     key={commandGroups.contact[2].id}
                     onSelect={() => commandGroups.contact[2].action()}
-                    className={`command-menu-item w-full mobile-touch-md flex cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] md:hover:scale-[1.05] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] ${selectedIndex === commandGroups.navigate.length + commandGroups.resume.length + 2
+                    className={`command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05] ${selectedIndex === commandGroups.navigate.length + commandGroups.resume.length + 2
                       ? 'bg-token-primary-100'
                       : 'hover:bg-token-primary-50'
                       }`}
