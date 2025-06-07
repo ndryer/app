@@ -1,4 +1,4 @@
-// ◀︎ LLM-modified - Enhanced font rendering for crisp text display on glassmorphism backgrounds, increased minimum font sizes for better readability, and applied text rendering optimizations
+// ◀︎ LLM-modified - Enhanced hover effects with subtle inner glow using design tokens, improved font rendering for glassmorphism backgrounds
 import React, { useState, useCallback, useRef } from 'react';
 import { Command } from 'cmdk';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -222,7 +222,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
               {/* Mobile-only close button - positioned for thumb reach */}
               <div className='flex justify-end p-2 md:hidden'>
                 <button
-                  className='mobile-touch-md rounded-lg p-2 transition-all duration-200 hover:scale-105 hover:bg-token-primary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)]'
+                  className='mobile-touch-md rounded-lg p-2 transition-all duration-200 hover:scale-105 hover:bg-token-primary-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)]'
                   style={{
                     color: 'var(--token-command-text)',
                   }}
@@ -242,7 +242,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
               {/* Desktop close button - positioned in top right */}
               <div className='hidden justify-end p-2 md:flex'>
                 <button
-                  className='mobile-touch-md rounded-lg p-2 transition-all duration-200 hover:scale-105 hover:bg-token-primary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)]'
+                  className='mobile-touch-md rounded-lg p-2 transition-all duration-200 hover:scale-105 hover:bg-token-primary-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)]'
                   style={{
                     color: 'var(--token-command-text)',
                   }}
@@ -310,7 +310,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                     onSelect={() => commandGroups.navigate[0].action()}
                     className={`command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05] ${selectedIndex === 0
                       ? 'bg-token-primary-100'
-                      : 'hover:bg-token-primary-50'
+                      : 'hover:bg-token-primary-100'
                       }`}
                     style={{
                       color: 'var(--token-command-text)',
@@ -321,12 +321,15 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                     }}
                     onMouseEnter={(e) => {
                       if (selectedIndex !== 0) {
-                        e.currentTarget.style.backgroundColor = 'var(--token-primary-50)';
+                        // ◀︎ LLM-modified: Use primary-100 for better contrast in both light and dark modes
+                        e.currentTarget.style.backgroundColor = 'var(--token-primary-100)';
+                        e.currentTarget.style.boxShadow = 'inset 0 0 0 1px var(--token-glow-hover)';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (selectedIndex !== 0) {
                         e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.boxShadow = 'none';
                       }
                     }}
                     role='button'
@@ -361,7 +364,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                   <Command.Item
                     key={commandGroups.navigate[1].id}
                     onSelect={() => commandGroups.navigate[1].action()}
-                    className="command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] hover:bg-token-primary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05]"
+                    className="command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] hover:bg-token-primary-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05]"
                     style={{
                       color: 'var(--token-command-text)',
                       backgroundColor: 'transparent',
@@ -370,10 +373,13 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                       marginBottom: 'var(--token-spacing-responsive-item-gap)',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--token-primary-50)';
+                      // ◀︎ LLM-modified: Use primary-100 for better contrast in both light and dark modes
+                      e.currentTarget.style.backgroundColor = 'var(--token-primary-100)';
+                      e.currentTarget.style.boxShadow = 'inset 0 0 0 1px var(--token-glow-hover)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.boxShadow = 'none';
                     }}
                     role='button'
                     aria-label='Navigate to skills section'
@@ -446,12 +452,15 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                         }}
                         onMouseEnter={(e) => {
                           if (selectedIndex !== globalIndex) {
-                            e.currentTarget.style.backgroundColor = 'var(--token-primary-50)';
+                            // ◀︎ LLM-modified: Use primary-100 for better contrast in both light and dark modes
+                            e.currentTarget.style.backgroundColor = 'var(--token-primary-100)';
+                            e.currentTarget.style.boxShadow = 'inset 0 0 0 1px var(--token-glow-hover)';
                           }
                         }}
                         onMouseLeave={(e) => {
                           if (selectedIndex !== globalIndex) {
                             e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.boxShadow = 'none';
                           }
                         }}
                         role='button'
@@ -521,7 +530,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                       onSelect={() => commandGroups.contact[0].action()}
                       className={`command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05] ${selectedIndex === commandGroups.navigate.length + commandGroups.resume.length
                         ? 'bg-token-primary-100'
-                        : 'hover:bg-token-primary-50'
+                        : 'hover:bg-token-primary-100'
                         }`}
                       style={{
                         color: 'var(--token-command-text)',
@@ -532,12 +541,15 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                       }}
                       onMouseEnter={(e) => {
                         if (selectedIndex !== commandGroups.navigate.length + commandGroups.resume.length) {
-                          e.currentTarget.style.backgroundColor = 'var(--token-primary-50)';
+                          // ◀︎ LLM-modified: Use primary-100 for better contrast in both light and dark modes
+                          e.currentTarget.style.backgroundColor = 'var(--token-primary-100)';
+                          e.currentTarget.style.boxShadow = 'inset 0 0 0 1px var(--token-glow-hover)';
                         }
                       }}
                       onMouseLeave={(e) => {
                         if (selectedIndex !== commandGroups.navigate.length + commandGroups.resume.length) {
                           e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.boxShadow = 'none';
                         }
                       }}
                       role='button'
@@ -574,7 +586,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                     onSelect={() => commandGroups.contact[1].action()}
                     className={`command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05] ${selectedIndex === commandGroups.navigate.length + commandGroups.resume.length + 1
                       ? 'bg-token-primary-100'
-                      : 'hover:bg-token-primary-50'
+                      : 'hover:bg-token-primary-100'
                       }`}
                     style={{
                       color: 'var(--token-command-text)',
@@ -585,12 +597,15 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                     }}
                     onMouseEnter={(e) => {
                       if (selectedIndex !== commandGroups.navigate.length + commandGroups.resume.length + 1) {
-                        e.currentTarget.style.backgroundColor = 'var(--token-primary-50)';
+                        // ◀︎ LLM-modified: Use primary-100 for better contrast in both light and dark modes
+                        e.currentTarget.style.backgroundColor = 'var(--token-primary-100)';
+                        e.currentTarget.style.boxShadow = 'inset 0 0 0 1px var(--token-glow-hover)';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (selectedIndex !== commandGroups.navigate.length + commandGroups.resume.length + 1) {
                         e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.boxShadow = 'none';
                       }
                     }}
                     role='button'
@@ -626,7 +641,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                     onSelect={() => commandGroups.contact[2].action()}
                     className={`command-menu-item mobile-touch-md flex w-full cursor-pointer items-center justify-between rounded-lg text-left transition-all hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--token-command-focus-ring-color)] focus-visible:ring-offset-[var(--token-command-focus-ring-offset)] md:hover:scale-[1.05] ${selectedIndex === commandGroups.navigate.length + commandGroups.resume.length + 2
                       ? 'bg-token-primary-100'
-                      : 'hover:bg-token-primary-50'
+                      : 'hover:bg-token-primary-100'
                       }`}
                     style={{
                       color: 'var(--token-command-text)',
@@ -637,12 +652,15 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
                     }}
                     onMouseEnter={(e) => {
                       if (selectedIndex !== commandGroups.navigate.length + commandGroups.resume.length + 2) {
-                        e.currentTarget.style.backgroundColor = 'var(--token-primary-50)';
+                        // ◀︎ LLM-modified: Use primary-100 for better contrast in both light and dark modes
+                        e.currentTarget.style.backgroundColor = 'var(--token-primary-100)';
+                        e.currentTarget.style.boxShadow = 'inset 0 0 0 1px var(--token-glow-hover)';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (selectedIndex !== commandGroups.navigate.length + commandGroups.resume.length + 2) {
                         e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.boxShadow = 'none';
                       }
                     }}
                     role='button'

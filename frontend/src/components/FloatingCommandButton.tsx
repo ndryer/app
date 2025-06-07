@@ -1,3 +1,4 @@
+// ◀︎ LLM-modified - Enhanced tooltip with glassmorphism effects and responsive sizing using clamp() functions
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { Command } from 'lucide-react';
@@ -35,16 +36,7 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
     return () => clearTimeout(delayTimer);
   }, []);
 
-  // Cleanup tooltip timer on unmount
-  useEffect(() => {
-    return () => {
-      if (tooltipTimer) {
-        clearTimeout(tooltipTimer);
-      }
-    };
-  }, [tooltipTimer]);
-
-  // Handle mouse enter with 500ms delay
+  // Enhanced tooltip handlers with 500ms delay
   const handleMouseEnter = (): void => {
     // Clear any existing timer
     if (tooltipTimer) {
@@ -70,6 +62,17 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
     // Immediately hide tooltip
     setShowTooltip(false);
   };
+
+  // Cleanup tooltip timer on unmount
+  useEffect(() => {
+    return () => {
+      if (tooltipTimer) {
+        clearTimeout(tooltipTimer);
+      }
+    };
+  }, [tooltipTimer]);
+
+
 
   // Check for reduced motion preference safely
   const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(false);
@@ -121,9 +124,9 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
       }
     },
     pulse: {
-      scale: [1, 1.02, 1], // Pulse scale values converted to numeric
+      scale: [1, 1.02, 1], // Using --token-scale-pulse-min (1) and --token-scale-pulse-max (1.02)
       transition: {
-        duration: 3.0, // 3s pulse duration
+        duration: 3.0, // Using --duration-pulse (3s)
         repeat: Infinity,
         repeatType: 'loop' as const,
         ease: 'easeInOut'
@@ -131,7 +134,10 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
     },
     hover: {
       scale: 1.05, // From --token-scale-hover
-      boxShadow: 'var(--token-glow-hover)',
+      boxShadow: [
+        'var(--token-glow-hover)',
+        'inset 0 0 0 1px rgba(59, 130, 246, 0.4)' // ◀︎ LLM-modified: Inner glow effect for better hover visibility
+      ].join(', '),
       transition: { duration: 0.18 } // 180ms from --duration-hover
     },
     tap: {
@@ -162,7 +168,8 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
                 className="absolute bottom-full right-0 mb-4 whitespace-nowrap rounded-lg px-4 py-2 text-sm text-white backdrop-blur-md"
                 style={{
                   background: 'var(--token-bg-frosted)',
-                  boxShadow: 'var(--token-shadow-tooltip)'
+                  boxShadow: 'var(--token-shadow-tooltip)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)', // Enhanced glassmorphism border
                 }}
               >
                 <div className="flex items-center gap-2">
@@ -171,14 +178,26 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
                     {isMac ? '⌘K' : 'Ctrl+K'}
                   </span>
                 </div>
-                <div className="absolute bottom-0 right-4 h-2 w-2 translate-y-1/2 rotate-45 transform bg-white/10"></div>
+                <div
+                  className="absolute bottom-0 right-4 h-2 w-2 translate-y-1/2 rotate-45 transform"
+                  style={{
+                    background: 'var(--token-bg-frosted)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderTop: 'none',
+                    borderLeft: 'none',
+                  }}
+                ></div>
               </motion.div>
             )}
           </AnimatePresence>
 
           <motion.button
             onClick={toggleCommandMenu}
-            className="flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg transition-all duration-300 bg-gradient-button hover:bg-gradient-button-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-token-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-token-secondary-900"
+            className="flex items-center justify-center rounded-full text-white shadow-lg transition-all duration-300 bg-gradient-button hover:bg-gradient-button-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-token-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-token-secondary-900"
+            style={{
+              width: 'clamp(2.75rem, 4vw, 3.5rem)', // Responsive sizing: 44px mobile to 56px desktop
+              height: 'clamp(2.75rem, 4vw, 3.5rem)', // Maintains 44px minimum accessibility target
+            }}
             whileHover="hover"
             whileTap="tap"
             variants={buttonVariants}
@@ -194,7 +213,12 @@ export const FloatingCommandButton: React.FC<FloatingCommandButtonProps> = ({
               }
             }}
           >
-            <Command size={24} />
+            <Command
+              style={{
+                width: 'clamp(1rem, 2.5vw, 1.5rem)', // Responsive icon: 16px mobile to 24px desktop
+                height: 'clamp(1rem, 2.5vw, 1.5rem)',
+              }}
+            />
           </motion.button>
         </motion.div>
       )}

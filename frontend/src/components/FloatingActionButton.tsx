@@ -1,3 +1,4 @@
+// ◀︎ LLM-modified - Enhanced responsive sizing using clamp() functions for better mobile/desktop scaling
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
@@ -17,10 +18,10 @@ export const FloatingActionButton: React.FC = () => {
       setHasShownInitially(true);
       setAnimationPhase('visible');
 
-      // Switch to bounce after fade-in completes (0.75s delay + 1s fade-in = 1.75s total)
+      // ◀︎ LLM-modified: Switch to pulse after fade-in completes (0.75s delay + 1s fade-in = 1.75s total)
       setTimeout(() => {
-        setAnimationPhase('bounce');
-      }, 1750); // Start bounce after synchronized fade-in completes
+        setAnimationPhase('pulse');
+      }, 1750); // Start pulse after synchronized fade-in completes
     }, 750); // 0.75 second initial delay - synchronized with command button
 
     return () => clearTimeout(delayTimer);
@@ -115,6 +116,15 @@ export const FloatingActionButton: React.FC = () => {
         // No delay here - delay is handled by the animationPhase timing
       }
     },
+    pulse: {
+      scale: [1, 1.02, 1], // ◀︎ LLM-modified: Using --token-scale-pulse-min (1) and --token-scale-pulse-max (1.02)
+      transition: {
+        duration: 3.0, // Using --duration-pulse (3s)
+        repeat: Infinity,
+        repeatType: 'loop' as const,
+        ease: 'easeInOut'
+      }
+    },
     initialPulse: {
       scale: [1, 1.1, 1, 1.05, 1], // Reduced for mobile
       boxShadow: [
@@ -169,7 +179,7 @@ export const FloatingActionButton: React.FC = () => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className="fixed bottom-4 left-1/2 z-30 -translate-x-1/2 transform md:bottom-6"
+          className="fixed bottom-6 left-1/2 z-30 -translate-x-1/2 transform" // ◀︎ LLM-modified: Aligned with FloatingCommandButton height (bottom-6)
           initial="hidden"
           animate="visible"
           exit="hidden"
@@ -177,7 +187,11 @@ export const FloatingActionButton: React.FC = () => {
         >
 
           <motion.button
-            className="flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition-all duration-300 bg-gradient-button hover:bg-gradient-button-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-token-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-token-secondary-900 md:h-14 md:w-14"
+            className="flex items-center justify-center rounded-full text-white shadow-lg transition-all duration-300 bg-gradient-button hover:bg-gradient-button-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-token-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-token-secondary-900"
+            style={{
+              width: 'clamp(2.75rem, 4vw, 3.5rem)', // Responsive sizing: 44px mobile to 56px desktop
+              height: 'clamp(2.75rem, 4vw, 3.5rem)', // Maintains 44px minimum accessibility target
+            }}
             onClick={handleScrollToTimeline}
             whileHover="hover"
             whileTap="tap"
@@ -193,7 +207,12 @@ export const FloatingActionButton: React.FC = () => {
               }
             }}
           >
-            <ChevronDown className="h-5 w-5 md:h-6 md:w-6" />
+            <ChevronDown
+              style={{
+                width: 'clamp(1rem, 2.5vw, 1.5rem)', // Responsive icon: 16px mobile to 24px desktop
+                height: 'clamp(1rem, 2.5vw, 1.5rem)',
+              }}
+            />
           </motion.button>
         </motion.div>
       )}

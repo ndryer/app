@@ -467,13 +467,7 @@ kbd {
   box-shadow: var(--token-glow-primary);
 }
 
-/* Command button specific hover effect */
-.command-button:hover {
-  animation: sheen 2.5s ease-in-out infinite;
-  background-size: 200% auto;
-  box-shadow: var(--token-glow-primary);
-  transform: translateY(-2px) scale(1.05);
-}
+/* ◀︎ LLM-modified: Removed unused .command-button:hover class - components now use Framer Motion for hover effects */
 
 /* Ensure proper text contrast in all states */
 .text-high-contrast {

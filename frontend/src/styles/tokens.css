@@ -455,27 +455,13 @@
   --fab-hover-scale: 1.05;
 
   /* === RESPONSIVE FLOATING BUTTON SIZING === */
-  /* ◀︎ LLM-modified: Responsive sizing tokens for floating buttons to prevent oversizing on tablets */
+  /* ◀︎ LLM-modified: Cleaned up unused tokens - components now use clamp() directly for better performance */
 
-  /* Button sizes using clamp() for smooth responsive scaling */
-  --fab-size-mobile: 2.75rem;
-  /* 44px - minimum touch target */
-  --fab-size-tablet: 3rem;
-  /* 48px - slightly larger for tablet */
-  --fab-size-desktop: 3.5rem;
-  /* 56px - comfortable for desktop */
-
-  /* Icon sizes that scale proportionally */
-  --fab-icon-mobile: 1rem;
-  /* 16px */
-  --fab-icon-tablet: 1.25rem;
-  /* 20px */
-  --fab-icon-desktop: 1.5rem;
-  /* 24px */
-
-  /* Responsive sizing using clamp for smooth scaling */
-  --fab-size-responsive: clamp(var(--fab-size-mobile), 4vw, var(--fab-size-desktop));
-  --fab-icon-responsive: clamp(var(--fab-icon-mobile), 2vw, var(--fab-icon-desktop));
+  /* Note: Floating action buttons now use clamp() functions directly in components:
+   * Button size: clamp(2.75rem, 4vw, 3.5rem) - 44px mobile to 56px desktop
+   * Icon size: clamp(1rem, 2.5vw, 1.5rem) - 16px mobile to 24px desktop
+   * This approach provides better performance and maintainability
+   */
 
   /* === RESPONSIVE COMMAND MENU TOKENS === */
   /* ◀︎ LLM-modified: Enhanced responsive tokens for CommandMenu component */
@@ -648,10 +634,6 @@
   /* Glassmorphism divider for light mode */
   --token-command-divider-height: 1px;
   /* Standard divider height */
-  --leading-command-body: 1.5;
-  /* Comfortable for body */
-  --leading-command-caption: 1.3;
-  /* Tight for captions */
 
   /* === ACCESSIBILITY TOKENS === */
   /* ◀︎ LLM-modified: Enhanced accessibility and interaction states with comprehensive focus tokens */
