@@ -23,9 +23,9 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({
   setIsOpen,
 }) => {
   const [copied, setCopied] = useState<boolean>(false);
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1); // -1 means no selection
   const focusTrapRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const selectedIndex = 0; // Simplified for now
 
   // Handle copy notification - direct state updates for better UX
   const handleCopyEmail = useCallback((): void => {

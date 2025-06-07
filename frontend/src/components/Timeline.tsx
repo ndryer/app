@@ -291,7 +291,7 @@ const TimelineComponent: React.FC<TimelineProps> = ({ experienceData }) => {
               <motion.div
                 key={item.id}
                 ref={setTimelineRef(item.id)}
-                className={`timeline-grid-item ${styles['timeline-item-hover']} relative ${leftSide ? 'timeline-left' : 'timeline-right'}`}
+                className={`timeline-grid-item relative ${leftSide ? 'timeline-left' : 'timeline-right'}`}
                 style={{
                   minHeight: `${baseSpacing}px`, // Keep calculated spacing as-is
                   paddingTop: 'var(--space-6)', // 24px for better mobile spacing
