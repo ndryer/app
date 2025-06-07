@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Experience } from '../types';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import styles from './Timeline.module.css';
 
 
 interface TimelineProps {
