@@ -1,0 +1,11 @@
+{
+  "name": "nathan-dryer-portfolio-workspace",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "predeploy": "yarn --cwd frontend build",
+    "deploy": "yarn --cwd frontend deploy"
+  }
+}

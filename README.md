@@ -1,92 +1,122 @@
-# Nathan Dryer Portfolio
+# Nathan Dryer • Personal Portfolio
 
-A modern, performant one-page portfolio site for Nathan Dryer, featuring a vertical timeline layout with parallax effects and smooth animations.
+A lightweight, single-page site that showcases my work, skills and contact details.  
+Built with modern-but-minimal tooling, published via **GitHub Pages** at **https://nathandryer.com**.
 
-## Features
+---
 
-- Responsive design with Tailwind CSS
-- Vertical timeline for professional experience
-- Parallax scrolling effects
-- Framer Motion animations
-- Material-style floating action button
-- Clipboard functionality for copying email
-- Accessibility features (respects prefers-reduced-motion)
-- Optimized for performance
+## 🚀  Why this project exists
+* Lets recruiters and collaborators experience my work instead of reading a PDF.
+* Doubles as a sandbox for trying the newest React / Tailwind features without extra infrastructure.
+* Entirely static—no server, database, or API to maintain.
 
-## Tech Stack
+---
 
-- React 18
-- TypeScript 5
-- Tailwind CSS 3
-- Framer Motion for animations
-- react-vertical-timeline-component
-- react-scroll-parallax
-- react-social-icons
-- react-copy-to-clipboard
+## ✨  Key Features
+| Feature | Notes |
+|---------|-------|
+| Smooth scrolling timeline | Animated with Framer Motion |
+| Skills grid | Responsive, token-based spacing |
+| Command palette | `⌘ / Ctrl + K` for quick navigation |
+| Dark / light theme | Respects OS preference |
+| Accessible by default | WCAG 2.2 AA contrast, focus ring, 44 px tap targets |
 
-## Installation
+---
 
-1. Clone the repository
-2. Install dependencies:
+## 🔧  Tech Stack
+| Layer | Tool | Why |
+|-------|------|-----|
+| UI | **React 19** + **TypeScript** | Modern, type-safe |
+| Styling | **Tailwind CSS 3** | Utility-first with custom spacing tokens |
+| Animation | **Framer Motion 12** | Declarative motion, respects `prefers-reduced-motion` |
+| Build | **Vite 5** | Fast dev server & build |
+| Lint / Format | ESLint v9 • Prettier | Consistent code style |
+| Hosting | **GitHub Pages** | Free CDN, custom domain support |
 
+---
+
+## 💻  Local Development
 ```bash
-npm install
+# 1 · Clone & install
+git clone https://github.com/nathan-dryer/app.git
+cd app/frontend
+yarn
+
+# 2 · Start dev server (http://localhost:5173)
+yarn dev
+
+# 3 · Optional quality checks
+yarn lint        # ESLint + Prettier
+yarn tsc --noEmit
 ```
 
-## Development
+---
 
-To start the development server:
+## 🌐  Deployment (GitHub Pages)
+1. Install the helper once:
+   ```bash
+   yarn add -D gh-pages
+   ```
+2. Add scripts to the root `package.json`:
+   ```json
+   "scripts": {
+     "predeploy": "yarn --cwd frontend build",
+     "deploy": "gh-pages -d frontend/dist -b gh-pages"
+   }
+   ```
+3. Publish:
+   ```bash
+   yarn deploy
+   ```
+   The static files land on the **`gh-pages`** branch and are served at  
+   `https://<github-user>.github.io/<repo>/`.
 
-```bash
-npm run start
+### Custom Domain
+1. In **Repo → Settings → Pages** set custom domain `www.nathandryer.com`.  
+2. Add a DNS record:  
+   ```
+   www  CNAME  <github-user>.github.io
+   ```  
+3. Enable **Enforce HTTPS** and wait for the TLS certificate.
+
+---
+
+## 🗂  Project Structure (concise)
+```
+frontend/
+└─ src/
+   ├─ components/     # Header.tsx, Timeline.tsx, etc.
+   ├─ styles/         # global.css (Tailwind install + CSS vars)
+   ├─ types/          # shared TS interfaces
+   ├─ data.mock.ts    # static data displayed on the page
+   ├─ App.tsx         # SPA root component
+   └─ main.tsx        # ReactDOM.createRoot(...)
 ```
 
-The site will be available at http://localhost:3000
+---
 
-## Building for Production
+## 🧭  Spacing Tokens
+Defined in `tailwind.config.js` (8 px scale) and exposed as CSS vars:
 
-To create a production build:
-
-```bash
-npm run build
 ```
+:root {
+  --space-component: clamp(16px,3vw,24px);
+  --space-section:   clamp(40px,6vw,64px);
+}
+```
+Use via Tailwind’s arbitrary values e.g.  
+`class="pt-[var(--space-section)]"`.
 
-The built files will be in the `build` directory, ready for deployment.
+---
 
-## Deployment
+## 🤝  Contributing
+1. Create a branch `feat/<short-thing>` or `fix/<bug>`.
+2. Follow the [Style Guide](STYLE_GUIDE.md) for TypeScript, Tailwind and accessibility rules.
+3. Run `yarn lint && yarn tsc --noEmit` before committing.
+4. Open a PR—CI will build & deploy a preview automatically.
 
-The site is optimized for deployment to services like GitHub Pages, Vercel, or Netlify. Simply connect your repository to any of these services for automatic deployment.
+---
 
-### For GitHub Pages:
-
-1. Create a GitHub repository
-2. Push your code to the repository
-3. Enable GitHub Pages in the repository settings
-4. Set the source to the `gh-pages` branch
-
-## Customization
-
-To customize the portfolio for your own use:
-
-1. Edit the data in `src/data.ts` to include your own information
-2. Replace the profile image in `public/profile.jpg`
-3. Adjust the color scheme in `tailwind.config.js` if desired
-4. Update the favicon and logo files in the `public` directory
-
-## Performance
-
-The site is optimized for performance:
-- Code splitting with dynamic imports
-- React Suspense for lazy loading
-- Optimized images
-- Minimal dependencies
-- Tailwind JIT for reduced CSS size
-
-## Accessibility
-
-The site includes several accessibility features:
-- Proper semantic HTML
-- ARIA labels on interactive elements
-- Support for keyboard navigation
-- Respects the user's motion preference settings
-- High contrast text for readability
+## 📄  License
+MIT – do anything, just give credit.  
+© 2025 Nathan Dryer

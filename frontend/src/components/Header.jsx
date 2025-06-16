@@ -1,51 +1,65 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ParallaxBanner } from 'react-scroll-parallax';
+import { Command, Sun, Moon } from 'lucide-react';
+import ScrollCue from './ScrollCue';
 
-const Header = ({ userData }) => {
+const Header = ({ userData, toggleTheme, darkMode, toggleCommandMenu }) => {
+  const [isMac, setIsMac] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  
+  // Detect OS for keyboard shortcut display
+  useEffect(() => {
+    setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0);
+  }, []);
+
+  // Animation variants - simplified
+  const animations = {
+    bounce: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 1.5,
+        repeat: Infinity,
+        repeatType: "loop",
+        ease: "easeInOut"
+      }
+    }
+  };
+
   return (
     <ParallaxBanner
       layers={[
         { speed: -20, expanded: false, children: (
-          <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-teal-600 opacity-100">
-            {/* Hexagon Pattern - created with multiple divs */}
-            <div className="hexagon-pattern">
-              {Array.from({ length: 20 }).map((_, i) => (
-                <div key={i} className="hexagon"></div>
-              ))}
-            </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 to-blue-600 opacity-100">
+            {/* Clean background without hexagon pattern */}
           </div>
         )},
       ]}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen flex items-center justify-center overflow-hidden pb-20 md:pb-32"
       id="top"
     >
+      {/* Theme Toggle Button */}
+      <motion.button
+        onClick={toggleTheme}
+        className="absolute top-6 right-6 z-20 p-2 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+      >
+        {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+      </motion.button>
+      
       <div className="relative z-10 container mx-auto px-6 py-8">
         <div className="flex flex-col items-center justify-center h-full text-center">
+          {/* Name and Subtitle - Now Above Command Prompt */}
           <motion.div 
-            className="mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="power-button-logo">
-              <div className="power-button-inner">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-10 h-10">
-                  <path d="M18.36 6.64a9 9 0 1 1-12.73 0" />
-                  <line x1="12" y1="2" x2="12" y2="12" />
-                </svg>
-              </div>
-            </div>
-          </motion.div>
-          
-          <motion.div 
-            className="text-center text-white max-w-xl"
+            className="text-center text-white max-w-xl mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <motion.h1 
-              className="text-4xl md:text-5xl font-bold mb-4 font-sans"
+              className="text-5xl md:text-6xl font-bold mb-6 font-sans tracking-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -54,71 +68,78 @@ const Header = ({ userData }) => {
             </motion.h1>
             
             <motion.div
-              className="flex flex-col items-center space-y-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <p className="text-xl text-white font-light">
+              <p className="text-2xl md:text-3xl text-blue-300 font-medium">
                 {userData.bioLine}
               </p>
-              
-              <div className="flex space-x-4">
-                <motion.a
-                  href="/nathan_dryer_resume.pdf"
-                  download="Nathan_Dryer_Resume.pdf"
-                  className="round-button"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  <span className="ml-2">Download Resume</span>
-                </motion.a>
-
-                <motion.button
-                  onClick={() => {
-                    navigator.clipboard.writeText(userData.email);
-                    // You would add a toast notification here
-                  }}
-                  className="round-button-icon"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Copy email"
-                >
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </motion.button>
-              </div>
             </motion.div>
+          </motion.div>
+          
+          {/* Modern Pill-Shaped Command Prompt Field */}
+          <motion.div 
+            className="relative w-full max-w-md"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            onHoverStart={() => setShowTooltip(true)}
+            onHoverEnd={() => setShowTooltip(false)}
+          >
+            <motion.div
+              className="flex items-center px-4 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white cursor-pointer hover:bg-white/15 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+              onClick={toggleCommandMenu}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              aria-label="Open command palette"
+              aria-keyshortcuts="⌘+K"
+            >
+              <Command size={18} className="text-white/70 mr-3" />
+              <span className="text-white/70 flex-1 text-left">Search or type a command...</span>
+              <kbd className="hidden md:flex items-center justify-center rounded border border-white/20 bg-white/5 px-2 py-1 text-xs text-white/70">
+                {isMac ? '⌘K' : 'Ctrl+K'}
+              </kbd>
+            </motion.div>
+            
+            {/* Tooltip */}
+            <AnimatePresence>
+              {showTooltip && (
+                <motion.div 
+                  className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-lg text-white text-sm shadow-lg border border-white/20 whitespace-nowrap"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Click or press {isMac ? '⌘' : 'Ctrl'}+K to open menu
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 rotate-45 w-2 h-2 bg-white/10 border-r border-b border-white/20"></div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </div>
       
-      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
-        <motion.div 
-          className="scroll-down-circle"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-          onClick={() => document.getElementById('timeline')?.scrollIntoView({ behavior: 'smooth' })}
+      {/* Scroll Cue - Moved higher up with bounce animation */}
+      <motion.div 
+        className="absolute -bottom-32 left-1/2 transform -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.5 }}
+      >
+        <motion.div
+          animate="bounce"
+          variants={animations}
+          className="relative"
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-6 w-6 text-white" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-            aria-label="Scroll down to timeline"
-            role="button"
-            tabIndex={0}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+          {/* Subtle glow effect */}
+          <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-md"></div>
+          <div className="relative z-10">
+            <ScrollCue />
+          </div>
         </motion.div>
-      </div>
+      </motion.div>
     </ParallaxBanner>
   );
 };

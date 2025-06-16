@@ -1,8 +1,46 @@
+:root {
+  /* Light theme colors */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #2563eb;
+  --color-accent-light: #93c5fd;
+  --color-accent-dark: #1d4ed8;
+  --color-border: #e2e8f0;
+  --color-shadow: rgba(15, 23, 42, 0.08);
+  --gradient-primary: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.dark {
+  /* Dark theme colors */
+  --color-bg-primary: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-accent: #3b82f6;
+  --color-accent-hover: #60a5fa;
+  --color-accent-light: #60a5fa;
+  --color-accent-dark: #1d4ed8;
+  --color-border: #334155;
+  --color-shadow: rgba(0, 0, 0, 0.25);
+  --gradient-primary: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
 .App {
   position: relative;
   overflow-x: hidden;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
 }
 
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading state */
 .loading {
   display: flex;
   justify-content: center;
@@ -16,14 +54,209 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Smooth transitions for all elements */
+/* Smooth transitions for all elements - reduced for better performance */
 * {
-  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-bounce-slow,
+  .animate-pulse-slow,
+  .animate-spin-slow,
+  .animate-wiggle {
+    animation: none !important;
+  }
+  
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Power button styling */
+.power-button-logo {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.power-button-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: 0 8px 20px -4px rgba(59, 130, 246, 0.5);
+  transition: all 0.3s ease;
+}
+
+.power-button-inner:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px -6px rgba(59, 130, 246, 0.6);
+}
+
+/* Command palette styling */
+.cmdk-root {
+  width: 100%;
+  max-width: 100%;
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.dark .cmdk-root {
+  background: rgba(30, 41, 59, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Keyboard navigation styles */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
 }
 
 /* Text styling enhancements */
 .text-accent {
   color: var(--color-accent);
+}
+
+/* Skills section styling */
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.65);
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.dark .skill-card {
+  background-color: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.skill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(59, 130, 246, 0.1);
+  margin-bottom: 1rem;
+}
+
+.dark .skill-icon {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+.skill-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+}
+
+.skill-name {
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+}
+
+/* Timeline styling */
+.timeline-container {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  width: 2px;
+  background-color: var(--color-accent-light);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-dot-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+}
+
+.timeline-content {
+  background-color: var(--color-bg-secondary);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px var(--color-shadow);
+  border: 1px solid var(--color-border);
 }
 
 /* Mobile optimizations */
@@ -39,5 +272,18 @@
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+  
+  .skill-card {
+    padding: 1.25rem 0.75rem;
+  }
+  
+  .skill-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .skill-name {
+    font-size: 0.875rem;
   }
 }

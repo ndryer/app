@@ -1,456 +1,362 @@
+/* Import Space Grotesk font from Google Fonts - 2025's trending digital-friendly font */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Base styles */
 :root {
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f9fafb;
-  --color-text-primary: #111827;
-  --color-text-secondary: #4b5563;
-  --color-accent: #38b2ac; /* Teal 500 */
-  --color-accent-light: #4fd1c5; /* Teal 400 */
-  --color-accent-dark: #2c7a7b; /* Teal 600 */
-  --color-card-bg: #ffffff;
-  --color-card-border: #e5e7eb;
-  --color-timeline: rgba(56, 178, 172, 0.2);
-  --color-timeline-dot: #38b2ac;
-  --color-timeline-dot-bg: #ffffff;
-  --color-dark-bg: #111827;
-  --color-dark-card: #1f2937;
+  --primary: #3B82F6;
+  --primary-dark: #2563EB;
+  --primary-light: #93C5FD;
+  --background: #FAFAFA;
+  --background-dark: #0F172A;
+  --text: #0F172A;
+  --text-dark: #F8FAFC;
+  --text-muted: #6B7280;
+  --text-muted-dark: #9CA3AF;
+  --border: #E5E7EB;
+  --border-dark: #374151;
+  --card: #FFFFFF;
+  --card-dark: #1E293B;
+  --accent: #0EA5E9;
+  --gradient-from: #1E293B;
+  --gradient-to: #3B82F6;
+  --gradient-to-dark: #2563EB;
 }
 
-.dark {
-  --color-bg-primary: #111827;
-  --color-bg-secondary: #1f2937;
-  --color-text-primary: #f9fafb;
-  --color-text-secondary: #d1d5db;
-  --color-accent: #4fd1c5;
-  --color-accent-light: #63e9dd;
-  --color-accent-dark: #38b2ac;
-  --color-card-bg: #1f2937;
-  --color-card-border: #4b5563;
-  --color-timeline: rgba(79, 209, 197, 0.3);
-  --color-timeline-dot: #4fd1c5;
-  --color-timeline-dot-bg: #111827;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: hidden;
-}
-
+/* Smooth scrolling for the entire page, with reduced motion preference support */
 html {
   scroll-behavior: smooth;
 }
 
-/* Hexagon Pattern Background */
-.hexagon-pattern {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  opacity: 0.3;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-none-on-reduce-motion,
+  .animate-gradient-shift,
+  .animate-bounce-slow {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
-.hexagon {
-  position: absolute;
-  width: 300px;
-  height: 170px;
-  background-color: rgba(255, 255, 255, 0.1);
-  transform: rotate(30deg);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+body {
+  @apply bg-canvas dark:bg-canvas-dark text-text dark:text-text-dark;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.hexagon:nth-child(1) { top: -5%; left: -10%; }
-.hexagon:nth-child(2) { top: 15%; left: 20%; }
-.hexagon:nth-child(3) { top: 45%; left: -15%; }
-.hexagon:nth-child(4) { top: 65%; left: 15%; }
-.hexagon:nth-child(5) { top: 85%; left: -10%; }
-.hexagon:nth-child(6) { top: -15%; left: 40%; }
-.hexagon:nth-child(7) { top: 25%; left: 60%; }
-.hexagon:nth-child(8) { top: 55%; left: 45%; }
-.hexagon:nth-child(9) { top: 75%; left: 65%; }
-.hexagon:nth-child(10) { top: -5%; left: 80%; }
-.hexagon:nth-child(11) { top: 35%; left: 90%; }
-.hexagon:nth-child(12) { top: 65%; left: 85%; }
-.hexagon:nth-child(13) { top: 85%; left: 100%; }
-.hexagon:nth-child(14) { top: 5%; left: 100%; }
-.hexagon:nth-child(15) { top: 45%; left: 110%; }
-.hexagon:nth-child(16) { top: 10%; left: -20%; transform: rotate(45deg) scale(1.5); }
-.hexagon:nth-child(17) { top: 50%; left: -30%; transform: rotate(60deg) scale(1.8); }
-.hexagon:nth-child(18) { top: 20%; left: 110%; transform: rotate(30deg) scale(1.7); }
-.hexagon:nth-child(19) { top: 70%; left: 120%; transform: rotate(45deg) scale(1.4); }
-.hexagon:nth-child(20) { top: 90%; left: 40%; transform: rotate(60deg) scale(1.6); }
-
-/* Power Button Logo */
-.power-button-logo {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: #2563eb; /* Blue 600 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.8);
-  margin-bottom: 1.5rem;
-  color: white;
+/* Font weight utilities */
+.font-thin {
+  font-weight: 100;
 }
-
-.power-button-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.font-extralight {
+  font-weight: 200;
 }
-
-/* Modern buttons */
-.round-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.75rem;
-  border-radius: 9999px;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  color: white;
-  font-size: 0.875rem;
+.font-light {
+  font-weight: 300;
+}
+.font-normal {
+  font-weight: 400;
+}
+.font-medium {
   font-weight: 500;
-  transition: all 0.2s;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-extrabold {
+  font-weight: 800;
+}
+.font-black {
+  font-weight: 900;
 }
 
-.round-button:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+/* Focus styles for better accessibility */
+*:focus-visible {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-gray-900;
+  transition: ring-color 0.2s ease-in-out;
 }
 
-.round-button-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  color: white;
-  transition: all 0.2s;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+/* Custom scrollbar styling for WebKit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-.round-button-icon:hover {
-  background-color: rgba(255, 255, 255, 0.3);
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800 rounded-full;
 }
 
-.scroll-down-circle {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  transition: all 0.2s;
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 
-.scroll-down-circle:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-3px);
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-600;
 }
 
-/* Timeline styles - Modern Card.co style */
-.timeline-wrapper {
+/* Command palette specific styles */
+.cmdk-root {
+  @apply w-full;
+}
+
+.cmdk-input {
+  @apply w-full py-2 bg-transparent focus:outline-none text-gray-800 dark:text-gray-200;
+}
+
+.cmdk-list {
+  @apply max-h-[300px] overflow-y-auto py-2;
+}
+
+.cmdk-group-heading {
+  @apply px-3 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider;
+}
+
+.cmdk-item {
+  @apply px-3 py-2 rounded-md flex items-center justify-between cursor-pointer;
+  transition: all 0.15s ease;
+}
+
+.cmdk-item[data-selected="true"] {
+  @apply bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300;
+}
+
+.cmdk-item:not([data-selected="true"]) {
+  @apply text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800;
+}
+
+.cmdk-empty {
+  @apply py-6 text-center text-gray-500 dark:text-gray-400;
+}
+
+/* Timeline card interaction styles */
+.timeline-element-container {
   position: relative;
-  padding: 2rem 0;
-  margin: 0 auto;
-  max-width: 1200px;
+  transition: z-index 0s 0.3s;
 }
 
-.timeline-line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 1px;
-  background-color: rgba(56, 178, 172, 0.5);
-  transform: translateX(-50%);
-}
-
-.timeline-card-container {
-  position: relative;
-  margin: 4rem 0;
-  width: 100%;
-}
-
-.timeline-left {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: calc(50% + 1.5rem);
-}
-
-.timeline-right {
-  display: flex;
-  justify-content: flex-start;
-  padding-left: calc(50% + 1.5rem);
-}
-
-.timeline-dot {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: rgba(56, 178, 172, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-}
-
-.timeline-dot-inner {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #38b2ac;
+.timeline-element-container.z-10 {
+  transition: z-index 0s 0s;
 }
 
 .timeline-card {
-  width: 100%;
-  max-width: 400px;
-  padding: 1.5rem;
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
-.timeline-date {
-  display: inline-block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #38b2ac;
-  margin-bottom: 0.5rem;
+.timeline-card:focus {
+  @apply outline-none;
 }
 
-.timeline-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  color: #111827;
+.timeline-card:focus-visible {
+  @apply ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-gray-900;
 }
 
-.timeline-company {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 0.25rem;
-  color: #38b2ac;
+.vertical-timeline-element-content {
+  transition: background-color 0.3s ease, border-left 0.3s ease, box-shadow 0.3s ease;
 }
 
-.timeline-location {
-  font-size: 0.75rem;
-  font-style: italic;
-  color: #6b7280;
-  margin-bottom: 1rem;
+.vertical-timeline-element-content-arrow {
+  transition: border-right 0.3s ease;
 }
 
-.timeline-points {
-  list-style-type: disc;
-  padding-left: 1.25rem;
-  margin-top: 0.5rem;
+/* Skills component styles */
+.skill-item {
+  transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
 }
 
-.timeline-points li {
-  font-size: 0.875rem;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
-  color: #4b5563;
+.skill-item:hover {
+  transform: translateY(-2px);
 }
 
-/* Skills section - Modern Card.co style */
-.skill-card-modern {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-  background-color: white;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+.skill-item:focus-visible {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-gray-900;
 }
 
-.skill-card-modern:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+.skill-category-button {
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-.skill-icon-modern {
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-  background-color: rgba(56, 178, 172, 0.1);
+.skill-category-button:hover {
+  transform: translateY(-1px);
 }
 
-.skill-dot {
-  width: 24px;
-  height: 24px;
-  border-radius: 12px;
-  background-color: #38b2ac;
+.skill-category-button:focus-visible {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-gray-900;
 }
 
-.skill-name-modern {
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-align: center;
-  color: #111827;
+.skill-category-button.active {
+  @apply bg-blue-600 text-white shadow-md;
 }
 
-/* Modern footer social links */
-.social-links-modern {
-  display: flex;
-  gap: 1rem;
+/* Keyboard navigation visual indicators */
+kbd {
+  @apply px-1.5 py-0.5 text-xs rounded bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
-.social-icon-modern {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
-  transition: all 0.3s ease;
-}
-
-.social-icon-modern:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-3px);
-}
-
-/* Modern theme toggle */
-.theme-toggle-modern {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 50;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  cursor: pointer;
+/* Animation utilities */
+.transition-all-200 {
   transition: all 0.2s ease;
 }
 
-.theme-toggle-modern:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+.transition-all-300 {
+  transition: all 0.3s ease;
 }
 
-/* Modern FAB and menu */
-.fab-modern {
-  width: 56px;
-  height: 56px;
-  border-radius: 28px;
-  background-color: #38b2ac;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  z-index: 60;
-  position: relative;
-  border: none;
+.transition-transform-200 {
+  transition: transform 0.2s ease;
 }
 
-.fab-menu-item-modern {
+.transition-opacity-300 {
+  transition: opacity 0.3s ease;
+}
+
+.transition-colors-200 {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Helper classes for focus states */
+.focus-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900;
+}
+
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  @apply shadow-md;
+}
+
+/* Scrollbar for command palette */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thumb-gray-300 {
+  scrollbar-color: #D1D5DB transparent;
+}
+
+.dark .scrollbar-thumb-gray-700 {
+  scrollbar-color: #374151 transparent;
+}
+
+/* Subtle animations for first-time visitors */
+@keyframes subtle-pulse {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* New animation keyframes */
+@keyframes sheen {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-subtle-pulse {
+  animation: subtle-pulse 2s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  animation: sheen 2.5s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s infinite;
+}
+
+/* Ensure proper stacking for interactive elements */
+.z-command-palette {
+  z-index: 50;
+}
+
+.z-timeline-expanded {
+  z-index: 10;
+}
+
+/* Custom utility for the timeline left border highlight */
+.border-l-highlight {
+  @apply border-l-4 border-blue-500;
+  transition: border-left-color 0.3s ease;
+}
+
+/* Organic flowing layout helpers for Skills component */
+.organic-position {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  background-color: white;
-  color: #38b2ac;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 55;
-  border: none;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.toast-modern {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #38b2ac;
+.skill-filter-active {
+  @apply scale-105 shadow-md;
+}
+
+.skill-filter-inactive {
+  @apply scale-90 opacity-40;
+}
+
+/* Icon button utilities */
+.icon-btn-primary {
+  background: linear-gradient(90deg, var(--gradient-from), var(--gradient-to), var(--gradient-to-dark));
+  background-size: 200% 100%;
   color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  font-size: 0.875rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .timeline-line {
-    left: 20px;
-  }
-  
-  .timeline-left,
-  .timeline-right {
-    justify-content: flex-start;
-    padding-left: 50px;
-    padding-right: 0;
-  }
-  
-  .timeline-dot {
-    left: 20px;
-  }
-  
-  .timeline-card {
-    max-width: 100%;
-  }
+.icon-btn-primary:hover {
+  animation: sheen 2.5s ease-in-out infinite;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-@media (max-width: 640px) {
-  .fab-modern {
-    width: 48px;
-    height: 48px;
-  }
-  
-  .fab-menu-item-modern {
-    width: 36px;
-    height: 36px;
-  }
-  
-  .toast-modern {
-    max-width: 80%;
-    text-align: center;
-  }
+/* Ensure proper text contrast in all states */
+.text-high-contrast {
+  @apply text-gray-900 dark:text-white;
+}
+
+.text-medium-contrast {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.text-low-contrast {
+  @apply text-gray-500 dark:text-gray-400;
 }
