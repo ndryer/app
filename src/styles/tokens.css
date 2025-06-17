@@ -1,0 +1,92 @@
+/* 1 · FONT FAMILIES & CORE PRIMITIVES */
+:root {
+  /* Font Families (to be loaded via <link> in <head>) */
+  --ff-display: "Space Grotesk", system-ui, sans-serif;
+  --ff-body: "Inter", system-ui, sans-serif;
+
+  /* Typographic Scale */
+  --tracking-tight: -0.015em;
+
+  /* Radii */
+  --r-sm: 0.375rem;
+  /* 6px */
+  --r-md: 0.5rem;
+  /* 8px */
+  --r-lg: 1rem;
+  /* 16px */
+
+  /* Elevation */
+  --e-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --e-md: 0 4px 8px rgba(0, 0, 0, 0.08);
+  --e-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
+
+  /* Spacing Scale (4px/8px baseline) */
+  --space-1: 0.25rem;
+  /* 4px */
+  --space-2: 0.5rem;
+  /* 8px */
+  --space-3: 0.75rem;
+  /* 12px */
+  --space-4: 1rem;
+  /* 16px */
+  --space-5: 1.5rem;
+  /* 24px */
+  --space-6: 2rem;
+  /* 32px */
+  --space-8: 3rem;
+  /* 48px */
+  --space-12: 4rem;
+  /* 64px */
+  --space-24: 6rem;
+  /* 96px */
+
+  /* Responsive Spacing (merged from global.css) */
+  --space-component: clamp(1rem, 3vw, 1.5rem);
+  /* 16px to 24px */
+  --space-section: clamp(2.5rem, 6vw, 4rem);
+  /* 40px to 64px */
+
+  /* Motion */
+  --motion-duration: 200ms;
+  --motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2 · THEME TOKENS (GRAPHITE & GOLD) */
+/* Light Mode */
+:root,
+:root[data-theme='graphite-light'] {
+  --bg-primary: #F5F5F7;
+  --bg-surface: #F0F0F2;
+  --bg-surface-alt: #EAEAEB;
+  --bg-surface-subtle: #F3F3F5;
+  --accent: #F1B33E;
+  --on-accent: #111111;
+  --text-primary: #1C1C1C;
+  --text-secondary: #5F5F5F;
+  --timeline-line: #5F5F5F;
+}
+
+/* Dark Mode */
+:root[data-theme='graphite-dark'] {
+  --bg-primary: #1C1C1C;
+  --bg-surface: #181818;
+  --bg-surface-alt: #222222;
+  --bg-surface-subtle: #222222;
+  --accent: #FACA63;
+  --on-accent: #181818;
+  --text-primary: #E0E0E0;
+  --text-secondary: #9D9D9D;
+  --timeline-line: #E0E0E0;
+}
+
+/* 3 · GLOBAL ELEMENT DEFAULTS */
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--motion-duration) var(--motion-easing), color var(--motion-duration) var(--motion-easing);
+}

@@ -21,8 +21,6 @@ test.describe('Header and CommandMenu Spacing', () => {
       return parseInt(computedStyle.paddingTop, 10);
     });
     
-    console.log(`Header padding-top: ${headerPaddingTop}px`);
-    
     // Assert that header padding is sufficient (≥ 64px)
     expect(headerPaddingTop).toBeGreaterThanOrEqual(64);
   });
@@ -54,12 +52,8 @@ test.describe('Header and CommandMenu Spacing', () => {
       };
     });
     
-    console.log(`CommandMenu margin-top: ${commandMenuMargins.marginTop}px`);
-    console.log(`CommandMenu margin-bottom: ${commandMenuMargins.marginBottom}px`);
-    
     // Calculate total vertical margin
     const totalVerticalMargin = commandMenuMargins.marginTop + commandMenuMargins.marginBottom;
-    console.log(`CommandMenu total vertical margin: ${totalVerticalMargin}px`);
     
     // Assert that command menu top margin is sufficient (≥ 24px)
     expect(commandMenuMargins.marginTop).toBeGreaterThanOrEqual(24);
@@ -102,23 +96,11 @@ test.describe('Header and CommandMenu Spacing', () => {
       };
     });
     
-    const totalVerticalMargin = commandMenuMargins.marginTop + commandMenuMargins.marginBottom;
-    
-    // Log results
-    console.log('Spacing Validation Results:');
-    console.log(`- Header padding-top: ${headerPaddingTop}px (required: ≥ 64px)`);
-    console.log(`- CommandMenu margin-top: ${commandMenuMargins.marginTop}px (required: ≥ 24px)`);
-    console.log(`- CommandMenu margin-bottom: ${commandMenuMargins.marginBottom}px (required: ≥ 24px)`);
-    console.log(`- CommandMenu total vertical margin: ${totalVerticalMargin}px (required: ≥ 48px)`);
+    // const totalVerticalMargin = commandMenuMargins.marginTop + commandMenuMargins.marginBottom;
     
     // Final assertions
-    expect(headerPaddingTop).toBeGreaterThanOrEqual(64, 'Header top padding should be at least 64px');
-    expect(commandMenuMargins.marginTop).toBeGreaterThanOrEqual(24, 'Command menu top margin should be at least 24px');
-    expect(commandMenuMargins.marginBottom).toBeGreaterThanOrEqual(24, 'Command menu bottom margin should be at least 24px');
-    
-    // If all tests pass, output the success message
-    if (headerPaddingTop >= 64 && totalVerticalMargin >= 48) {
-      console.log('✅ AlreadyImplemented: header/command spacing OK');
-    }
+    expect(headerPaddingTop, 'Header top padding should be at least 64px').toBeGreaterThanOrEqual(64);
+    expect(commandMenuMargins.marginTop, 'Command menu top margin should be at least 24px').toBeGreaterThanOrEqual(24);
+    expect(commandMenuMargins.marginBottom, 'Command menu bottom margin should be at least 24px').toBeGreaterThanOrEqual(24);
   });
 });

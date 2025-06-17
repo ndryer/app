@@ -21,8 +21,6 @@ test.describe('Component Spacing Preflight Check', () => {
       return parseInt(computedStyle.paddingTop, 10);
     });
     
-    console.log(`Header padding-top: ${headerPaddingTop}px`);
-    
     // Open command menu by clicking on it
     const commandButton = await page.locator('div[aria-label="Open command palette"]');
     await commandButton.click();
@@ -43,22 +41,13 @@ test.describe('Component Spacing Preflight Check', () => {
       };
     });
     
-    console.log(`CommandMenu margin-top: ${commandMenuStyles.marginTop}px`);
-    console.log(`CommandMenu margin-bottom: ${commandMenuStyles.marginBottom}px`);
-    
     // Check if the values meet the requirements
     const totalVerticalMargin = commandMenuStyles.marginTop + commandMenuStyles.marginBottom;
-    console.log(`CommandMenu total vertical margin: ${totalVerticalMargin}px`);
     
     // Assert that header padding is sufficient (≥ 64px)
     expect(headerPaddingTop).toBeGreaterThanOrEqual(64);
     
     // Assert that command menu vertical margin is sufficient (≥ 24px)
     expect(totalVerticalMargin).toBeGreaterThanOrEqual(24);
-    
-    // If tests pass, output the success message to console
-    if (headerPaddingTop >= 64 && totalVerticalMargin >= 24) {
-      console.log('✅ AlreadyImplemented: header/command spacing OK');
-    }
   });
 });
